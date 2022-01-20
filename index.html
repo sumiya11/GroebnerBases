@@ -86,7 +86,7 @@ R, &#40;x, y&#41; &#61; PolynomialRing&#40;GF&#40;2^31 - 1&#41;, &#91;&quot;x&qu
 polys &#61; &#91;x^3 &#43; y^2, x*y &#43; x^2&#93;;</code></pre>
 <p>..compute a <em>nonreduced</em> Groebner basis for it..</p>
 <pre><code class="language-julia">using Groebner
-basis &#61; groebner&#40;polys, reduced&#61;false&#41;</code></pre><pre><code class="plaintext code-output">Failed to precompile Groebner [0b43b601-686d-58a3-8a1c-6623616c7cd4] to /home/runner/.julia/compiled/v1.7/Groebner/jl_TFNS6w.
+basis &#61; groebner&#40;polys, reduced&#61;false&#41;</code></pre><pre><code class="plaintext code-output">Failed to precompile Groebner [0b43b601-686d-58a3-8a1c-6623616c7cd4] to /home/runner/.julia/compiled/v1.7/Groebner/jl_mZiyXr.
 </code></pre>
 <p>..and check correctness of result</p>
 <pre><code class="language-julia">isgroebner&#40;basis&#41;</code></pre><pre><code class="plaintext code-output">UndefVarError: isgroebner not defined
