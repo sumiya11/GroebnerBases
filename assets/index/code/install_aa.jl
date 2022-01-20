@@ -1,2 +1,2 @@
 # This file was generated, do not modify it. # hide
-using Groebner # hide
+Pkg.add("AbstractAlgebra") # hide

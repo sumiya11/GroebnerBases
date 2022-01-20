@@ -79,12 +79,10 @@ Pkg.add&#40;url&#61;&quot;https://github.com/sumiya11/Groebner.jl&quot;&#41;</co
 <p>Currently, polynomials from <code>AbstractAlgebra</code>, <code>DynamicPolynomials</code>, and <code>Nemo</code> are supported as input.</p>
 <h3 id="with_abstractalgebra"><a href="#with_abstractalgebra" class="header-anchor">with <code>AbstractAlgebra</code></a></h3>
 <p>Let&#39;s import <code>AbstractAlgebra</code>, create a system over a finite field..</p>
+
 <pre><code class="language-julia">using AbstractAlgebra
 R, &#40;x, y&#41; &#61; PolynomialRing&#40;GF&#40;2^31 - 1&#41;, &#91;&quot;x&quot;, &quot;y&quot;&#93;&#41;
-polys &#61; &#91;x^3 &#43; y^2, x*y &#43; x^2&#93;;</code></pre><pre><code class="plaintext code-output">ArgumentError: Package AbstractAlgebra not found in current path:
-- Run `import Pkg; Pkg.add("AbstractAlgebra")` to install the AbstractAlgebra package.
-
-</code></pre>
+polys &#61; &#91;x^3 &#43; y^2, x*y &#43; x^2&#93;;</code></pre>
 <p>..compute a <em>nonreduced</em> Groebner basis for it..</p>
 <pre><code class="language-julia">basis &#61; groebner&#40;polys, reduced&#61;false&#41;</code></pre><pre><code class="plaintext code-output">UndefVarError: groebner not defined
 </code></pre>
