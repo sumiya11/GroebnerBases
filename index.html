@@ -84,13 +84,15 @@ Pkg.add&#40;url&#61;&quot;https://github.com/sumiya11/Groebner.jl&quot;&#41;</co
 <pre><code class="language-julia">using AbstractAlgebra
 R, &#40;x, y&#41; &#61; PolynomialRing&#40;GF&#40;2^31 - 1&#41;, &#91;&quot;x&quot;, &quot;y&quot;&#93;&#41;
 polys &#61; &#91;x^3 &#43; y^2, x*y &#43; x^2&#93;;</code></pre>
-<p>compute a <em>nonreduced</em> Groebner basis for it</p>
+<p>and compute a <em>nonreduced</em> Groebner basis for it</p>
 <pre><code class="language-julia">using Groebner
-basis &#61; groebner&#40;polys, reduced&#61;false&#41;</code></pre><pre><code class="plaintext code-output">Failed to precompile Groebner [0b43b601-686d-58a3-8a1c-6623616c7cd4] to /home/runner/.julia/compiled/v1.7/Groebner/jl_9gcAon.
-</code></pre>
-<p>and check correctness of result</p>
-<pre><code class="language-julia">isgroebner&#40;basis&#41;</code></pre><pre><code class="plaintext code-output">UndefVarError: isgroebner not defined
-</code></pre>
+basis &#61; groebner&#40;polys, reduced&#61;false&#41;</code></pre><pre><code class="plaintext code-output">4-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
+ x^2 + x*y
+ x^3 + y^2
+ x*y^2 + y^2
+ y^3 + 2147483646*y^2</code></pre>
+<p>We can also check that a set of polynomials forms a basis</p>
+<pre><code class="language-julia">isgroebner&#40;basis&#41;</code></pre><pre><code class="plaintext code-output">true</code></pre>
 <p>Now, having a <code>basis</code> of the ideal <code>&lt;polys&gt; &#61; &lt;x^3 &#43; y^2, x*y &#43; x^2&gt;</code> computed, we can tackle the <em>ideal membership problem</em> for <code>polys</code>. Recall that a polynomial lies in the ideal iff it&#39;s normal form w.r.t a <code>basis</code> is zero. Let&#39;s check if <code>x^2y^2 &#43; 2x^3y - xy^2</code> is a member of <code>&lt;polys&gt;</code>&#33;</p>
 <pre><code class="language-julia">normalform&#40;basis, x^2y^2 &#43; 2x^3y - xy^2&#41;</code></pre><pre><code class="plaintext code-output">MethodError: no method matching ^(::AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}, ::AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}})
 Closest candidates are:
@@ -105,8 +107,10 @@ Closest candidates are:
 system &#61; &#91;10*x1*x2^2 - 11*x1 &#43; 10,
         10*x1^2*x2 - 11*x2 &#43; 10&#93;
 
-groebner&#40;system&#41;</code></pre><pre><code class="plaintext code-output">UndefVarError: groebner not defined
-</code></pre>
+groebner&#40;system&#41;</code></pre><pre><code class="plaintext code-output">3-element Vector{DynamicPolynomials.Polynomial{true, Int64}}:
+ 11x1² - 11x2² - 10x1 + 10x2
+ 110x2³ + 100x1x2 - 100x2² - 121x2 + 110
+ 10x1x2² - 11x1 + 10</code></pre>
 <h2 id="constraints"><a href="#constraints" class="header-anchor">Constraints</a></h2>
 <p>There are some limitations of the package we&#39;d like to mention here.</p>
 <p><strong>&#91;TODO&#93;</strong> Currently, it is not recommended to compute the basis for large &#40;&gt;3 variables&#41; ideals with <code>:lex</code> ordering. The reason is that the implementation is optimized for degree orderings &#40;<code>:deglex</code> or <code>:degrevlex</code>&#41;, but is quite bad for lexicographical ones. Please consider using degree orderings.</p>
