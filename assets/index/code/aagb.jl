@@ -1,3 +1,2 @@
 # This file was generated, do not modify it. # hide
-using Groebner
-basis = groebner(polys, reduced=false)
+normalform(basis, x^2y^2 + 2x^3y - xy^2)
