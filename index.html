@@ -114,7 +114,6 @@ groebner&#40;system&#41;</code></pre><pre><code class="plaintext code-output">3-
 <h2 id="constraints"><a href="#constraints" class="header-anchor">Constraints</a></h2>
 <p>There are some limitations of the package we&#39;d like to mention here.</p>
 <p><strong>&#91;TODO&#93;</strong> Currently, it is not recommended to compute the basis for large &#40;&gt;3 variables&#41; ideals with <code>:lex</code> ordering. The reason is that the implementation is optimized for degree orderings &#40;<code>:deglex</code> or <code>:degrevlex</code>&#41;, but is quite bad for lexicographical ones. Please consider using degree orderings.</p>
-<p><strong>&#91;TODO&#93;</strong> We also note that <code>groebner</code> implementation <em>is randomized</em>. This means the result is correct with a high probability &#40;some reasons make it safe to assume the probability of correctness &gt;99.9&#37;, but no rigorous proofs were carried out yet&#41;.</p>
 <div class="page-foot">
   <div class="copyright">
     &copy; Alexander Demin. Last modified: January 21, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
