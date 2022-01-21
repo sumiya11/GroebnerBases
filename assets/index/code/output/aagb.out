@@ -1,4 +1,0 @@
-MethodError: no method matching ^(::AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}, ::AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}})
-Closest candidates are:
-  ^(::AbstractAlgebra.Generic.MPoly{T}, !Matched::Int64) where T<:AbstractAlgebra.RingElement at ~/.julia/packages/AbstractAlgebra/KPT2D/src/generic/MPoly.jl:2312
-  ^(::T, !Matched::Integer) where T<:AbstractAlgebra.RingElem at ~/.julia/packages/AbstractAlgebra/KPT2D/src/algorithms/GenericFunctions.jl:23
