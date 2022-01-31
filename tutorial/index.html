@@ -72,10 +72,7 @@
 
 <!-- Content appended here -->
 <div class="franklin-content"><h1 id="tutorials"><a href="#tutorials" class="header-anchor">Tutorials</a></h1>
-<pre><code class="plaintext code-output">ArgumentError: Package BenchmarkTools not found in current path:
-- Run `import Pkg; Pkg.add("BenchmarkTools")` to install the BenchmarkTools package.
 
-</code></pre>
 <h2 id="intro"><a href="#intro" class="header-anchor">Intro</a></h2>
 <p>Introduced by Buchberger in 1965 for handling quotient space of Ideals algorithmically, Groebner bases are excellent for <strong>variable elimination, system solving</strong>, and many more. Among others, Groebner bases find applications in</p>
 <ul>
@@ -136,8 +133,8 @@ f &#61; x^4*y^2 &#43; y^3 &#43; x^2 &#43; x*y &#43; 1
 G &#61; groebner&#40;F&#41;     # compute the basis
 normalform&#40;G, f&#41;    # divide f by G</code></pre><pre><code class="plaintext code-output">MethodError: no method matching normal_form_f4(::Groebner.PolyRing, ::Vector{Vector{Vector{UInt16}}}, ::Vector{Vector{Rational{BigInt}}}, ::Vector{Vector{Vector{UInt16}}}, ::Vector{Vector{Rational{BigInt}}}, ::Random.MersenneTwister)
 Closest candidates are:
-  normal_form_f4(::Groebner.PolyRing, ::Vector{Vector{Vector{UInt16}}}, !Matched::Vector{Vector{UInt64}}, ::Vector{Vector{Vector{UInt16}}}, !Matched::Vector{Vector{UInt64}}, ::Rng) where Rng at ~/.julia/packages/Groebner/8EE92/src/f4/normalform.jl:48
-  normal_form_f4(::Groebner.PolyRing, ::Vector{Vector{Vector{UInt16}}}, !Matched::Vector{Vector{UInt64}}, ::Vector{Vector{Vector{UInt16}}}, !Matched::Vector{Vector{UInt64}}, ::Rng, !Matched::Int64) where Rng at ~/.julia/packages/Groebner/8EE92/src/f4/normalform.jl:48
+  normal_form_f4(::Groebner.PolyRing, ::Vector{Vector{Vector{UInt16}}}, !Matched::Vector{Vector{UInt64}}, ::Vector{Vector{Vector{UInt16}}}, !Matched::Vector{Vector{UInt64}}, ::Rng) where Rng at ~/.julia/packages/Groebner/a7zrN/src/f4/normalform.jl:48
+  normal_form_f4(::Groebner.PolyRing, ::Vector{Vector{Vector{UInt16}}}, !Matched::Vector{Vector{UInt64}}, ::Vector{Vector{Vector{UInt16}}}, !Matched::Vector{Vector{UInt64}}, ::Rng, !Matched::Int64) where Rng at ~/.julia/packages/Groebner/a7zrN/src/f4/normalform.jl:48
 </code></pre>
 <p>TODO: add more</p>
 <h1 id="useful_analogies"><a href="#useful_analogies" class="header-anchor">Useful Analogies</a></h1>
@@ -170,13 +167,12 @@ gcd&#40;f, g&#41;   # usual gcd</code></pre><pre><code class="plaintext code-out
  x + 3</code></pre>
 <p>So, you can compute GCD using <code>Groebner.jl</code>&#33; But probably you shouldn&#39;t.. <code>Groebner.jl</code> converts all input into internal polynomial representation, instantiates huge hashtables and matrices; this all is unnesesarry for computing GCD.</p>
 <p>We emphasize, however, that <code>Groebner.jl</code> is designed to have as little runtime overhead as possible</p>
-<pre><code class="language-julia">@btime gcd&#40;&#36;f, &#36;g&#41;</code></pre><pre><code class="plaintext code-output">LoadError: UndefVarError: @btime not defined
-in expression starting at none:1
-</code></pre>
+<pre><code class="language-julia">@btime gcd&#40;&#36;f, &#36;g&#41;</code></pre><pre><code class="plaintext code-output">  265.101 μs (3138 allocations: 190.50 KiB)
+x + 3</code></pre>
 <pre><code class="language-julia">F &#61; &#91;f, g&#93;
-@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">LoadError: UndefVarError: @btime not defined
-in expression starting at none:1
-</code></pre>
+@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  362.503 μs (1054 allocations: 1.59 MiB)
+1-element Vector{DynamicPolynomials.Polynomial{true, Int64}}:
+ x + 3</code></pre>
 <h1 id="eliminating_parameters"><a href="#eliminating_parameters" class="header-anchor">Eliminating parameters</a></h1>
 <p>TODO&#33;</p>
 <p>With appropriate term orders, one can use Grobner bases to <em>eliminate indeterminates</em> from equations.</p>

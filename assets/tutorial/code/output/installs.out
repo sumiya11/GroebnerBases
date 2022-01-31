@@ -1,3 +1,0 @@
-ArgumentError: Package BenchmarkTools not found in current path:
-- Run `import Pkg; Pkg.add("BenchmarkTools")` to install the BenchmarkTools package.
-
