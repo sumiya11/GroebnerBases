@@ -55,6 +55,7 @@
     </style>
     <nav class="sidebar-nav" style="opacity: 0.9">
       <a class="sidebar-nav-item active" href="/Groebner.jl/">Home</a>
+      <a class="sidebar-nav-item " href="/Groebner.jl/tutorial/">Tutorials</a>
       <a class="sidebar-nav-item " href="/Groebner.jl/interface/">Interface</a>
     </nav>
 
@@ -74,7 +75,7 @@
 <h2 id="installation"><a href="#installation" class="header-anchor">Installation</a></h2>
 <p>To install Groebner.jl, use the Julia package manager:</p>
 <pre><code class="language-julia">using Pkg
-Pkg.add&#40;url&#61;&quot;https://github.com/sumiya11/Groebner.jl&quot;&#41;</code></pre>
+Pkg.add&#40;&quot;Groebner&quot;&#41;</code></pre>
 <p>For a detailed description of exported functions and their input parameters please see page <strong>Interface</strong>. Meanwhile, below are simple usage examples.</p>
 <h2 id="examples"><a href="#examples" class="header-anchor">Examples</a></h2>
 <p>Currently, polynomials from <code>AbstractAlgebra</code>, <code>DynamicPolynomials</code>, and <code>Nemo</code> are supported as input.</p>
@@ -112,7 +113,7 @@ groebner&#40;system&#41;</code></pre><pre><code class="plaintext code-output">3-
 <p><strong>&#91;TODO&#93;</strong> Currently, it is not recommended to compute the basis for large &#40;&gt;3 variables&#41; ideals with <code>:lex</code> ordering. The reason is that the implementation is optimized for degree orderings &#40;<code>:deglex</code> or <code>:degrevlex</code>&#41;, but is quite bad for lexicographical ones. Please consider using degree orderings.</p>
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin. Last modified: January 29, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin. Last modified: January 31, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
