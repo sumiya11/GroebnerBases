@@ -1,4 +1,1 @@
-MethodError: no method matching normal_form_f4(::Groebner.PolyRing, ::Vector{Vector{Vector{UInt16}}}, ::Vector{Vector{Rational{BigInt}}}, ::Vector{Vector{Vector{UInt16}}}, ::Vector{Vector{Rational{BigInt}}}, ::Random.MersenneTwister)
-Closest candidates are:
-  normal_form_f4(::Groebner.PolyRing, ::Vector{Vector{Vector{UInt16}}}, !Matched::Vector{Vector{UInt64}}, ::Vector{Vector{Vector{UInt16}}}, !Matched::Vector{Vector{UInt64}}, ::Rng) where Rng at ~/.julia/packages/Groebner/X6QmJ/src/f4/normalform.jl:48
-  normal_form_f4(::Groebner.PolyRing, ::Vector{Vector{Vector{UInt16}}}, !Matched::Vector{Vector{UInt64}}, ::Vector{Vector{Vector{UInt16}}}, !Matched::Vector{Vector{UInt64}}, ::Rng, !Matched::Int64) where Rng at ~/.julia/packages/Groebner/X6QmJ/src/f4/normalform.jl:48
+UndefVarError: groebner not defined

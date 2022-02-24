@@ -1,1 +1,2 @@
-  297.304 μs (1054 allocations: 1.59 MiB)
+LoadError: UndefVarError: @btime not defined
+in expression starting at none:1
