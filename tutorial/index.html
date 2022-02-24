@@ -72,7 +72,7 @@
 
 <!-- Content appended here -->
 <div class="franklin-content"><h1 id="tutorials"><a href="#tutorials" class="header-anchor">Tutorials</a></h1>
-<pre><code class="plaintext code-output">Failed to precompile Groebner [0b43b601-686d-58a3-8a1c-6623616c7cd4] to /home/runner/.julia/compiled/v1.7/Groebner/jl_qHejBn.
+<pre><code class="plaintext code-output">Failed to precompile Groebner [0b43b601-686d-58a3-8a1c-6623616c7cd4] to /home/runner/.julia/compiled/v1.7/Groebner/jl_UD19nr.
 </code></pre>
 <h2 id="intro"><a href="#intro" class="header-anchor">Intro</a></h2>
 <p>Introduced by Buchberger in 1965 for handling quotient space of Ideals algorithmically, Groebner bases are excellent for <strong>variable elimination, system solving</strong>, and many more. Among others, Groebner bases find applications in</p>
@@ -117,7 +117,7 @@ F &#61; &#91;x^3 &#43; y^2, x*y &#43; x^2&#93;;
 <p>In our example, the Groebner basis and leading Ideal of ⟨F⟩ are</p>
 <pre><code class="language-julia">using Groebner
 G &#61; groebner&#40;F&#41;
-println&#40;&quot;Basis is &#36;G \nLeading Ideal is &#36;&#40;map&#40;leading_term, G&#41;&#41;&quot;&#41;</code></pre><pre><code class="plaintext code-output">Failed to precompile Groebner [0b43b601-686d-58a3-8a1c-6623616c7cd4] to /home/runner/.julia/compiled/v1.7/Groebner/jl_aQWzZl.
+println&#40;&quot;Basis is &#36;G \nLeading Ideal is &#36;&#40;map&#40;leading_term, G&#41;&#41;&quot;&#41;</code></pre><pre><code class="plaintext code-output">Failed to precompile Groebner [0b43b601-686d-58a3-8a1c-6623616c7cd4] to /home/runner/.julia/compiled/v1.7/Groebner/jl_jQPRKp.
 </code></pre>
 <p>Given a set of polynomials F, computing a Groebner basis of F is hard. However, it possess a plenty of nice properties.</p>
 <p>First of all, the reduced Groebner basis <strong>is unique</strong>&#33; That is, ⟨F₁⟩ &#61; ⟨F₂⟩ iff Groebner bases of ⟨F₁⟩ and ⟨F₂⟩ are the same. <code>Groebner.jl</code> computes the reduced basis by default.</p>
