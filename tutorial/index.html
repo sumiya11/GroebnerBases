@@ -56,7 +56,12 @@
     </style>
     <nav class="sidebar-nav" style="opacity: 0.9">
       <a class="sidebar-nav-item " href="/Groebner.jl/">Home</a>
-      <a class="sidebar-nav-item active" href="/Groebner.jl/tutorial/">Tutorials</a>
+      <!-- <a class="sidebar-nav-item {{ispage tutorial.html}}active{{end}}" href="/Groebner.jl/tutorial/">Tutorials</a> -->
+      <li class="sidebar-nav-item active"><a href="/Groebner.jl/tutorial/">• Tutorials</a>
+			  <ul class="menu-list-child-list ">
+				<li class="menu-list-item active"><a href="/Groebner.jl/tutorial/" class="menu-list-link">Create and edit</a>
+				<li class="menu-list-item "><a href="/Groebner.jl/tutorial/" class="menu-list-link">Page structure</a>
+			  </ul>
       <a class="sidebar-nav-item " href="/Groebner.jl/interface/">Interface</a>
     </nav>
 
@@ -167,10 +172,10 @@ gcd&#40;f, g&#41;   # usual gcd</code></pre><pre><code class="plaintext code-out
  x + 3</code></pre>
 <p>So, you can compute GCD using <code>Groebner.jl</code>&#33; But probably you shouldn&#39;t.. <code>Groebner.jl</code> converts all input into internal polynomial representation, instantiates huge hashtables and matrices; this all is unnesesarry for computing GCD.</p>
 <p>We emphasize, however, that <code>Groebner.jl</code> is designed to have as little runtime overhead as possible</p>
-<pre><code class="language-julia">@btime gcd&#40;&#36;f, &#36;g&#41;</code></pre><pre><code class="plaintext code-output">  276.398 μs (3138 allocations: 190.50 KiB)
+<pre><code class="language-julia">@btime gcd&#40;&#36;f, &#36;g&#41;</code></pre><pre><code class="plaintext code-output">  273.800 μs (3138 allocations: 190.50 KiB)
 x + 3</code></pre>
 <pre><code class="language-julia">F &#61; &#91;f, g&#93;
-@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  223.899 μs (1058 allocations: 1.59 MiB)
+@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  256.400 μs (1058 allocations: 1.59 MiB)
 1-element Vector{DynamicPolynomials.Polynomial{true, Int64}}:
  x + 3</code></pre>
 <h1 id="eliminating_parameters"><a href="#eliminating_parameters" class="header-anchor">Eliminating parameters</a></h1>
