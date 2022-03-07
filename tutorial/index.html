@@ -165,10 +165,10 @@ gcd&#40;f, g&#41;   # usual gcd</code></pre><pre><code class="plaintext code-out
  x + 3</code></pre>
 <p>So, you can compute the GCD of several polynomials using <code>Groebner.jl</code>&#33; But probably you shouldn&#39;t.. <code>Groebner.jl</code> converts all input into internal polynomial representation, instantiates huge hashtables and matrices; this all is unnesesarry for computing GCD.</p>
 <p>We emphasize, however, that <code>Groebner.jl</code> is designed to have as little runtime overhead as possible</p>
-<pre><code class="language-julia">@btime gcd&#40;&#36;f, &#36;g&#41;</code></pre><pre><code class="plaintext code-output">  264.002 μs (3138 allocations: 190.50 KiB)
+<pre><code class="language-julia">@btime gcd&#40;&#36;f, &#36;g&#41;</code></pre><pre><code class="plaintext code-output">  230.202 μs (3138 allocations: 190.50 KiB)
 x + 3</code></pre>
 <pre><code class="language-julia">F &#61; &#91;f, g&#93;
-@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  280.901 μs (1054 allocations: 1.59 MiB)
+@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  312.202 μs (1054 allocations: 1.59 MiB)
 1-element Vector{DynamicPolynomials.Polynomial{true, Int64}}:
  x + 3</code></pre>
 <h1 id="eliminating_parameters"><a href="#eliminating_parameters" class="header-anchor">Eliminating parameters</a></h1>
@@ -200,7 +200,7 @@ G &#61; groebner&#40;F&#41;</code></pre><pre><code class="plaintext code-output"
 <p>f &#61; &#40;7x - 1&#41;<em>&#40;4x &#43; 3&#41;^2</em>&#40;x^2 &#43; 5x &#43; 13&#41;^5 g &#61; &#40;4x &#43; 3&#41;<em>&#40;x^3 - x - 1&#41;^3</em>&#40;x - 2&#41;^2</p>
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin. Last modified: March 02, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin. Last modified: March 07, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
