@@ -165,7 +165,7 @@ To resolve the ambiguity, try making one of the methods more specific, or adding
 </code></pre>
 <p>So, you can compute the GCD of several polynomials using <code>Groebner.jl</code>&#33; But probably you shouldn&#39;t.. <code>Groebner.jl</code> converts all input into internal polynomial representation, instantiates huge hashtables and matrices; this all is unnesesarry for computing GCD.</p>
 <p>We emphasize, however, that <code>Groebner.jl</code> is designed to have as little runtime overhead as possible</p>
-<pre><code class="language-julia">@btime gcd&#40;&#36;f, &#36;g&#41;</code></pre><pre><code class="plaintext code-output">  271.303 μs (3205 allocations: 193.61 KiB)
+<pre><code class="language-julia">@btime gcd&#40;&#36;f, &#36;g&#41;</code></pre><pre><code class="plaintext code-output">  278.703 μs (3205 allocations: 193.61 KiB)
 x + 3</code></pre>
 <pre><code class="language-julia">F &#61; &#91;f, g&#93;
 @btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">MethodError: convert_to_output(::Groebner.PolyRing, ::Vector{DynamicPolynomials.Polynomial{true, Int64}}, ::Vector{Vector{Vector{UInt16}}}, ::Vector{Vector{Rational{BigInt}}}) is ambiguous. Candidates:
