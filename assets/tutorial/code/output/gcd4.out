@@ -1,4 +1,1 @@
-MethodError: convert_to_output(::Groebner.PolyRing, ::Vector{DynamicPolynomials.Polynomial{true, Int64}}, ::Vector{Vector{Vector{UInt16}}}, ::Vector{Vector{Rational{BigInt}}}) is ambiguous. Candidates:
-  convert_to_output(ring::Groebner.PolyRing, origpolys::Vector{P}, gbexps::Vector{Vector{Vector{UInt16}}}, gbcoeffs::Array{Vector{I}, 1}) where {P, I<:Union{UInt64, Rational{BigInt}, BigInt}} in Groebner at /home/runner/.julia/packages/Groebner/wsOhT/src/io.jl:312
-  convert_to_output(ring::Groebner.PolyRing, origpolys::Vector{P}, gbexps::Vector{Vector{Vector{UInt16}}}, gbcoeffs::Array{Vector{I}, 1}) where {J, P<:MultivariatePolynomials.AbstractPolynomialLike{J}, I<:Rational} in Groebner at /home/runner/.julia/packages/Groebner/wsOhT/src/io.jl:369
-To resolve the ambiguity, try making one of the methods more specific, or adding a new method more specific than any of the existing applicable methods.
+  110.306 μs (1026 allocations: 108.58 KiB)

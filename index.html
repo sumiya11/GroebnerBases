@@ -109,17 +109,16 @@ basis &#61; groebner&#40;polys, reduced&#61;false&#41;</code></pre><pre><code cl
 system &#61; &#91;10*x1*x2^2 - 11*x1 &#43; 10,
         10*x1^2*x2 - 11*x2 &#43; 10&#93;
 
-groebner&#40;system&#41;</code></pre><pre><code class="plaintext code-output">MethodError: convert_to_output(::Groebner.PolyRing, ::Vector{DynamicPolynomials.Polynomial{true, Int64}}, ::Vector{Vector{Vector{UInt16}}}, ::Vector{Vector{Rational{BigInt}}}) is ambiguous. Candidates:
-  convert_to_output(ring::Groebner.PolyRing, origpolys::Vector{P}, gbexps::Vector{Vector{Vector{UInt16}}}, gbcoeffs::Array{Vector{I}, 1}) where {P, I<:Union{UInt64, Rational{BigInt}, BigInt}} in Groebner at /home/runner/.julia/packages/Groebner/wsOhT/src/io.jl:312
-  convert_to_output(ring::Groebner.PolyRing, origpolys::Vector{P}, gbexps::Vector{Vector{Vector{UInt16}}}, gbcoeffs::Array{Vector{I}, 1}) where {J, P<:MultivariatePolynomials.AbstractPolynomialLike{J}, I<:Rational} in Groebner at /home/runner/.julia/packages/Groebner/wsOhT/src/io.jl:369
-To resolve the ambiguity, try making one of the methods more specific, or adding a new method more specific than any of the existing applicable methods.
-</code></pre>
+groebner&#40;system&#41;</code></pre><pre><code class="plaintext code-output">3-element Vector{DynamicPolynomials.Polynomial{true, Int64}}:
+ 11x1² - 11x2² - 10x1 + 10x2
+ 110x2³ + 100x1x2 - 100x2² - 121x2 + 110
+ 10x1x2² - 11x1 + 10</code></pre>
 <h2 id="constraints"><a href="#constraints" class="header-anchor">Constraints</a></h2>
 <p>There are some limitations of the package we&#39;d like to mention here.</p>
 <p><strong>&#91;TODO&#93;</strong> Currently, it is not recommended to compute the basis for large &#40;&gt;3 variables&#41; ideals with <code>:lex</code> ordering. The reason is that the implementation is optimized for degree orderings &#40;<code>:deglex</code> or <code>:degrevlex</code>&#41;, but is quite bad for lexicographical ones. Please consider using degree orderings.</p>
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin. Last modified: March 29, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin. Last modified: March 30, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
