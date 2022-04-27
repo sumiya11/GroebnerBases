@@ -161,10 +161,10 @@ gcd&#40;f, g&#41;   # usual gcd</code></pre><pre><code class="plaintext code-out
  x + 3</code></pre>
 <p>So, you can compute the GCD of several polynomials using <code>Groebner.jl</code>&#33; But probably you shouldn&#39;t.. <code>Groebner.jl</code> converts all input into internal polynomial representation, instantiates huge hashtables and matrices; this all is unnesesarry for computing GCD.</p>
 <p>We emphasize, however, that <code>Groebner.jl</code> is designed to have as little runtime overhead as possible</p>
-<pre><code class="language-julia">@btime gcd&#40;&#36;f, &#36;g&#41;</code></pre><pre><code class="plaintext code-output">  336.702 μs (3138 allocations: 190.50 KiB)
+<pre><code class="language-julia">@btime gcd&#40;&#36;f, &#36;g&#41;</code></pre><pre><code class="plaintext code-output">  359.497 μs (3138 allocations: 190.50 KiB)
 x + 3</code></pre>
 <pre><code class="language-julia">F &#61; &#91;f, g&#93;
-@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  146.001 μs (1026 allocations: 108.58 KiB)
+@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  145.698 μs (1026 allocations: 108.58 KiB)
 1-element Vector{DynamicPolynomials.Polynomial{true, Int64}}:
  x + 3</code></pre>
 <h1 id="eliminating_parameters"><a href="#eliminating_parameters" class="header-anchor">Eliminating parameters</a></h1>
