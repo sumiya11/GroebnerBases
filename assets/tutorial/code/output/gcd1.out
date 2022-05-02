@@ -1,3 +1,0 @@
-ArgumentError: Package DynamicPolynomials not found in current path:
-- Run `import Pkg; Pkg.add("DynamicPolynomials")` to install the DynamicPolynomials package.
-

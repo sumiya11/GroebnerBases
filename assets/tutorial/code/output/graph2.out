@@ -1,1 +1,6 @@
-UndefVarError: gplot not defined
+MethodError: no method matching spring_layout(::DynamicPolynomials.Polynomial{true, Int64})
+Closest candidates are:
+  spring_layout(!Matched::Graphs.AbstractGraph) at ~/.julia/packages/GraphPlot/pvheh/src/layout.jl:104
+  spring_layout(!Matched::Graphs.AbstractGraph, !Matched::Integer, !Matched::Any...) at ~/.julia/packages/GraphPlot/pvheh/src/layout.jl:177
+  spring_layout(!Matched::Graphs.AbstractGraph, !Matched::Any) at ~/.julia/packages/GraphPlot/pvheh/src/layout.jl:104
+  ...

@@ -1,3 +1,0 @@
-ArgumentError: Package AbstractAlgebra not found in current path:
-- Run `import Pkg; Pkg.add("AbstractAlgebra")` to install the AbstractAlgebra package.
-
