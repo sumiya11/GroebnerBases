@@ -1,5 +1,5 @@
 # This file was generated, do not modify it. # hide
-using Graph # hide
+using Graphs # hide
 using GraphPlot # hide
 g = Graph(4) # hide
 add_edge!(g, 1, 2) # hide
