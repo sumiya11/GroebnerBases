@@ -5,4 +5,4 @@ using DynamicPolynomials
 f = (x^2 - 1)^7*(x + 3)*(x - 7)^4
 g = (x + 3)*(x + 7)
 
-gcd(f, g)   # usual gcd
+groebner([f, g])   # gcd by groebner

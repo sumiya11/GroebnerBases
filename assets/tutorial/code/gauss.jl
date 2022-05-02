@@ -8,4 +8,4 @@ system = [
        x + y + 5z + 3
 ]
 
-groebner(system)
+groebner(system)  # rref
