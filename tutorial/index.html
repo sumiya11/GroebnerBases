@@ -59,7 +59,13 @@
       <!-- <a class="sidebar-nav-item {{ispage tutorial.html}}active{{end}}" href="/Groebner.jl/tutorial/">Tutorials</a> -->
       <li class="sidebar-nav-item active"><a href="/Groebner.jl/tutorial/">• Tutorials</a>
 			  <ul class="menu-list-child-list ">
-				<li class="menu-list-item active"><a href="/Groebner.jl/tutorial/" class="menu-list-link">Tutorials</a>
+				<li class="menu-list-item active"><a href="/Groebner.jl/tutorial/" class="menu-list-link">Intro</a>
+				<li class="menu-list-item active"><a href="/Groebner.jl/tutorial/#so_what_is_a_groebner_basis" class="menu-list-link">So, what is a Groebner basis?</a>
+				<li class="menu-list-item active"><a href="/Groebner.jl/tutorial/#useful_analogies" class="menu-list-link">Reference to the Classics</a>
+				<li class="menu-list-item active"><a href="/Groebner.jl/tutorial/#variable_elimination" class="menu-list-link">Variable Elimination</a>
+				<li class="menu-list-item active"><a href="/Groebner.jl/tutorial/#curve_implicitization" class="menu-list-link">Curve Implicitization</a>
+				<li class="menu-list-item active"><a href="/Groebner.jl/tutorial/#system_solving" class="menu-list-link">System Solving</a>
+				<li class="menu-list-item active"><a href="/Groebner.jl/tutorial/#graph_coloring" class="menu-list-link">Graph Coloring</a>
 				<!-- <li class="menu-list-item {{ispage index.html}}active{{end}}"><a href="/Groebner.jl/tutorial/" class="menu-list-link">Page structure</a> -->
 			  </ul>
       <a class="sidebar-nav-item " href="/Groebner.jl/interface/">Interface</a>
@@ -155,10 +161,10 @@ g &#61; &#40;x &#43; 3&#41;*&#40;x &#43; 7&#41;
 <p>We emphasize, however, that <code>Groebner.jl</code> is designed to have as little runtime overhead as possible</p>
 <pre><code class="language-julia">h &#61; &#40;x &#43; 3&#41;^5
 
-@btime gcd&#40;gcd&#40;&#36;f, &#36;g&#41;, &#36;h&#41;</code></pre><pre><code class="plaintext code-output">  398.906 μs (3816 allocations: 228.98 KiB)
+@btime gcd&#40;gcd&#40;&#36;f, &#36;g&#41;, &#36;h&#41;</code></pre><pre><code class="plaintext code-output">  320.502 μs (3816 allocations: 228.98 KiB)
 x + 3</code></pre>
 <pre><code class="language-julia">F &#61; &#91;f, g, h&#93;
-@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  169.302 μs (1160 allocations: 127.61 KiB)
+@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  110.300 μs (1160 allocations: 127.61 KiB)
 1-element Vector{DynamicPolynomials.Polynomial{true, Int64}}:
  x + 3</code></pre>
 <h2 id="variable_elimination"><a href="#variable_elimination" class="header-anchor">Variable Elimination</a></h2>
@@ -249,7 +255,7 @@ xyz - 1 &= 0 \\
 <p>In graph theory, Graph coloring is a problem of assigning a color to each vertex of a graph in a way that no two neighboring vertices the same color.</p>
 
 
-<img src="/Groebner.jl/assets/tutorial/code/output/graph.svg" alt="">
+<img src="/Groebner.jl/assets/tutorial/code/output/graph2.svg" alt="">
 <p>The common hard question is <em>the existence of a proper coloring with \(k\) colors</em> for \(k > 2\). In this section, we will show how the question can be tackled using the Groebner bases approach.</p>
 <p>The approach is to</p>
 <ul>
