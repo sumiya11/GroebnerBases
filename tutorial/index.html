@@ -155,10 +155,10 @@ g &#61; &#40;x &#43; 3&#41;*&#40;x &#43; 7&#41;
 <p>We emphasize, however, that <code>Groebner.jl</code> is designed to have as little runtime overhead as possible</p>
 <pre><code class="language-julia">h &#61; &#40;x &#43; 3&#41;^5
 
-@btime gcd&#40;gcd&#40;&#36;f, &#36;g&#41;, &#36;h&#41;</code></pre><pre><code class="plaintext code-output">  262.003 μs (3816 allocations: 228.98 KiB)
+@btime gcd&#40;gcd&#40;&#36;f, &#36;g&#41;, &#36;h&#41;</code></pre><pre><code class="plaintext code-output">  325.104 μs (3816 allocations: 228.98 KiB)
 x + 3</code></pre>
 <pre><code class="language-julia">F &#61; &#91;f, g, h&#93;
-@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  106.601 μs (1160 allocations: 127.61 KiB)
+@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  112.101 μs (1160 allocations: 127.61 KiB)
 1-element Vector{DynamicPolynomials.Polynomial{true, Int64}}:
  x + 3</code></pre>
 <h2 id="variable_elimination"><a href="#variable_elimination" class="header-anchor">Variable Elimination</a></h2>
@@ -248,9 +248,8 @@ xyz - 1 &= 0 \\
 <h2 id="graph_coloring"><a href="#graph_coloring" class="header-anchor">Graph Coloring</a></h2>
 <p>In graph theory, Graph coloring is a problem of assigning a color to each vertex of a graph in a way that no two neighboring vertices the same color.</p>
 
-<pre><code class="plaintext code-output">UndefVarError: cm not defined
-</code></pre>
-<p><span style="color:red;">// Image matching '/assets/tutorial/code/graph' not found. //</span></p>
+
+<img src="/Groebner.jl/assets/tutorial/code/output/graph.svg" alt="">
 <p>The common hard question is <em>the existence of a proper coloring with \(k\) colors</em> for \(k > 2\). In this section, we will show how the question can be tackled using the Groebner bases approach.</p>
 <p>The approach is to</p>
 <ul>
@@ -271,8 +270,7 @@ x_j^k - 1 = 0
 \]
 <p>for each \(i \rightarrow j\) in edges to ensure two neighboring vertices do not share the same color. Such polynomial disallows that colors \(x_i\) and \(x_j\) for two neighbors \(i\) and \(j\) coincide.</p>
 <p>Finally, solutions of a system constructed this way correspond to proper k-colorings in a 1 to 1 relation.</p>
-<pre><code class="language-julia">draw&#40;SVG&#40;joinpath&#40;@OUTPUT, &quot;graph.svg&quot;&#41;, 16cm, 16cm&#41;, gplot&#40;g&#41;&#41;;</code></pre><pre><code class="plaintext code-output">UndefVarError: cm not defined
-</code></pre>
+<pre><code class="language-julia">draw&#40;SVG&#40;joinpath&#40;@OUTPUT, &quot;graph.svg&quot;&#41;, 16cm, 16cm&#41;, gplot&#40;g&#41;&#41;;</code></pre>
 <p>The coloring system for k&#61;3 in the graph above must contain vertex polynomials</p>
 \[
 \{ x_1^3 - 1,~ x_2^3 - 1,~ x_3^3 - 1,~ x_4^3 - 1 \}

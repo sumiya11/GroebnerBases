@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     version="1.2"
+     width="160mm" height="160mm" viewBox="0 0 160 160"
+     stroke="none"
+     fill="#000000"
+     stroke-width="0.3"
+     font-size="3.88"
+>
+<defs>
+  <marker id="arrow" markerWidth="15" markerHeight="7" refX="5" refY="3.5" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L15,3.5 L0,7 z" stroke="context-stroke" fill="context-stroke"/>
+  </marker>
+</defs>
+<g stroke-width="1.5" fill="#000000" fill-opacity="0.000" stroke="#D3D3D3" id="img-462affb8-1">
+  <g transform="translate(52.16,136.77)">
+    <path fill="none" d="M30.75,7.84 L-30.75,-7.84 " class="primitive"/>
+  </g>
+  <g transform="translate(80.67,80)">
+    <path fill="none" d="M9.05,58.43 L-9.05,-58.43 " class="primitive"/>
+  </g>
+  <g transform="translate(118.83,90.36)">
+    <path fill="none" d="M-24.14,48.83 L24.14,-48.83 " class="primitive"/>
+  </g>
+  <g transform="translate(41.84,70.1)">
+    <path fill="none" d="M-24.77,49.32 L24.77,-49.32 " class="primitive"/>
+  </g>
+  <g transform="translate(108.51,23.7)">
+    <path fill="none" d="M-30.12,-8.18 L30.12,8.18 " class="primitive"/>
+  </g>
+</g>
+<g stroke-width="1.5" stroke="#D3D3D3" id="img-462affb8-2">
+</g>
+<g font-size="4" stroke="#000000" stroke-opacity="0.000" fill="#000000" id="img-462affb8-3">
+</g>
+<g stroke-width="0" stroke="#000000" stroke-opacity="0.000" fill="#40E0D0" id="img-462affb8-4">
+  <g transform="translate(90.99,146.67)">
+    <circle cx="0" cy="0" r="8" class="primitive"/>
+  </g>
+  <g transform="translate(13.33,126.87)">
+    <circle cx="0" cy="0" r="8" class="primitive"/>
+  </g>
+  <g transform="translate(70.35,13.33)">
+    <circle cx="0" cy="0" r="8" class="primitive"/>
+  </g>
+  <g transform="translate(146.67,34.06)">
+    <circle cx="0" cy="0" r="8" class="primitive"/>
+  </g>
+</g>
+<g font-size="4" stroke="#000000" stroke-opacity="0.000" fill="#000000" id="img-462affb8-5">
+</g>
+</svg>
