@@ -130,9 +130,7 @@ normalform&#40;G, f&#41;    # divide f by G</code></pre><pre><code class="plaint
 <h2 id="useful_analogies"><a href="#useful_analogies" class="header-anchor">Useful Analogies</a></h2>
 <h3 id="groebner_basis_is_gaussian_elimination"><a href="#groebner_basis_is_gaussian_elimination" class="header-anchor">Groebner basis is Gaussian Elimination</a></h3>
 <p>Groebner bases can be seen as <em>a nonlinear generalization</em> of <strong>Gaussian elimination</strong> for systems of algebraic equations. Applied to a linear system, Groebner basis algorithms produce exactly row echelon matrix form&#33;</p>
-<pre><code class="language-julia">using DynamicPolynomials
-
-@polyvar x y z
+<pre><code class="language-julia">@polyvar x y z
 system &#61; &#91;
        x - y &#43; z &#43; 1,
        x &#43; 2y &#43; 3z &#43; 4,
@@ -144,24 +142,23 @@ groebner&#40;system&#41;  # rref</code></pre><pre><code class="plaintext code-ou
  y + 1
  x + 2</code></pre>
 <h3 id="groebner_basis_is_euclidean_algorithm"><a href="#groebner_basis_is_euclidean_algorithm" class="header-anchor">Groebner basis is Euclidean Algorithm</a></h3>
-<p>Another important property is that a Groebner basis of a <em>univariate Ideal</em> is nothing else but GCD of its generators.</p>
-<pre><code class="language-julia">using DynamicPolynomials
-
-@polyvar x
+<p>Another important property is that a Groebner basis of a <em>univariate Ideal</em> is the GCD of its generators.</p>
+<pre><code class="language-julia">@polyvar x
 f &#61; &#40;x^2 - 1&#41;^7*&#40;x &#43; 3&#41;*&#40;x - 7&#41;^4
 g &#61; &#40;x &#43; 3&#41;*&#40;x &#43; 7&#41;
 
-groebner&#40;&#91;f, g&#93;&#41;   # gcd by groebner</code></pre><pre><code class="plaintext code-output">1-element Vector{DynamicPolynomials.Polynomial{true, Int64}}:
- x + 3</code></pre>
-<pre><code class="language-julia">gcd&#40;f, g&#41;          # usual gcd</code></pre><pre><code class="plaintext code-output">x + 3</code></pre>
+@show groebner&#40;&#91;f, g&#93;&#41;   # gcd by groebner</code></pre><pre><code class="plaintext code-output">groebner([f, g]) = DynamicPolynomials.Polynomial{true, Int64}[x + 3]
+</code></pre>
+<pre><code class="language-julia">@show gcd&#40;f, g&#41;          # usual gcd</code></pre><pre><code class="plaintext code-output">gcd(f, g) = x + 3
+</code></pre>
 <p>So, you can compute the GCD of several polynomials at once using <code>Groebner.jl</code>&#33; But probably you shouldn&#39;t..</p>
 <p>We emphasize, however, that <code>Groebner.jl</code> is designed to have as little runtime overhead as possible</p>
 <pre><code class="language-julia">h &#61; &#40;x &#43; 3&#41;^5
 
-@btime gcd&#40;gcd&#40;&#36;f, &#36;g&#41;, &#36;h&#41;</code></pre><pre><code class="plaintext code-output">  322.796 μs (3816 allocations: 228.98 KiB)
+@btime gcd&#40;gcd&#40;&#36;f, &#36;g&#41;, &#36;h&#41;</code></pre><pre><code class="plaintext code-output">  262.003 μs (3816 allocations: 228.98 KiB)
 x + 3</code></pre>
 <pre><code class="language-julia">F &#61; &#91;f, g, h&#93;
-@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  101.798 μs (1160 allocations: 127.61 KiB)
+@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  106.601 μs (1160 allocations: 127.61 KiB)
 1-element Vector{DynamicPolynomials.Polynomial{true, Int64}}:
  x + 3</code></pre>
 <h2 id="variable_elimination"><a href="#variable_elimination" class="header-anchor">Variable Elimination</a></h2>
@@ -251,7 +248,7 @@ xyz - 1 &= 0 \\
 <h2 id="graph_coloring"><a href="#graph_coloring" class="header-anchor">Graph Coloring</a></h2>
 <p>In graph theory, Graph coloring is a problem of assigning a color to each vertex of a graph in a way that no two neighboring vertices the same color.</p>
 
-<pre><code class="plaintext code-output">UndefVarError: savefig not defined
+<pre><code class="plaintext code-output">UndefVarError: cm not defined
 </code></pre>
 <p><span style="color:red;">// Image matching '/assets/tutorial/code/graph' not found. //</span></p>
 <p>The common hard question is <em>the existence of a proper coloring with \(k\) colors</em> for \(k > 2\). In this section, we will show how the question can be tackled using the Groebner bases approach.</p>
@@ -274,7 +271,8 @@ x_j^k - 1 = 0
 \]
 <p>for each \(i \rightarrow j\) in edges to ensure two neighboring vertices do not share the same color. Such polynomial disallows that colors \(x_i\) and \(x_j\) for two neighbors \(i\) and \(j\) coincide.</p>
 <p>Finally, solutions of a system constructed this way correspond to proper k-colorings in a 1 to 1 relation.</p>
-<pre><code class="language-julia">gplot&#40;g&#41;</code></pre><pre><code class="plaintext code-output">Compose.Context(Measures.BoundingBox{Tuple{Measures.Length{:w, Float64}, Measures.Length{:h, Float64}}, Tuple{Measures.Length{:w, Float64}, Measures.Length{:h, Float64}}}((0.0w, 0.0h), (1.0w, 1.0h)), Compose.UnitBox{Float64, Float64, Float64, Float64}(-1.2, -1.2, 2.4, 2.4, 0.0mm, 0.0mm, 0.0mm, 0.0mm), nothing, nothing, nothing, List([Compose.Context(Measures.BoundingBox{Tuple{Measures.Length{:w, Float64}, Measures.Length{:h, Float64}}, Tuple{Measures.Length{:w, Float64}, Measures.Length{:h, Float64}}}((0.0w, 0.0h), (1.0w, 1.0h)), nothing, nothing, nothing, nothing, List([]), List([Compose.Form{Compose.LinePrimitive}(Compose.LinePrimitive[Compose.LinePrimitive{Tuple{Measures.Measure, Measures.Measure}}(Tuple{Measures.Measure, Measures.Measure}[(-0.07688562431394534cx, -0.9915622941003276cy), (0.8752851046620708cx, -0.9271422698874466cy)]), Compose.LinePrimitive{Tuple{Measures.Measure, Measures.Measure}}(Tuple{Measures.Measure, Measures.Measure}[(-0.17766050467563713cx, -0.8773139140613837cy), (0.16472401400563225cx, 0.8773139140613838cy)]), Compose.LinePrimitive{Tuple{Measures.Measure, Measures.Measure}}(Tuple{Measures.Measure, Measures.Measure}[(-0.24987621168158847cx, -0.8846984060862461cy), (-0.9517243079702861cx, 0.7915945849621563cy)]), Compose.LinePrimitive{Tuple{Measures.Measure, Measures.Measure}}(Tuple{Measures.Measure, Measures.Measure}[(0.9513165634685757cx, -0.8035745374634535cy), (0.237347465513294cx, 0.8848699734756793cy)]), Compose.LinePrimitive{Tuple{Measures.Measure, Measures.Measure}}(Tuple{Measures.Measure, Measures.Measure}[(0.06404571308916496cx, 0.9902390910225511cy), (-0.8753816841072952cx, 0.9166570878533591cy)])], Symbol(""))]), List([Compose.Property{Compose.LineWidthPrimitive}(Compose.LineWidthPrimitive[Compose.LineWidthPrimitive(1.5mm)]), Compose.Property{Compose.FillPrimitive}(Compose.FillPrimitive[Compose.FillPrimitive(RGBA{Float64}(0.0,0.0,0.0,0.0))]), Compose.Property{Compose.StrokePrimitive}(Compose.StrokePrimitive[Compose.StrokePrimitive(RGBA{Float64}(0.8274509803921568,0.8274509803921568,0.8274509803921568,1.0))])]), 0, false, false, false, false, nothing, nothing, 0.0, Symbol("")), Compose.Context(Measures.BoundingBox{Tuple{Measures.Length{:w, Float64}, Measures.Length{:h, Float64}}, Tuple{Measures.Length{:w, Float64}, Measures.Length{:h, Float64}}}((0.0w, 0.0h), (1.0w, 1.0h)), nothing, nothing, nothing, nothing, List([]), List([]), List([Compose.Property{Compose.LineWidthPrimitive}(Compose.LineWidthPrimitive[Compose.LineWidthPrimitive(1.5mm)]), Compose.Property{Compose.StrokePrimitive}(Compose.StrokePrimitive[Compose.StrokePrimitive(RGBA{Float64}(0.8274509803921568,0.8274509803921568,0.8274509803921568,1.0))])]), 0, false, false, false, false, nothing, nothing, 0.0, Symbol("")), Compose.Context(Measures.BoundingBox{Tuple{Measures.Length{:w, Float64}, Measures.Length{:h, Float64}}, Tuple{Measures.Length{:w, Float64}, Measures.Length{:h, Float64}}}((0.0w, 0.0h), (1.0w, 1.0h)), nothing, nothing, nothing, nothing, List([]), List([]), List([Compose.Property{Compose.FontSizePrimitive}(Compose.FontSizePrimitive[Compose.FontSizePrimitive(4.0mm)]), Compose.Property{Compose.StrokePrimitive}(Compose.StrokePrimitive[Compose.StrokePrimitive(RGBA{Float64}(0.0,0.0,0.0,0.0))]), Compose.Property{Compose.FillPrimitive}(Compose.FillPrimitive[Compose.FillPrimitive(RGBA{Float64}(0.0,0.0,0.0,1.0))])]), 0, false, false, false, false, nothing, nothing, 0.0, Symbol("")), Compose.Context(Measures.BoundingBox{Tuple{Measures.Length{:w, Float64}, Measures.Length{:h, Float64}}, Tuple{Measures.Length{:w, Float64}, Measures.Length{:h, Float64}}}((0.0w, 0.0h), (1.0w, 1.0h)), nothing, nothing, nothing, nothing, List([]), List([Compose.Form{Compose.CirclePrimitive{Tuple{Measures.Measure, Measures.Measure}, Measures.Measure}}(Compose.CirclePrimitive{Tuple{Measures.Measure, Measures.Measure}, Measures.Measure}[Compose.CirclePrimitive{Tuple{Measures.Measure, Measures.Measure}, Measures.Measure}((-0.20160051965187453cx, -1.0cy), 0.05w), Compose.CirclePrimitive{Tuple{Measures.Measure, Measures.Measure}, Measures.Measure}((1.0cx, -0.9187045639877742cy), 0.05w), Compose.CirclePrimitive{Tuple{Measures.Measure, Measures.Measure}, Measures.Measure}((0.18866402898186974cx, 1.0cy), 0.05w), Compose.CirclePrimitive{Tuple{Measures.Measure, Measures.Measure}, Measures.Measure}((-1.0cx, 0.9068961788759102cy), 0.05w)], Symbol(""))]), List([Compose.Property{Compose.LineWidthPrimitive}(Compose.LineWidthPrimitive[Compose.LineWidthPrimitive(0.0mm)]), Compose.Property{Compose.StrokePrimitive}(Compose.StrokePrimitive[Compose.StrokePrimitive(RGBA{Float64}(0.0,0.0,0.0,0.0))]), Compose.Property{Compose.FillPrimitive}(Compose.FillPrimitive[Compose.FillPrimitive(RGBA{Float64}(0.25098039215686274,0.8784313725490196,0.8156862745098039,1.0))])]), 0, false, false, false, false, nothing, nothing, 0.0, Symbol("")), Compose.Context(Measures.BoundingBox{Tuple{Measures.Length{:w, Float64}, Measures.Length{:h, Float64}}, Tuple{Measures.Length{:w, Float64}, Measures.Length{:h, Float64}}}((0.0w, 0.0h), (1.0w, 1.0h)), nothing, nothing, nothing, nothing, List([]), List([]), List([Compose.Property{Compose.FontSizePrimitive}(Compose.FontSizePrimitive[Compose.FontSizePrimitive(4.0mm)]), Compose.Property{Compose.StrokePrimitive}(Compose.StrokePrimitive[Compose.StrokePrimitive(RGBA{Float64}(0.0,0.0,0.0,0.0))]), Compose.Property{Compose.FillPrimitive}(Compose.FillPrimitive[Compose.FillPrimitive(RGBA{Float64}(0.0,0.0,0.0,1.0))])]), 0, false, false, false, false, nothing, nothing, 0.0, Symbol(""))]), List([]), List([]), 0, false, false, false, false, nothing, nothing, 0.0, Symbol(""))</code></pre>
+<pre><code class="language-julia">draw&#40;SVG&#40;joinpath&#40;@OUTPUT, &quot;graph.svg&quot;&#41;, 16cm, 16cm&#41;, gplot&#40;g&#41;&#41;;</code></pre><pre><code class="plaintext code-output">UndefVarError: cm not defined
+</code></pre>
 <p>The coloring system for k&#61;3 in the graph above must contain vertex polynomials</p>
 \[
 \{ x_1^3 - 1,~ x_2^3 - 1,~ x_3^3 - 1,~ x_4^3 - 1 \}
@@ -296,6 +294,8 @@ groebner&#40;coloring_system&#41;</code></pre><pre><code class="plaintext code-o
  x3^2 + x3*x4 + x4^2
  x2 - x4
  x1 + x3 + x4</code></pre>
+<p>Wow cool &#33;</p>
+<p>draw&#40;SVG&#40;joinpath&#40;@OUTPUT, &quot;graph.svg&quot;&#41;, 16cm, 16cm&#41;, gplot&#40;g&#41;&#41;;</p>
 <div class="page-foot">
   <div class="copyright">
     &copy; Alexander Demin. Last modified: May 02, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.

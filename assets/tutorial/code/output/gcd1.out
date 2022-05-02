@@ -1,0 +1,1 @@
+groebner([f, g]) = DynamicPolynomials.Polynomial{true, Int64}[x + 3]

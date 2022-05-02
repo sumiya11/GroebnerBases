@@ -1,5 +1,5 @@
 # This file was generated, do not modify it. # hide
-using DynamicPolynomials
+using DynamicPolynomials # hide
 
 @polyvar x y z
 system = [
