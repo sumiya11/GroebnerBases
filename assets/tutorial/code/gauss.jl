@@ -1,6 +1,5 @@
 # This file was generated, do not modify it. # hide
 using DynamicPolynomials # hide
-
 @polyvar x y z
 system = [
        x - y + z + 1,
