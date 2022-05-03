@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+   <link rel="stylesheet" href="/Groebner.jl/libs/katex/katex.min.css">
+     
    <link rel="stylesheet" href="/Groebner.jl/libs/highlight/github.min.css">
    
   <link rel="stylesheet" href="/Groebner.jl/css/franklin.css">
@@ -56,11 +57,10 @@
     <nav class="sidebar-nav" style="opacity: 0.9">
       <a class="sidebar-nav-item active" href="/Groebner.jl/">Home</a>
       <!-- <a class="sidebar-nav-item {{ispage tutorial.html}}active{{end}}" href="/Groebner.jl/tutorial/">Tutorials</a> -->
-      <li class="sidebar-nav-item "><a href="/Groebner.jl/tutorial/">• Tutorials</a>
+      <li class="sidebar-nav-item "><a href="/Groebner.jl/tutorial/">Tutorials</a>
 			  <ul class="menu-list-child-list ">
 				<li class="menu-list-item "><a href="/Groebner.jl/tutorial/" class="menu-list-link">Intro</a>
-				<li class="menu-list-item "><a href="/Groebner.jl/tutorial/#so_what_is_a_groebner_basis" class="menu-list-link">So, what is a Groebner basis?</a>
-				<li class="menu-list-item "><a href="/Groebner.jl/tutorial/#useful_analogies" class="menu-list-link">Reference to the Classics</a>
+				<li class="menu-list-item "><a href="/Groebner.jl/tutorial/#useful_analogies" class="menu-list-link">Back to the Classics</a>
 				<li class="menu-list-item "><a href="/Groebner.jl/tutorial/#variable_elimination" class="menu-list-link">Variable Elimination</a>
 				<li class="menu-list-item "><a href="/Groebner.jl/tutorial/#curve_implicitization" class="menu-list-link">Curve Implicitization</a>
 				<li class="menu-list-item "><a href="/Groebner.jl/tutorial/#system_solving" class="menu-list-link">System Solving</a>
@@ -84,33 +84,36 @@
 <div class="franklin-content"><h1 id="groebnerjl"><a href="#groebnerjl" class="header-anchor">Groebner.jl</a></h1>
 <p><code>Groebner.jl</code> is a package for fast and generic Gröbner bases computations based on Faugère&#39;s F4 algorithm <a href="https://www-polsys.lip6.fr/~jcf/Papers/F99a.pdf">&#91;1&#93;</a> written in pure Julia.</p>
 <h2 id="installation"><a href="#installation" class="header-anchor">Installation</a></h2>
-<p>To install Groebner.jl, use the Julia package manager:</p>
+<p>To install <code>Groebner.jl</code>, use the Julia package manager:</p>
 <pre><code class="language-julia">using Pkg
 Pkg.add&#40;&quot;Groebner&quot;&#41;</code></pre>
-<p>For a detailed description of exported functions and their input parameters please see page <strong>Interface</strong>. Meanwhile, below are simple usage examples.</p>
+<p>For a detailed description of exported functions please see page <strong>Interface</strong>. You can find a quick introduction to Groebner bases and a couple of interesting use cases in <strong>Tutorials</strong>. Meanwhile, below are simple examples.</p>
 <h2 id="examples"><a href="#examples" class="header-anchor">Examples</a></h2>
 <p>Currently, polynomials from <code>AbstractAlgebra</code>, <code>DynamicPolynomials</code>, and <code>Nemo</code> are supported as input.</p>
 <h3 id="with_abstractalgebra"><a href="#with_abstractalgebra" class="header-anchor">with <code>AbstractAlgebra</code></a></h3>
 <p>Let&#39;s import <code>AbstractAlgebra</code>, create a system over a finite field</p>
 
 <pre><code class="language-julia">using AbstractAlgebra
+
 R, &#40;x, y&#41; &#61; PolynomialRing&#40;GF&#40;2^31 - 1&#41;, &#91;&quot;x&quot;, &quot;y&quot;&#93;&#41;
 polys &#61; &#91;x^3 &#43; y^2, x*y &#43; x^2&#93;;</code></pre>
-<p>and compute a <em>nonreduced</em> Groebner basis for it</p>
+<p>and compute <em>the</em> Groebner basis</p>
 <pre><code class="language-julia">using Groebner
-basis &#61; groebner&#40;polys, reduced&#61;false&#41;</code></pre><pre><code class="plaintext code-output">4-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
+
+basis &#61; groebner&#40;polys&#41;</code></pre><pre><code class="plaintext code-output">3-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
  y^3 + 2147483646*y^2
  x*y^2 + y^2
- x^2 + x*y
- x^3 + y^2</code></pre>
+ x^2 + x*y</code></pre>
 <p>We can also check that a set of polynomials forms a basis</p>
 <pre><code class="language-julia">isgroebner&#40;basis&#41;</code></pre><pre><code class="plaintext code-output">true</code></pre>
-<p>Now, having a <code>basis</code> of the ideal <code>&lt;polys&gt; &#61; &lt;x^3 &#43; y^2, x*y &#43; x^2&gt;</code> computed, we can tackle the <em>ideal membership problem</em> for <code>polys</code>. Recall that a polynomial lies in the ideal iff it&#39;s normal form w.r.t a <code>basis</code> is zero. Let&#39;s check if <code>x^2y^2 &#43; 2x^3y - xy^2</code> is a member of <code>&lt;polys&gt;</code>&#33;</p>
+<p>Now, having a <code>basis</code> of the ideal \(\langle x^3 + y^2, xy + x^2 \rangle\) computed, we can tackle the <em>ideal membership problem</em>. The task is to decide whether the given polynomial contains in the infinite ideal.</p>
+<p>In fact, if the normal form of polynomial w.r.t a Groebner basis <em>is zero</em>, then this polynomial lies in the ideal. Let&#39;s check if \(x^2y^2 + 2x^3y - xy^2\) is a member of \(\langle x^3 + y^2, xy + x^2 \rangle\), using the <code>normalform</code> function</p>
 <pre><code class="language-julia">normalform&#40;basis, x^2*y^2 &#43; 2x^3*y - x*y^2&#41;</code></pre><pre><code class="plaintext code-output">0</code></pre>
 <h3 id="with_dynamicpolynomials"><a href="#with_dynamicpolynomials" class="header-anchor">with <code>DynamicPolynomials</code></a></h3>
-<p>We will compute the unique basis for the <code>noon-2</code> system, arising from cellular network dynamics analysis <a href="https://www.jstor.org/stable/2101937">&#91;2&#93;</a>:</p>
+<p>We will compute the basis for the <code>noon-2</code> system, arising from cellular network dynamics analysis <a href="https://www.jstor.org/stable/2101937">&#91;2&#93;</a>:</p>
 
 <pre><code class="language-julia">using DynamicPolynomials
+
 @polyvar x1 x2
 system &#61; &#91;10*x1*x2^2 - 11*x1 &#43; 10,
         10*x1^2*x2 - 11*x2 &#43; 10&#93;
@@ -119,13 +122,25 @@ groebner&#40;system&#41;</code></pre><pre><code class="plaintext code-output">3-
  11x1² - 11x2² - 10x1 + 10x2
  110x2³ + 100x1x2 - 100x2² - 121x2 + 110
  10x1x2² - 11x1 + 10</code></pre>
+<h2 id="note_on_the_implementation"><a href="#note_on_the_implementation" class="header-anchor">Note on the Implementation</a></h2>
+<p>Computing Groebner bases largely depends on a single iterative algorithm, known as <strong>Buchbergers algorithm</strong>. Modified and optimized versions of this algorithm are crucial for many Computer Algebra Systems &#40;<em>e.g., Singular, Maple, Mathematica, Sage</em>&#41;.</p>
+<p>The Buchbergers algorithm is exponential by its nature, so a variety of insights, heuristics, and good software engineering practices is required to produce a usable implementation.   </p>
+<p>Our package implements <strong>F4 algorithm</strong> introduced by Jean-Charles Faugère, which can be seen as a modification of the Buchbergers. The performance of the implementation comes from thoughtful polynomial representation, monomial hashing, lightning-fast linear algebra, and technical modular algorithms.</p>
+<h2 id="acknowledgement"><a href="#acknowledgement" class="header-anchor">Acknowledgement</a></h2>
+<p>We would like to acknowledge Jérémy Berthomieu, Christian Eder and Mohab Safey El Din as this Library was adapted from their work &quot;msolve: A Library for Solving Polynomial Systems&quot;. I also thank Max-Planck-Institut für Informatik for assistance in producing benchmarks.</p>
+<p>Special thanks goes to Vladimir Kuznetsov for providing the sources of his F4 implementation.</p>
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin. Last modified: May 02, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin. Last modified: May 03, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
     </div>  <!-- div: content container -->
+    
+        <script src="/Groebner.jl/libs/katex/katex.min.js"></script>
+<script src="/Groebner.jl/libs/katex/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
     
     <script>
         var els =  document.querySelectorAll(".language-julia")

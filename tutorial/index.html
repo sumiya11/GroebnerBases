@@ -57,11 +57,10 @@
     <nav class="sidebar-nav" style="opacity: 0.9">
       <a class="sidebar-nav-item " href="/Groebner.jl/">Home</a>
       <!-- <a class="sidebar-nav-item {{ispage tutorial.html}}active{{end}}" href="/Groebner.jl/tutorial/">Tutorials</a> -->
-      <li class="sidebar-nav-item active"><a href="/Groebner.jl/tutorial/">• Tutorials</a>
+      <li class="sidebar-nav-item active"><a href="/Groebner.jl/tutorial/">Tutorials</a>
 			  <ul class="menu-list-child-list ">
 				<li class="menu-list-item active"><a href="/Groebner.jl/tutorial/" class="menu-list-link">Intro</a>
-				<li class="menu-list-item active"><a href="/Groebner.jl/tutorial/#so_what_is_a_groebner_basis" class="menu-list-link">So, what is a Groebner basis?</a>
-				<li class="menu-list-item active"><a href="/Groebner.jl/tutorial/#useful_analogies" class="menu-list-link">Reference to the Classics</a>
+				<li class="menu-list-item active"><a href="/Groebner.jl/tutorial/#useful_analogies" class="menu-list-link">Back to the Classics</a>
 				<li class="menu-list-item active"><a href="/Groebner.jl/tutorial/#variable_elimination" class="menu-list-link">Variable Elimination</a>
 				<li class="menu-list-item active"><a href="/Groebner.jl/tutorial/#curve_implicitization" class="menu-list-link">Curve Implicitization</a>
 				<li class="menu-list-item active"><a href="/Groebner.jl/tutorial/#system_solving" class="menu-list-link">System Solving</a>
@@ -85,6 +84,7 @@
 <div class="franklin-content"><h1 id="tutorials"><a href="#tutorials" class="header-anchor">Tutorials</a></h1>
 
 <h2 id="intro"><a href="#intro" class="header-anchor">Intro</a></h2>
+<p>The following contains a small tutorial on basics and interesting usecases of Groebner bases provided with the code from <code>Groebner.jl</code>.</p>
 <p>Introduced by Buchberger in 1965 for handling quotient space of Ideals algorithmically, Groebner bases are excellent for <strong>variable elimination, system solving</strong>, and many more. Among others, Groebner bases find applications in</p>
 <ul>
 <li><p>Robotics</p>
@@ -97,13 +97,7 @@
 </li>
 </ul>
 <p>The following tutorials will give a short introduction to Groebner basis ground theory, and cover some random interesting showcases.</p>
-<h2 id="note_on_the_implementation"><a href="#note_on_the_implementation" class="header-anchor">Note on the Implementation</a></h2>
-<p>Computing Groebner bases largely depends on a single iterative algorithm, known as <strong>Buchbergers algorithm</strong>. Modified and optimized versions of this algorithm are crucial for many Computer Algebra Systems &#40;<em>e.g., Singular, Maple, Mathematica, Sage</em>&#41;.</p>
-<p>The Buchbergers algorithm is exponential by its nature, so a variety of insights, heuristics, and good software engineering practices is required to produce a usable implementation.   </p>
-<p>Our package implements <strong>F4 algorithm</strong>, which is a modification of the Buchbergers. The performance of the implementation comes from thoughtful polynomial representation, monomial hashing, lightning-fast linear algebra, and technical modular algorithms.</p>
-<p>It&#39;s important to mention that a lot of implementation insights we use in this package were introduced by Jérémy Berthomieu, Christian Eder and Mohab Safey El Din in <a href="https://arxiv.org/abs/2104.03572">&#91;1&#93;</a>.</p>
-<p>TODO: split the following into separate pages.</p>
-<h2 id="so_what_is_a_groebner_basis"><a href="#so_what_is_a_groebner_basis" class="header-anchor">So, what is a Groebner basis?</a></h2>
+<h3 id="so_what_is_a_groebner_basis"><a href="#so_what_is_a_groebner_basis" class="header-anchor">So, what is a Groebner basis?</a></h3>
 <p>A set of polynomials \(F = \{f_1, \ldots, f_m \}\) generates an <strong>infinite</strong> set \(I\):</p>
 \[
   I = \{ f_1h_1 + f_2h_2 + \ldots + f_nh_n ~|~ h_i ~are~arbitrary~polynomials \}
@@ -133,7 +127,7 @@ f &#61; x^4*y^2 &#43; y^3 &#43; x^2 &#43; x*y &#43; 1
 G &#61; groebner&#40;F&#41;     # compute the basis
 normalform&#40;G, f&#41;    # divide f by G</code></pre><pre><code class="plaintext code-output">2*y^2 + 1</code></pre>
 <p>The normal form with respect to a Groebner basis is unique, and has in turn nice properties. We will discuss these in the following.</p>
-<h2 id="useful_analogies"><a href="#useful_analogies" class="header-anchor">Useful Analogies</a></h2>
+<h2 id="back_to_the_classics"><a href="#back_to_the_classics" class="header-anchor">Back to the Classics</a></h2>
 <h3 id="groebner_basis_is_gaussian_elimination"><a href="#groebner_basis_is_gaussian_elimination" class="header-anchor">Groebner basis is Gaussian Elimination</a></h3>
 <p>Groebner bases can be seen as <em>a nonlinear generalization</em> of <strong>Gaussian elimination</strong> for systems of algebraic equations. Applied to a linear system, Groebner basis algorithms produce exactly row echelon matrix form&#33;</p>
 <pre><code class="language-julia">@polyvar x y z
@@ -161,10 +155,10 @@ g &#61; &#40;x &#43; 3&#41;*&#40;x &#43; 7&#41;
 <p>We emphasize, however, that <code>Groebner.jl</code> is designed to have as little runtime overhead as possible</p>
 <pre><code class="language-julia">h &#61; &#40;x &#43; 3&#41;^5
 
-@btime gcd&#40;gcd&#40;&#36;f, &#36;g&#41;, &#36;h&#41;</code></pre><pre><code class="plaintext code-output">  320.502 μs (3816 allocations: 228.98 KiB)
+@btime gcd&#40;gcd&#40;&#36;f, &#36;g&#41;, &#36;h&#41;</code></pre><pre><code class="plaintext code-output">  317.704 μs (3816 allocations: 228.98 KiB)
 x + 3</code></pre>
 <pre><code class="language-julia">F &#61; &#91;f, g, h&#93;
-@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  110.300 μs (1160 allocations: 127.61 KiB)
+@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  113.002 μs (1160 allocations: 127.61 KiB)
 1-element Vector{DynamicPolynomials.Polynomial{true, Int64}}:
  x + 3</code></pre>
 <h2 id="variable_elimination"><a href="#variable_elimination" class="header-anchor">Variable Elimination</a></h2>
@@ -302,7 +296,7 @@ groebner&#40;coloring_system&#41;</code></pre><pre><code class="plaintext code-o
 <img src="/Groebner.jl/assets/tutorial/code/output/graphcolored.svg" alt="">
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin. Last modified: May 02, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin. Last modified: May 03, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
