@@ -85,40 +85,40 @@
 <p><code>Groebner.jl</code> is a package for fast and generic Gröbner bases computations based on Faugère&#39;s F4 algorithm <a href="https://www-polsys.lip6.fr/~jcf/Papers/F99a.pdf">&#91;1&#93;</a> written in pure Julia.</p>
 <h2 id="installation"><a href="#installation" class="header-anchor">Installation</a></h2>
 <p>To install <code>Groebner.jl</code>, use the Julia package manager:</p>
-<pre><code class="language-julia">using Pkg
-Pkg.add&#40;&quot;Groebner&quot;&#41;</code></pre>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Pkg
+Pkg.add(<span class="hljs-string">&quot;Groebner&quot;</span>)</code></pre>
 <p>For a detailed description of exported functions please see page <strong>Interface</strong>. You can find a quick introduction to Groebner bases and a couple of interesting use cases in <strong>Tutorials</strong>. Meanwhile, below are simple examples.</p>
 <h2 id="examples"><a href="#examples" class="header-anchor">Examples</a></h2>
 <p>Currently, polynomials from <code>AbstractAlgebra</code>, <code>DynamicPolynomials</code>, and <code>Nemo</code> are supported as input.</p>
 <h3 id="with_abstractalgebra"><a href="#with_abstractalgebra" class="header-anchor">with <code>AbstractAlgebra</code></a></h3>
 <p>Let&#39;s import <code>AbstractAlgebra</code>, create a system over a finite field</p>
 
-<pre><code class="language-julia">using AbstractAlgebra
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> AbstractAlgebra
 
-R, &#40;x, y&#41; &#61; PolynomialRing&#40;GF&#40;2^31 - 1&#41;, &#91;&quot;x&quot;, &quot;y&quot;&#93;&#41;
-polys &#61; &#91;x^3 &#43; y^2, x*y &#43; x^2&#93;;</code></pre>
+R, (x, y) = PolynomialRing(GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span> - <span class="hljs-number">1</span>), [<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>])
+polys = [x^<span class="hljs-number">3</span> + y^<span class="hljs-number">2</span>, x*y + x^<span class="hljs-number">2</span>];</code></pre>
 <p>and compute <em>the</em> Groebner basis</p>
-<pre><code class="language-julia">using Groebner
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner
 
-basis &#61; groebner&#40;polys&#41;</code></pre><pre><code class="plaintext code-output">3-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
+basis = groebner(polys)</code></pre><pre><code class="plaintext hljs">3-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
  y^3 + 2147483646*y^2
  x*y^2 + y^2
  x^2 + x*y</code></pre>
 <p>We can also check that a set of polynomials forms a basis</p>
-<pre><code class="language-julia">isgroebner&#40;basis&#41;</code></pre><pre><code class="plaintext code-output">true</code></pre>
-<p>Now, having a <code>basis</code> of the ideal \(\langle x^3 + y^2, xy + x^2 \rangle\) computed, we can tackle the <em>ideal membership problem</em>. The task is to decide whether the given polynomial contains in the infinite ideal.</p>
-<p>In fact, if the normal form of polynomial w.r.t a Groebner basis <em>is zero</em>, then this polynomial lies in the ideal. Let&#39;s check if \(x^2y^2 + 2x^3y - xy^2\) is a member of \(\langle x^3 + y^2, xy + x^2 \rangle\), using the <code>normalform</code> function</p>
-<pre><code class="language-julia">normalform&#40;basis, x^2*y^2 &#43; 2x^3*y - x*y^2&#41;</code></pre><pre><code class="plaintext code-output">0</code></pre>
+<pre><code class="julia hljs">isgroebner(basis)</code></pre><pre><code class="plaintext hljs">true</code></pre>
+<p>Now, having a <code>basis</code> of the ideal <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">⟨</mo><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo separator="true">,</mo><mi>x</mi><mi>y</mi><mo>+</mo><msup><mi>x</mi><mn>2</mn></msup><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\langle x^3 + y^2, xy + x^2 \rangle</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mopen">⟨</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">⟩</span></span></span></span> computed, we can tackle the <em>ideal membership problem</em>. The task is to decide whether the given polynomial contains in the infinite ideal.</p>
+<p>In fact, if the normal form of polynomial w.r.t a Groebner basis <em>is zero</em>, then this polynomial lies in the ideal. Let&#39;s check if <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><msup><mi>y</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><msup><mi>x</mi><mn>3</mn></msup><mi>y</mi><mo>−</mo><mi>x</mi><msup><mi>y</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">x^2y^2 + 2x^3y - xy^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord">2</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">x</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> is a member of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">⟨</mo><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo separator="true">,</mo><mi>x</mi><mi>y</mi><mo>+</mo><msup><mi>x</mi><mn>2</mn></msup><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\langle x^3 + y^2, xy + x^2 \rangle</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mopen">⟨</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">⟩</span></span></span></span>, using the <code>normalform</code> function</p>
+<pre><code class="julia hljs">normalform(basis, x^<span class="hljs-number">2</span>*y^<span class="hljs-number">2</span> + <span class="hljs-number">2</span>x^<span class="hljs-number">3</span>*y - x*y^<span class="hljs-number">2</span>)</code></pre><pre><code class="plaintext hljs">0</code></pre>
 <h3 id="with_dynamicpolynomials"><a href="#with_dynamicpolynomials" class="header-anchor">with <code>DynamicPolynomials</code></a></h3>
 <p>We will compute the basis for the <code>noon-2</code> system, arising from cellular network dynamics analysis <a href="https://www.jstor.org/stable/2101937">&#91;2&#93;</a>:</p>
 
-<pre><code class="language-julia">using DynamicPolynomials
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> DynamicPolynomials
 
-@polyvar x1 x2
-system &#61; &#91;10*x1*x2^2 - 11*x1 &#43; 10,
-        10*x1^2*x2 - 11*x2 &#43; 10&#93;
+<span class="hljs-meta">@polyvar</span> x1 x2
+system = [<span class="hljs-number">10</span>*x1*x2^<span class="hljs-number">2</span> - <span class="hljs-number">11</span>*x1 + <span class="hljs-number">10</span>,
+        <span class="hljs-number">10</span>*x1^<span class="hljs-number">2</span>*x2 - <span class="hljs-number">11</span>*x2 + <span class="hljs-number">10</span>]
 
-groebner&#40;system&#41;</code></pre><pre><code class="plaintext code-output">3-element Vector{DynamicPolynomials.Polynomial{true, Int64}}:
+groebner(system)</code></pre><pre><code class="plaintext hljs">3-element Vector{DynamicPolynomials.Polynomial{true, Int64}}:
  11x1² - 11x2² - 10x1 + 10x2
  110x2³ + 100x1x2 - 100x2² - 121x2 + 110
  10x1x2² - 11x1 + 10</code></pre>
@@ -131,15 +131,15 @@ groebner&#40;system&#41;</code></pre><pre><code class="plaintext code-output">3-
 <p>Special thanks goes to Vladimir Kuznetsov for providing the sources of his F4 implementation.</p>
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin. Last modified: May 13, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin. Last modified: May 14, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
     </div>  <!-- div: content container -->
     
-        <script src="/Groebner.jl/libs/katex/katex.min.js"></script>
-<script src="/Groebner.jl/libs/katex/auto-render.min.js"></script>
-<script>renderMathInElement(document.body)</script>
+        
+
+
 
     
     <script>
@@ -153,8 +153,8 @@ groebner&#40;system&#41;</code></pre><pre><code class="plaintext code-output">3-
         }
     </script>
     
-        <script src="/Groebner.jl/libs/highlight/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+        
+
 
     
   </body>
