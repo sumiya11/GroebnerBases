@@ -124,10 +124,10 @@ groebner(system)</code></pre><pre><code class="plaintext hljs">3-element Vector{
  10x1x2² - 11x1 + 10</code></pre>
 <h2 id="note_on_the_implementation"><a href="#note_on_the_implementation" class="header-anchor">Note on the Implementation</a></h2>
 <p>Computing Groebner bases largely depends on a single iterative algorithm, known as <strong>Buchbergers algorithm</strong>. Modified and optimized versions of this algorithm are crucial for many Computer Algebra Systems &#40;<em>e.g., Singular, Maple, Mathematica, Sage</em>&#41;.</p>
-<p>The Buchbergers algorithm is exponential by its nature, so a variety of insights, heuristics, and good software engineering practices is required to produce a usable implementation.   </p>
+<p>The Buchbergers algorithm is exponential by its nature, so any implementation is tricky.</p>
 <p>Our package implements <strong>F4 algorithm</strong> introduced by Jean-Charles Faugère, which can be seen as a modification of the Buchbergers. The performance of the implementation comes from thoughtful polynomial representation, monomial hashing, lightning-fast linear algebra, and technical modular algorithms.</p>
 <h2 id="acknowledgement"><a href="#acknowledgement" class="header-anchor">Acknowledgement</a></h2>
-<p>We would like to acknowledge Jérémy Berthomieu, Christian Eder and Mohab Safey El Din as this Library was adapted from their work &quot;msolve: A Library for Solving Polynomial Systems&quot;. I also thank Max-Planck-Institut für Informatik for assistance in producing benchmarks.</p>
+<p>We would like to acknowledge Jérémy Berthomieu, Christian Eder and Mohab Safey El Din as this Library benefits is inspired by their work &quot;msolve: A Library for Solving Polynomial Systems&quot;. We are also grateful to Max-Planck-Institut für Informatik for assistance in producing benchmarks.</p>
 <p>Special thanks goes to Vladimir Kuznetsov for providing the sources of his F4 implementation.</p>
 <div class="page-foot">
   <div class="copyright">
