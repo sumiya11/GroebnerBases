@@ -155,10 +155,10 @@ groebner&#40;&#91;f, g&#93;&#41;   # gcd by groebner</code></pre><pre><code clas
 <p>We emphasize, however, that <code>Groebner.jl</code> is designed to have as little runtime overhead as possible over the usual GCD implementation</p>
 <pre><code class="language-julia">h &#61; &#40;x &#43; 3&#41;^5
 
-@btime gcd&#40;gcd&#40;&#36;f, &#36;g&#41;, &#36;h&#41;</code></pre><pre><code class="plaintext code-output">  394.998 μs (3816 allocations: 228.98 KiB)
+@btime gcd&#40;gcd&#40;&#36;f, &#36;g&#41;, &#36;h&#41;</code></pre><pre><code class="plaintext code-output">  334.498 μs (3816 allocations: 228.98 KiB)
 x + 3</code></pre>
 <pre><code class="language-julia">F &#61; &#91;f, g, h&#93;
-@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  134.499 μs (1160 allocations: 127.61 KiB)
+@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  101.099 μs (1160 allocations: 127.61 KiB)
 1-element Vector{DynamicPolynomials.Polynomial{true, Int64}}:
  x + 3</code></pre>
 <h2 id="variable_elimination"><a href="#variable_elimination" class="header-anchor">Variable Elimination</a></h2>
@@ -193,7 +193,7 @@ F &#61; &#91;x^2 &#43; y &#43; z - 1,
 x = \frac{1 - t^2}{1 + t^2} ~~~~ y = \frac{2t}{1 + t^2}
 \]
 
-and we want to produce an implicit curve equation in $x, y$ *without $t$*. Let's clear denominators
+and we want to produce an implicit curve equation in $x, y$ *without t*. Let's clear denominators
 
 \[
 t^2y - 2t + y = 0 ~~~~ t^2x + t^2 + x - 1 = 0
@@ -201,7 +201,7 @@ t^2y - 2t + y = 0 ~~~~ t^2x + t^2 + x - 1 = 0
 <p>~ y = \frac{2t}{1 + t^2}
 \]
 
-and we want to produce an implicit curve equation in $x, y$ *without $t$*. Let's clear denominators
+and we want to produce an implicit curve equation in $x, y$ *without t*. Let's clear denominators
 
 \[
 t^2y - 2t + y = 0 ~ t^2x &#43; t^2 &#43; x - 1 &#61; 0 &#93;</p>
@@ -299,7 +299,7 @@ groebner&#40;coloring_system&#41;</code></pre><pre><code class="plaintext code-o
 <img src="/Groebner.jl/assets/tutorial/code/output/graphcolored.svg" alt="">
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin. Last modified: May 23, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin. Last modified: May 26, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
