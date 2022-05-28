@@ -155,10 +155,10 @@ groebner&#40;&#91;f, g&#93;&#41;   # gcd by groebner</code></pre><pre><code clas
 <p>We emphasize, however, that <code>Groebner.jl</code> is designed to have as little runtime overhead as possible over the usual GCD implementation</p>
 <pre><code class="language-julia">h &#61; &#40;x &#43; 3&#41;^5
 
-@btime gcd&#40;gcd&#40;&#36;f, &#36;g&#41;, &#36;h&#41;</code></pre><pre><code class="plaintext code-output">  384.414 μs (3816 allocations: 228.98 KiB)
+@btime gcd&#40;gcd&#40;&#36;f, &#36;g&#41;, &#36;h&#41;</code></pre><pre><code class="plaintext code-output">  325.602 μs (3816 allocations: 228.98 KiB)
 x + 3</code></pre>
 <pre><code class="language-julia">F &#61; &#91;f, g, h&#93;
-@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  164.005 μs (1215 allocations: 126.94 KiB)
+@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  113.800 μs (1215 allocations: 126.94 KiB)
 1-element Vector{DynamicPolynomials.Polynomial{true, Int64}}:
  x + 3</code></pre>
 <h2 id="variable_elimination"><a href="#variable_elimination" class="header-anchor">Variable Elimination</a></h2>
