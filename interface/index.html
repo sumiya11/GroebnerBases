@@ -110,8 +110,7 @@
 </li>
 </ul>
 <p>Graded orderings tend to be the fastest.</p>
-<p>The algorithm is randomized. Still, by default, the result is <strong>guaranteed to be correct</strong>.</p>
-<p>One may set <code>certify</code> to <code>false</code> to speed up the computation a bit. The obtained result will be correct with probability &gt; 0.9999</p>
+<p>The algorithm is randomized. The obtained result will be correct with probability &gt; 0.9999. Set <code>certify</code> to <code>true</code> to obtain correct result guaranteedly.</p>
 <p>Set <code>forsolve</code> to <code>true</code> to tell the algorithm to automatically select parameters for producing a basis that further can used for <strong>solving the input system</strong>. In this case, the output basis will be in generic position in lexicographic monomial order. The computation will, however, fail, if the input polynomial system is not solvable.</p>
 <p>The <code>linalg</code> parameter is responsible for linear algebra backend to be used. Currently, available options are</p>
 <ul>
@@ -138,7 +137,6 @@
 )</code></pre>
 <p>Checks if <code>polynomials</code> forms a Groebner basis.</p>
 <p>Uses the ordering on <code>polynomials</code> by default. If <code>ordering</code> is explicitly specialized, it takes precedence.</p>
-<p>The algorithm is randomized. Still, by default, the result is <strong>guaranteed to be correct</strong>.</p>
 <p>One may set <code>certify</code> to <code>false</code> to speed up the computation a bit. The obtained result will be correct with probability &gt; 0.9999</p>
 </div>
   </div>
@@ -189,7 +187,7 @@
 
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin. Last modified: May 26, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin. Last modified: May 28, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
