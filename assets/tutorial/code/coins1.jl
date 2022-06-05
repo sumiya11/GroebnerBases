@@ -1,6 +1,0 @@
-# This file was generated, do not modify it. # hide
-_, (p, n, d, q) = PolynomialRing(QQ, ["p","n","d","q"], ordering=:deglex)
-
-F = [p^5 - n, p^10 - d, p^25 - q]
-
-G = groebner(F)
