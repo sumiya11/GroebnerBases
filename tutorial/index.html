@@ -151,11 +151,11 @@ groebner(f_1, \ldots, f_m) = gcd(gcd(gcd(f_1, f_2), \ldots), f_m)
 <p>With <code>DynamicPolynomials.jl</code>:</p>
 <pre><code class="language-julia">h &#61; &#40;x &#43; 3&#41;^5
 
-@btime gcd&#40;gcd&#40;&#36;f, &#36;g&#41;, &#36;h&#41;</code></pre><pre><code class="plaintext code-output">  333.798 μs (3816 allocations: 228.98 KiB)
+@btime gcd&#40;gcd&#40;&#36;f, &#36;g&#41;, &#36;h&#41;</code></pre><pre><code class="plaintext code-output">  342.000 μs (3816 allocations: 228.98 KiB)
 x + 3</code></pre>
 <p>With <code>Groebner.jl</code>:</p>
 <pre><code class="language-julia">F &#61; &#91;f, g, h&#93;
-@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  101.599 μs (1215 allocations: 126.94 KiB)
+@btime groebner&#40;&#36;F&#41;</code></pre><pre><code class="plaintext code-output">  102.700 μs (1215 allocations: 126.94 KiB)
 1-element Vector{DynamicPolynomials.Polynomial{true, Int64}}:
  x + 3</code></pre>
 <h2 id="variable_elimination"><a href="#variable_elimination" class="header-anchor">Variable Elimination</a></h2>
