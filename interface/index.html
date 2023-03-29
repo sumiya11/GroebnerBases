@@ -57,17 +57,21 @@
       <a class="sidebar-nav-item " href="/Groebner.jl/">Home</a>
       <!-- <a class="sidebar-nav-item {{ispage tutorial.html}}active{{end}}" href="/Groebner.jl/tutorial/">Tutorials</a> -->
       <li class="sidebar-nav-item "><a href="/Groebner.jl/tutorial/">Tutorials</a>
-			  <ul class="menu-list-child-list ">
-				<li class="menu-list-item "><a href="/Groebner.jl/tutorial/#introduction" class="menu-list-link">Introduction</a>
-				<li class="menu-list-item "><a href="/Groebner.jl/tutorial/#gcd_rref" class="menu-list-link">Gcd & Rref</a>
-				<li class="menu-list-item "><a href="/Groebner.jl/tutorial/#variable_elimination" class="menu-list-link">Variable Elimination</a>
-				<li class="menu-list-item "><a href="/Groebner.jl/tutorial/#curve_implicitization" class="menu-list-link">Curve Implicitization</a>
-				<li class="menu-list-item "><a href="/Groebner.jl/tutorial/#system_solving" class="menu-list-link">System Solving</a>
-				<li class="menu-list-item "><a href="/Groebner.jl/tutorial/#integer_programming" class="menu-list-link">Integer Programming</a>
-				<li class="menu-list-item "><a href="/Groebner.jl/tutorial/#graph_coloring" class="menu-list-link">Graph Coloring</a>
-				<!-- <li class="menu-list-item {{ispage index.html}}active{{end}}"><a href="/Groebner.jl/tutorial/" class="menu-list-link">Page structure</a> -->
-			  </ul>
+			  <!-- <ul class="menu-list-child-list ">
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#introduction" class="menu-list-link">Introduction</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#gcd_rref" class="menu-list-link">Gcd & Rref</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#variable_elimination" class="menu-list-link">Variable Elimination</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#curve_implicitization" class="menu-list-link">Curve Implicitization</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#system_solving" class="menu-list-link">System Solving</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#integer_programming" class="menu-list-link">Integer Programming</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#graph_coloring" class="menu-list-link">Graph Coloring</a>
+				<li class="menu-list-item {{ispage index.html}}active{{end}}"><a href="/Groebner.jl/tutorial/" class="menu-list-link">Page structure</a>
+			  </ul> -->
       <a class="sidebar-nav-item active" href="/Groebner.jl/interface/">Interface</a>
+        <ul class="menu-list-child-list ">
+          <li class="menu-list-item active"><a href="/Groebner.jl/interface/#exported_functions" class="menu-list-link">Exported functions</a>
+          <li class="menu-list-item active"><a href="/Groebner.jl/interface/#monomial_orderings" class="menu-list-link">Monomial orderings</a>
+        </ul>
     </nav>
 
   </div>
@@ -82,6 +86,7 @@
 
 <!-- Content appended here -->
 <div class="franklin-content"><h1 id="interface"><a href="#interface" class="header-anchor">Interface</a></h1>
+<h2 id="exported_functions"><a href="#exported_functions" class="header-anchor">Exported functions</a></h2>
 
   <div class="docstring">
       <h2 class="doc-header" id="groebner">
@@ -221,9 +226,87 @@ julia&gt; kbase([y^<span class="hljs-number">2</span> + x, x^<span class="hljs-n
 </div>
   </div>
 
+<h2 id="monomial_orderings"><a href="#monomial_orderings" class="header-anchor">Monomial orderings</a></h2>
+<p>A list of supported monomial orderings. An ordering can be set by passing it as the keyword argument <code>ordering</code>. See below for some examples.</p>
+<p><em>Note that some frontends &#40;e.g. <code>AbstractAlgebra.jl</code>&#41; do not support weighted/block/matrix orderings. In such cases, the polynomial terms in the output may be ordered w.r.t. some other ordering. Still, the output is a correct Groebner basis in the requested ordering.</em></p>
+  <div class="docstring">
+      <h2 class="doc-header" id="Lex">
+        <a href="#Lex">Lex</a>
+        <div class="doc-type">struct</div></h2>
+      <div class="doc-content"><p>No documentation found.</p>
+<h1 id="summary"><a href="#summary" class="header-anchor">Summary</a></h1>
+<pre><code class="julia hljs"><span class="hljs-keyword">struct</span> Groebner.Lex</code></pre>
+<h1 id="supertype_hierarchy"><a href="#supertype_hierarchy" class="header-anchor">Supertype Hierarchy</a></h1>
+<pre><code class="julia hljs">Groebner.Lex &lt;: Groebner.AbstractMonomialOrdering &lt;: <span class="hljs-built_in">Any</span></code></pre>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="DegLex">
+        <a href="#DegLex">DegLex</a>
+        <div class="doc-type">struct</div></h2>
+      <div class="doc-content"><p>No documentation found.</p>
+<h1 id="summary__2"><a href="#summary__2" class="header-anchor">Summary</a></h1>
+<pre><code class="julia hljs"><span class="hljs-keyword">struct</span> Groebner.DegLex</code></pre>
+<h1 id="supertype_hierarchy__2"><a href="#supertype_hierarchy__2" class="header-anchor">Supertype Hierarchy</a></h1>
+<pre><code class="julia hljs">Groebner.DegLex &lt;: Groebner.AbstractMonomialOrdering &lt;: <span class="hljs-built_in">Any</span></code></pre>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="DegRevLex">
+        <a href="#DegRevLex">DegRevLex</a>
+        <div class="doc-type">struct</div></h2>
+      <div class="doc-content"><p>No documentation found.</p>
+<h1 id="summary__3"><a href="#summary__3" class="header-anchor">Summary</a></h1>
+<pre><code class="julia hljs"><span class="hljs-keyword">struct</span> Groebner.DegRevLex</code></pre>
+<h1 id="supertype_hierarchy__3"><a href="#supertype_hierarchy__3" class="header-anchor">Supertype Hierarchy</a></h1>
+<pre><code class="julia hljs">Groebner.DegRevLex &lt;: Groebner.AbstractMonomialOrdering &lt;: <span class="hljs-built_in">Any</span></code></pre>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="InputOrdering">
+        <a href="#InputOrdering">InputOrdering</a>
+        <div class="doc-type">struct</div></h2>
+      <div class="doc-content"><p>No documentation found.</p>
+<h1 id="summary__4"><a href="#summary__4" class="header-anchor">Summary</a></h1>
+<pre><code class="julia hljs"><span class="hljs-keyword">struct</span> Groebner.InputOrdering</code></pre>
+<h1 id="supertype_hierarchy__4"><a href="#supertype_hierarchy__4" class="header-anchor">Supertype Hierarchy</a></h1>
+<pre><code class="julia hljs">Groebner.InputOrdering &lt;: Groebner.AbstractMonomialOrdering &lt;: <span class="hljs-built_in">Any</span></code></pre>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="WeightedOrdering">
+        <a href="#WeightedOrdering">WeightedOrdering</a>
+        <div class="doc-type">struct</div></h2>
+      <div class="doc-content"><p>No documentation found.</p>
+<p>Binding <code>Groebner.WeightedOrdering</code> does not exist.</p>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="BlockOrdering">
+        <a href="#BlockOrdering">BlockOrdering</a>
+        <div class="doc-type">struct</div></h2>
+      <div class="doc-content"><p>No documentation found.</p>
+<p>Binding <code>Groebner.BlockOrdering</code> does not exist.</p>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="MatrixOrdering">
+        <a href="#MatrixOrdering">MatrixOrdering</a>
+        <div class="doc-type">struct</div></h2>
+      <div class="doc-content"><p>No documentation found.</p>
+<p>Binding <code>Groebner.MatrixOrdering</code> does not exist.</p>
+</div>
+  </div>
+
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin. Last modified: March 15, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: March 29, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
