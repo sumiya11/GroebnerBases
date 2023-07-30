@@ -247,15 +247,6 @@ julia&gt; normalform&#40;&#91;y^2 &#43; x, x^2 &#43; y&#93;, x^2 &#43; y^2 &#43;
   </div>
 
   <div class="docstring">
-      <h2 class="doc-header" id="fglm">
-        <a href="#fglm">fglm</a>
-        <div class="doc-type">fn</div></h2>
-      <div class="doc-content"><p>No documentation found.</p>
-<p>Binding <code>Groebner.fglm</code> does not exist.</p>
-</div>
-  </div>
-
-  <div class="docstring">
       <h2 class="doc-header" id="kbase">
         <a href="#kbase">kbase</a>
         <div class="doc-type">fn</div></h2>
@@ -277,8 +268,8 @@ julia&gt; kbase&#40;&#91;y^2 &#43; x, x^2 &#43; y&#93;, check&#61;true&#41;</cod
   </div>
 
 <h2 id="monomial_orderings"><a href="#monomial_orderings" class="header-anchor">Monomial orderings</a></h2>
-<p>A list of supported monomial orderings. An ordering can be set by passing it as the keyword argument <code>ordering</code>. See below for some examples.</p>
-<p><em>Note that some frontends &#40;e.g. <code>AbstractAlgebra.jl</code>&#41; do not support weighted/block/matrix orderings. In such cases, the polynomial terms in the output may be ordered w.r.t. some other ordering. Still, the output is a correct Groebner basis in the requested ordering.</em></p>
+<p>A list of all supported monomial orderings. An ordering can be set by passing the keyword argument <code>ordering</code>. See below for some examples.</p>
+<p><em>Note that some frontends, for example, <code>AbstractAlgebra.jl</code>, may not support weighted/product/matrix orderings. In such cases, the polynomial terms in the output are ordered w.r.t. some other supported ordering.</em></p>
   <div class="docstring">
       <h2 class="doc-header" id="Lex">
         <a href="#Lex">Lex</a>
@@ -386,23 +377,11 @@ groebner&#40;&#91;x*y &#43; x, x &#43; y^2&#93;, ordering&#61;ord&#41;</code></p
   </div>
 
   <div class="docstring">
-      <h2 class="doc-header" id="BlockOrdering">
-        <a href="#BlockOrdering">BlockOrdering</a>
+      <h2 class="doc-header" id="ProductOrdering">
+        <a href="#ProductOrdering">ProductOrdering</a>
         <div class="doc-type">str</div></h2>
-      <div class="doc-content"><pre><code class="language-julia">struct BlockOrdering</code></pre>
-<p>Block monomial ordering.</p>
-<h1 id="example__10"><a href="#example__10" class="header-anchor">Example</a></h1>
-<p>Block ordering with the first two variables ordered by <code>Lex</code> and the last two variables ordered by <code>DegRevLex</code>:</p>
-<pre><code class="language-julia">using Groebner, AbstractAlgebra
-R, &#40;x, y, z, w&#41; &#61; QQ&#91;&quot;x&quot;, &quot;y&quot;, &quot;z&quot;, &quot;w&quot;&#93;;
-ord &#61; BlockOrdering&#40;1:2, Lex&#40;&#41;, 3:4, DegRevLex&#40;&#41;&#41;
-groebner&#40;&#91;x*y &#43; w, y*z - w&#93;, ordering&#61;ord&#41;</code></pre>
-<p>Recursive creation of block orderings:</p>
-<pre><code class="language-julia">using Groebner, AbstractAlgebra
-R, &#40;x1,x2,x3,x4,x5,x6&#41; &#61; QQ&#91;&quot;x1&quot;,&quot;x2&quot;,&quot;x3&quot;,&quot;x4&quot;,&quot;x5&quot;,&quot;x6&quot;&#93;;
-ord_3_6 &#61; BlockOrdering&#40;3:4, DegRevLex&#40;&#41;, 5:6, WeightedOrdering&#40;&#91;0, 3&#93;&#41;&#41;
-ord &#61; BlockOrdering&#40;1:2, Lex&#40;&#41;, 3:6, ord_3_6&#41;
-groebner&#40;&#91;x1 &#43; x2 &#43; x3 &#43; x4 &#43; x5 &#43; x6&#93;, ordering&#61;ord&#41;</code></pre>
+      <div class="doc-content"><p>No documentation found.</p>
+<p>Binding <code>Groebner.ProductOrdering</code> does not exist.</p>
 </div>
   </div>
 
@@ -412,7 +391,7 @@ groebner&#40;&#91;x1 &#43; x2 &#43; x3 &#43; x4 &#43; x5 &#43; x6&#93;, ordering
         <div class="doc-type">st</div></h2>
       <div class="doc-content"><pre><code class="language-julia">struct MatrixOrdering</code></pre>
 <p>Matrix monomial ordering.</p>
-<h1 id="example__11"><a href="#example__11" class="header-anchor">Example</a></h1>
+<h1 id="example__10"><a href="#example__10" class="header-anchor">Example</a></h1>
 <pre><code class="language-julia">using Groebner, AbstractAlgebra
 R, &#40;x, y, z, w&#41; &#61; QQ&#91;&quot;x&quot;, &quot;y&quot;, &quot;z&quot;, &quot;w&quot;&#93;;
 # the number of columns equal to the number of variables
@@ -427,7 +406,7 @@ groebner&#40;&#91;x*y &#43; w, y*z - w&#93;, ordering&#61;ord&#41;</code></pre>
 
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: July 26, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: July 30, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
