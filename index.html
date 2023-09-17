@@ -86,17 +86,19 @@
 <div class="content container">
 
 <!-- Content appended here -->
-<div class="franklin-content"><h1 id="groebnerjl"><a href="#groebnerjl" class="header-anchor">Groebner.jl</a></h1>
+<div class="franklin-content"><p>inline: <img src="https://juliacon.org/2018/assets/img/julia-logo-dots.png" alt="alt text" /></p>
+<h1 id="groebnerjl"><a href="#groebnerjl" class="header-anchor">Groebner.jl</a></h1>
 <p><code>Groebner.jl</code> is a package for fast and generic Gröbner bases computations based on Faugère&#39;s F4 algorithm <a href="https://www-polsys.lip6.fr/~jcf/Papers/F99a.pdf">&#91;1&#93;</a> written in pure Julia.</p>
 <h2 id="installation"><a href="#installation" class="header-anchor">Installation</a></h2>
 <p>To install <code>Groebner.jl</code>, execute the following in Julia:</p>
-<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Pkg; Pkg.add(<span class="hljs-string">&quot;Groebner&quot;</span>)</code></pre>
+<pre><code class="julia hljs"><span class="hljs-number">1</span></code></pre><pre><code class="plaintext hljs">1</code></pre>
 <p>See <strong>Interface</strong> for a description of all exported functions. Find a quick introduction to Groebner bases and a couple of interesting use cases in <strong>Tutorials</strong>. Meanwhile, below are simple examples.</p>
 <h2 id="examples"><a href="#examples" class="header-anchor">Examples</a></h2>
 <p>Currently, polynomials from <code>AbstractAlgebra</code>, <code>DynamicPolynomials</code>, and <code>Nemo</code> are supported as input.</p>
 <h3 id="with_abstractalgebra"><a href="#with_abstractalgebra" class="header-anchor">with <code>AbstractAlgebra</code></a></h3>
 <p>Let&#39;s import <code>AbstractAlgebra</code>, create a system over a finite field</p>
-
+<pre><code class="plaintext hljs">UndefVarError: `Pkg` not defined
+</code></pre>
 <pre><code class="julia hljs"><span class="hljs-keyword">using</span> AbstractAlgebra
 
 R, (x, y) = PolynomialRing(GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span> - <span class="hljs-number">1</span>), [<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>])
@@ -114,7 +116,8 @@ basis = groebner(polys)</code></pre><pre><code class="plaintext hljs">3-element 
 <pre><code class="julia hljs">normalform(basis, x^<span class="hljs-number">2</span>*y^<span class="hljs-number">2</span> + <span class="hljs-number">2</span>x^<span class="hljs-number">3</span>*y - x*y^<span class="hljs-number">2</span>)</code></pre><pre><code class="plaintext hljs">0</code></pre>
 <h3 id="with_dynamicpolynomials"><a href="#with_dynamicpolynomials" class="header-anchor">with <code>DynamicPolynomials</code></a></h3>
 <p>We will compute the basis of the <code>noon-2</code> system <a href="https://www.jstor.org/stable/2101937">&#91;2&#93;</a>:</p>
-
+<pre><code class="plaintext hljs">UndefVarError: `Pkg` not defined
+</code></pre>
 <pre><code class="julia hljs"><span class="hljs-keyword">using</span> DynamicPolynomials
 
 <span class="hljs-meta">@polyvar</span> x1 x2
@@ -132,7 +135,7 @@ groebner(system)</code></pre><pre><code class="plaintext hljs">3-element Vector{
 <p>Special thanks goes to Vladimir Kuznetsov for providing the sources of his F4 implementation.</p>
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: September 15, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: September 17, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->

@@ -1,0 +1,10 @@
+Status `~/work/Groebner.jl/Groebner.jl/docs/Project.toml`
+⌅ [c3fe647b] AbstractAlgebra v0.31.1
+  [6e4b80f9] BenchmarkTools v1.3.2
+  [a81c6b42] Compose v0.9.5
+  [7c1d4256] DynamicPolynomials v0.5.3
+  [713c75ef] Franklin v0.10.93
+  [a2cc645c] GraphPlot v0.5.2
+  [86223c79] Graphs v1.8.0
+  [0b43b601] Groebner v0.4.3
+Info Packages marked with ⌅ have new versions available but compatibility constraints restrict them from upgrading. To see why use `status --outdated`
