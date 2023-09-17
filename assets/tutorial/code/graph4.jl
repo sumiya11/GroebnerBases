@@ -1,5 +1,5 @@
 # This file was generated, do not modify it. # hide
-# hIdeall
+# hideall
 nodefillc = ["red", "blue", "green", "blue"]
 
 xs = [0.5, 1.0, 0.5, 0.0]

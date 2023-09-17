@@ -86,36 +86,40 @@
 <div class="content container">
 
 <!-- Content appended here -->
-<div class="franklin-content"><p>inline: <img src="https://juliacon.org/2018/assets/img/julia-logo-dots.png" alt="alt text" /></p>
-<h1 id="groebnerjl"><a href="#groebnerjl" class="header-anchor">Groebner.jl</a></h1>
-<p><code>Groebner.jl</code> is a package for fast and generic Gröbner bases computations based on Faugère&#39;s F4 algorithm <a href="https://www-polsys.lip6.fr/~jcf/Papers/F99a.pdf">&#91;1&#93;</a> written in pure Julia.</p>
+<div class="franklin-content"><div class="im-50"><img src="/Groebner.jl/assets/logo-with-text.svg" alt="" /></div>
+<p>Groebner.jl is a package for fast and generic Gröbner bases computations based on Faugère&#39;s F4 algorithm<sup id="fnref:1"><a href="#fndef:1" class="fnref">[1]</a></sup> written in Julia.</p>
 <h2 id="installation"><a href="#installation" class="header-anchor">Installation</a></h2>
-<p>To install <code>Groebner.jl</code>, execute the following in Julia:</p>
-<pre><code class="julia hljs"><span class="hljs-number">1</span></code></pre><pre><code class="plaintext hljs">1</code></pre>
-<p>See <strong>Interface</strong> for a description of all exported functions. Find a quick introduction to Groebner bases and a couple of interesting use cases in <strong>Tutorials</strong>. Meanwhile, below are simple examples.</p>
+<p>To install Groebner.jl, run the following in the Julia REPL:</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Pkg; Pkg.add(<span class="hljs-string">&quot;Groebner&quot;</span>)</code></pre>
+<p>See <a href="interface">Interface</a> for a description of all exported functions. For a quick introduction to Groebner bases we refer to <a href="tutorial">Tutorials</a>. Meanwhile, below are simple examples.</p>
 <h2 id="examples"><a href="#examples" class="header-anchor">Examples</a></h2>
-<p>Currently, polynomials from <code>AbstractAlgebra</code>, <code>DynamicPolynomials</code>, and <code>Nemo</code> are supported as input.</p>
-<h3 id="with_abstractalgebra"><a href="#with_abstractalgebra" class="header-anchor">with <code>AbstractAlgebra</code></a></h3>
-<p>Let&#39;s import <code>AbstractAlgebra</code>, create a system over a finite field</p>
+<p>Currently, polynomials from AbstractAlgebra.jl, DynamicPolynomials.jl, and Nemo.jl are supported as input.</p>
+<h3 id="with_abstractalgebrajl"><a href="#with_abstractalgebrajl" class="header-anchor">with AbstractAlgebra.jl</a></h3>
+<p>First, import AbstractAlgebra.jl.  Then, we can create an array of polynomials over a finite field</p>
 <pre><code class="plaintext hljs">UndefVarError: `Pkg` not defined
 </code></pre>
 <pre><code class="julia hljs"><span class="hljs-keyword">using</span> AbstractAlgebra
 
-R, (x, y) = PolynomialRing(GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span> - <span class="hljs-number">1</span>), [<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>])
-polys = [x^<span class="hljs-number">3</span> + y^<span class="hljs-number">2</span>, x*y + x^<span class="hljs-number">2</span>];</code></pre>
-<p>and compute the Groebner basis</p>
+R, (x, y, z) = PolynomialRing(GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span> - <span class="hljs-number">1</span>), [<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>, <span class="hljs-string">&quot;z&quot;</span>])
+polys = [x^<span class="hljs-number">2</span> + y + z, x*y + z];</code></pre>
+<p>and compute the Groebner basis with the <code>groebner</code> command</p>
 <pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner
 
-basis = groebner(polys)</code></pre><pre><code class="plaintext hljs">3-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
- y^3 + 2147483646*y^2
- x*y^2 + y^2
- x^2 + x*y</code></pre>
-<p>We can also check that a set of polynomials forms a basis</p>
+basis = groebner(polys)</code></pre><pre><code class="plaintext hljs">4-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
+ y^3 + y^2*z + z^2
+ x*z + 2147483646*y^2 + 2147483646*y*z
+ x*y + z
+ x^2 + y + z</code></pre>
+<p>We can check if a set of polynomials forms a basis</p>
 <pre><code class="julia hljs">isgroebner(basis)</code></pre><pre><code class="plaintext hljs">true</code></pre>
-<p>We check if <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><msup><mi>y</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><msup><mi>x</mi><mn>3</mn></msup><mi>y</mi><mo>−</mo><mi>x</mi><msup><mi>y</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">x^2y^2 + 2x^3y - xy^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord">2</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">x</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> is a member of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">⟨</mo><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo separator="true">,</mo><mi>x</mi><mi>y</mi><mo>+</mo><msup><mi>x</mi><mn>2</mn></msup><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\langle x^3 + y^2, xy + x^2 \rangle</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mopen">⟨</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">⟩</span></span></span></span>, using the <code>normalform</code> function</p>
-<pre><code class="julia hljs">normalform(basis, x^<span class="hljs-number">2</span>*y^<span class="hljs-number">2</span> + <span class="hljs-number">2</span>x^<span class="hljs-number">3</span>*y - x*y^<span class="hljs-number">2</span>)</code></pre><pre><code class="plaintext hljs">0</code></pre>
-<h3 id="with_dynamicpolynomials"><a href="#with_dynamicpolynomials" class="header-anchor">with <code>DynamicPolynomials</code></a></h3>
-<p>We will compute the basis of the <code>noon-2</code> system <a href="https://www.jstor.org/stable/2101937">&#91;2&#93;</a>:</p>
+<p>Groebner.jl also provides several monomial orderings.  For example, we can eliminate <code>z</code> from the above system:</p>
+<pre><code class="julia hljs">ordering = Lex(z) * DegRevLex(x, y)  <span class="hljs-comment"># z &gt; x, y</span>
+groebner(polys, ordering=ordering)</code></pre><pre><code class="plaintext hljs">2-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
+ x^2 + 2147483646*x*y + y
+ x*y + z</code></pre>
+<p>You can find more information on monomial orderings in Groebner.jl in <a href="interface/#monomial_orderings">Monomial Orderings</a>.</p>
+<h3 id="with_dynamicpolynomialsjl"><a href="#with_dynamicpolynomialsjl" class="header-anchor">with DynamicPolynomials.jl</a></h3>
+<p>We will compute the basis of the <code>noon-2</code> system<sup id="fnref:3"><a href="#fndef:3" class="fnref">[2]</a></sup></p>
 <pre><code class="plaintext hljs">UndefVarError: `Pkg` not defined
 </code></pre>
 <pre><code class="julia hljs"><span class="hljs-keyword">using</span> DynamicPolynomials
@@ -129,10 +133,29 @@ groebner(system)</code></pre><pre><code class="plaintext hljs">3-element Vector{
  110 - 121x2 - 100x2² + 100x1x2 + 110x2³
  10 - 11x1 + 10x1x2²</code></pre>
 <h2 id="contacts"><a href="#contacts" class="header-anchor">Contacts</a></h2>
-<p>This library is maintained by Alexander Demin &#40;asdemin_2@edu.hse.ru&#41;</p>
+<p>This library is maintained by Alexander Demin &#40;<a href="mailto:asdemin_2@edu.hse.ru">asdemin_2@edu.hse.ru</a>&#41;.</p>
 <h2 id="acknowledgement"><a href="#acknowledgement" class="header-anchor">Acknowledgement</a></h2>
-<p>We would like to acknowledge Jérémy Berthomieu, Christian Eder and Mohab Safey El Din as this Library is inspired by their work &quot;msolve: A Library for Solving Polynomial Systems&quot;. We are also grateful to Max-Planck-Institut für Informatik for assistance in producing benchmarks.</p>
+<p>We would like to acknowledge Jérémy Berthomieu, Christian Eder, and Mohab Safey El Din as this library is inspired by their work &quot;msolve: A Library for Solving Polynomial Systems&quot;<sup id="fnref:2"><a href="#fndef:2" class="fnref">[3]</a></sup>. We are also grateful to The Max Planck Institute for Informatics and The MAX team at l&#39;X for providing computational resources.</p>
 <p>Special thanks goes to Vladimir Kuznetsov for providing the sources of his F4 implementation.</p>
+<p><table class="fndef" id="fndef:1">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:1">[1]</a></td>
+        <td class="fndef-content"><a href="https://www-polsys.lip6.fr/~jcf/Papers/F99a.pdf">https://www-polsys.lip6.fr/~jcf/Papers/F99a.pdf</a></td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:3">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:3">[2]</a></td>
+        <td class="fndef-content"><a href="https://www.jstor.org/stable/2101937">https://www.jstor.org/stable/2101937</a></td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:2">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:2">[3]</a></td>
+        <td class="fndef-content"><a href="https://msolve.lip6.fr/">https://msolve.lip6.fr/</a></td>
+    </tr>
+</table>
+</p>
 <div class="page-foot">
   <div class="copyright">
     &copy; Alexander Demin, Shashi Gowda, and others. Last modified: September 17, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.

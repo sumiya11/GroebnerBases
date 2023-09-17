@@ -4,7 +4,7 @@ import Pkg; Pkg.add("BenchmarkTools") # hide
 Pkg.add("Graphs") # hide
 Pkg.add("GraphPlot") # hide
 Pkg.add("AbstractAlgebra") # hide
-# Pkg.add("Groebner") # hide
+Pkg.add(url="https://github.com/sumiya11/Groebner.jl") # hide
 Pkg.add("DynamicPolynomials") # hide
 Pkg.add("AbstractAlgebra") # hide
 Pkg.add("Compose") # hide

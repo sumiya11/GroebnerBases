@@ -1,5 +1,5 @@
 # This file was generated, do not modify it. # hide
-# hIdeall
+# hideall
 xs = [0.5, 1.0, 0.5, 0.0]
 ys = [-sqrt(3) / 6, 0.0, -1.0, 0.0]
 nodelabeldist = 1.5

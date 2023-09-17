@@ -89,26 +89,14 @@
 <div class="franklin-content"><h1 id="interface"><a href="#interface" class="header-anchor">Interface</a></h1>
 <h2 id="exported_functions"><a href="#exported_functions" class="header-anchor">Exported functions</a></h2>
 
-<pre><code class="language-julia">import Pkg
-Pkg.status&#40;&#41;</code></pre><pre><code class="plaintext code-output">Status `~/work/Groebner.jl/Groebner.jl/docs/Project.toml`
-⌅ [c3fe647b] AbstractAlgebra v0.31.1
-  [6e4b80f9] BenchmarkTools v1.3.2
-  [a81c6b42] Compose v0.9.5
-  [7c1d4256] DynamicPolynomials v0.5.3
-  [713c75ef] Franklin v0.10.93
-  [a2cc645c] GraphPlot v0.5.2
-  [86223c79] Graphs v1.8.0
-  [0b43b601] Groebner v0.4.3
-Info Packages marked with ⌅ have new versions available but compatibility constraints restrict them from upgrading. To see why use `status --outdated`
-</code></pre>
   <div class="docstring">
       <h2 class="doc-header" id="groebner">
         <a href="#groebner">groebner</a>
         <div class="doc-type">fn</div></h2>
-      <div class="doc-content"><pre><code class="language-julia">groebner&#40;polynomials; options...&#41;</code></pre>
+      <div class="doc-content"><pre><code class="julia hljs">groebner(polynomials; options...)</code></pre>
 <p>Computes a Groebner basis of <code>polynomials</code>.</p>
 <h2 id="possible_options"><a href="#possible_options" class="header-anchor">Possible Options</a></h2>
-<p>The <code>groebner</code> routine takes the following options:</p>
+<p>The <code>groebner</code> routine takes the following optional arguments:</p>
 <ul>
 <li><p><code>reduced</code>: If the returned basis must be autoreduced and unique &#40;default is <code>true</code>&#41;.</p>
 </li>
@@ -116,22 +104,22 @@ Info Packages marked with ⌅ have new versions available but compatibility cons
 <ul>
 <li><p><code>InputOrdering&#40;&#41;</code> for inferring the ordering from the given <code>polynomials</code> &#40;default&#41;,</p>
 </li>
-<li><p><code>Lex&#40;&#41;</code> for lexicographic,</p>
+<li><p><code>Lex&#40;args...&#41;</code> for lexicographic,</p>
 </li>
-<li><p><code>DegLex&#40;&#41;</code> for degree lexicographic,</p>
+<li><p><code>DegLex&#40;args...&#41;</code> for degree lexicographic,</p>
 </li>
-<li><p><code>DegRevLex&#40;&#41;</code> for degree reverse lexicographic,</p>
+<li><p><code>DegRevLex&#40;args...&#41;</code> for degree reverse lexicographic,</p>
 </li>
-<li><p><code>WeightedOrdering&#40;weights&#41;</code> for weighted ordering,</p>
+<li><p><code>WeightedOrdering&#40;args...&#41;</code> for weighted ordering,</p>
 </li>
 <li><p><code>ProductOrdering&#40;args...&#41;</code> for block ordering,</p>
 </li>
-<li><p><code>MatrixOrdering&#40;matrix&#41;</code> for matrix ordering.</p>
+<li><p><code>MatrixOrdering&#40;args...&#41;</code> for matrix ordering.</p>
 </li>
 </ul>
 <p>For details and examples see the corresponding documentation page.</p>
 </li>
-<li><p><code>certify</code>: Certify the obtained basis. When this option is <code>false</code>, the   algorithm is randomized, and the result is correct with high probability   &#40;default is <code>false</code>&#41;.</p>
+<li><p><code>certify</code>: Certify the obtained basis. When this option is <code>false</code>, the   algorithm is randomized, and the result is correct with high probability.   When this option is <code>true</code>, the result is guaranteed to be correct in case   the ideal is homogeneous &#40;default is <code>false</code>&#41;.</p>
 </li>
 <li><p><code>linalg</code>: Linear algebra backend. Available options are: </p>
 <ul>
@@ -157,7 +145,7 @@ Info Packages marked with ⌅ have new versions available but compatibility cons
 </li>
 <li><p><code>loglevel</code>: Logging level, an integer. Higher values mean less verbose.   Default value is <code>0</code>, which means that only info and warnings are printed.   Set <code>loglevel</code> to negative values, e.g., <code>-1</code>, for debugging.</p>
 </li>
-<li><p><code>maxpairs</code>: The maximum number of critical pairs used at once in matrix   construction. By default, this is not specified. Tweak this option to try to   lower the amount of RAM consumed.</p>
+<li><p><code>maxpairs</code>: The maximum number of critical pairs used at once in matrix   construction in the F4 algorithm. By default, this is not specified. Tweak   this option to try to lower the amount of RAM consumed.</p>
 </li>
 <li><p><code>homogenize</code>: Controls the use of homogenization in the algorithm. Possible options are:</p>
 <ul>
@@ -172,13 +160,15 @@ Info Packages marked with ⌅ have new versions available but compatibility cons
 </ul>
 <h2 id="example"><a href="#example" class="header-anchor">Example</a></h2>
 <p>Using <code>DynamicPolynomials</code>:</p>
-<pre><code class="language-julia">using Groebner, DynamicPolynomials
-@polyvar x y
-groebner&#40;&#91;x*y^2 &#43; x, y*x^2 &#43; y&#93;&#41;</code></pre>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, DynamicPolynomials
+<span class="hljs-meta">@polyvar</span> x y
+groebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])</code></pre>
 <p>Using <code>AbstractAlgebra</code>:</p>
-<pre><code class="language-julia">using Groebner, AbstractAlgebra
-R, &#40;x, y&#41; &#61; QQ&#91;&quot;x&quot;, &quot;y&quot;&#93;
-groebner&#40;&#91;x*y^2 &#43; x, y*x^2 &#43; y&#93;&#41;</code></pre>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
+groebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])</code></pre>
+<p>Or, in another monomial ordering:</p>
+<pre><code class="julia hljs">groebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y], ordering=Lex(y, x))</code></pre>
 </div>
   </div>
 
@@ -186,10 +176,10 @@ groebner&#40;&#91;x*y^2 &#43; x, y*x^2 &#43; y&#93;&#41;</code></pre>
       <h2 class="doc-header" id="isgroebner">
         <a href="#isgroebner">isgroebner</a>
         <div class="doc-type">fn</div></h2>
-      <div class="doc-content"><pre><code class="language-julia">isgroebner&#40;polynomials; options...&#41;</code></pre>
-<p>Checks if the given array <code>polynomials</code> forms a Groebner basis.</p>
+      <div class="doc-content"><pre><code class="julia hljs">isgroebner(polynomials; options...)</code></pre>
+<p>Checks if <code>polynomials</code> forms a Groebner basis.</p>
 <h2 id="possible_options__2"><a href="#possible_options__2" class="header-anchor">Possible Options</a></h2>
-<p>The <code>isgroebner</code> routine takes the following options:</p>
+<p>The <code>isgroebner</code> routine takes the following optional arguments:</p>
 <ul>
 <li><p><code>ordering</code>: Specifies the monomial ordering. Available monomial orderings are: </p>
 <ul>
@@ -219,13 +209,13 @@ groebner&#40;&#91;x*y^2 &#43; x, y*x^2 &#43; y&#93;&#41;</code></pre>
 </ul>
 <h2 id="example__2"><a href="#example__2" class="header-anchor">Example</a></h2>
 <p>Using <code>DynamicPolynomials</code>:</p>
-<pre><code class="language-julia">using Groebner, DynamicPolynomials
-@polyvar x y;
-isgroebner&#40;&#91;x*y^2 &#43; x, y*x^2 &#43; y&#93;&#41;</code></pre>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, DynamicPolynomials
+<span class="hljs-meta">@polyvar</span> x y;
+isgroebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])</code></pre>
 <p>Using <code>AbstractAlgebra</code>:</p>
-<pre><code class="language-julia">using Groebner, AbstractAlgebra
-R, &#40;x, y&#41; &#61; QQ&#91;&quot;x&quot;, &quot;y&quot;&#93;
-isgroebner&#40;&#91;x*y^2 &#43; x, y*x^2 &#43; y&#93;&#41;</code></pre>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
+isgroebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])</code></pre>
 </div>
   </div>
 
@@ -233,10 +223,10 @@ isgroebner&#40;&#91;x*y^2 &#43; x, y*x^2 &#43; y&#93;&#41;</code></pre>
       <h2 class="doc-header" id="normalform">
         <a href="#normalform">normalform</a>
         <div class="doc-type">fn</div></h2>
-      <div class="doc-content"><pre><code class="language-julia">normalform&#40;basis, tobereduced; options...&#41;</code></pre>
+      <div class="doc-content"><pre><code class="julia hljs">normalform(basis, tobereduced; options...)</code></pre>
 <p>Computes the normal form of polynomials <code>tobereduced</code> w.r.t <code>basis</code>. <code>tobereduced</code> can be either a single polynomial or an array of polynomials.</p>
 <h2 id="possible_options__3"><a href="#possible_options__3" class="header-anchor">Possible Options</a></h2>
-<p>The <code>normalform</code> routine takes the following options:</p>
+<p>The <code>normalform</code> routine takes the following optional arguments:</p>
 <ul>
 <li><p><code>check</code>: Check if the given array <code>basis</code> forms a Groebner basis &#40;default is <code>true</code>&#41;.</p>
 </li>
@@ -263,9 +253,9 @@ isgroebner&#40;&#91;x*y^2 &#43; x, y*x^2 &#43; y&#93;&#41;</code></pre>
 </li>
 </ul>
 <h2 id="example__3"><a href="#example__3" class="header-anchor">Example</a></h2>
-<pre><code class="language-julia">using Groebner, DynamicPolynomials
-@polyvar x y;
-normalform&#40;&#91;y^2 &#43; x, x^2 &#43; y&#93;, x^2 &#43; y^2 &#43; 1&#41;</code></pre>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, DynamicPolynomials
+<span class="hljs-meta">@polyvar</span> x y;
+normalform([y^<span class="hljs-number">2</span> + x, x^<span class="hljs-number">2</span> + y], x^<span class="hljs-number">2</span> + y^<span class="hljs-number">2</span> + <span class="hljs-number">1</span>)</code></pre>
 </div>
   </div>
 
@@ -273,10 +263,10 @@ normalform&#40;&#91;y^2 &#43; x, x^2 &#43; y&#93;, x^2 &#43; y^2 &#43; 1&#41;</c
       <h2 class="doc-header" id="kbase">
         <a href="#kbase">kbase</a>
         <div class="doc-type">fn</div></h2>
-      <div class="doc-content"><pre><code class="language-julia">kbase&#40;basis; options...&#41;</code></pre>
-<p>Computes the basis of the quotient ideal as a vector space.</p>
+      <div class="doc-content"><pre><code class="julia hljs">kbase(basis; options...)</code></pre>
+<p>Computes the basis of the quotient ideal of <code>basis</code> as a vector space.</p>
 <h2 id="possible_options__4"><a href="#possible_options__4" class="header-anchor">Possible Options</a></h2>
-<p>The <code>kbase</code> routine takes the following options:</p>
+<p>The <code>kbase</code> routine takes the following optional arguments:</p>
 <ul>
 <li><p><code>check</code>: Check if the given array <code>basis</code> forms a Groebner basis &#40;default is <code>true</code>&#41;.</p>
 </li>
@@ -284,41 +274,44 @@ normalform&#40;&#91;y^2 &#43; x, x^2 &#43; y&#93;, x^2 &#43; y^2 &#43; 1&#41;</c
 </li>
 </ul>
 <h2 id="example__4"><a href="#example__4" class="header-anchor">Example</a></h2>
-<pre><code class="language-julia">using Groebner, DynamicPolynomials
-@polyvar x y;
-kbase&#40;&#91;y^2 &#43; x, x^2 &#43; y&#93;&#41;</code></pre>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, DynamicPolynomials
+<span class="hljs-meta">@polyvar</span> x y;
+kbase([y^<span class="hljs-number">2</span> + x, x^<span class="hljs-number">2</span> + y])</code></pre>
 </div>
   </div>
 
 <h2 id="monomial_orderings"><a href="#monomial_orderings" class="header-anchor">Monomial orderings</a></h2>
-<p>A list of all supported monomial orderings. An ordering can be set by passing the keyword argument <code>ordering</code>. See below for some examples.</p>
-<p><em>Note that some frontends, for example, <code>AbstractAlgebra.jl</code>, may not support weighted/product/matrix orderings. In such cases, the polynomial terms in the output are ordered w.r.t. some other supported ordering.</em></p>
+<p>A list of all monomial orderings supported by Groebner.jl. An ordering can be set by passing it with the keyword argument <code>ordering</code>. See below for some examples.</p>
+<div class="note"><div class="title">⚠ Note</div>
+<div class="content">Some frontends, for example, AbstractAlgebra.jl, may not support weighted/product/matrix orderings from Groebner.jl. In such cases, the basis is computed in the ordering requested by user, but the terms of polynomials in the output are ordered w.r.t. some other ordering that is supported by the frontend.</div></div>
   <div class="docstring">
       <h2 class="doc-header" id="Lex">
         <a href="#Lex">Lex</a>
         <div class="doc-type"></div></h2>
-      <div class="doc-content"><pre><code class="language-julia">Lex&#40;&#41;
-Lex&#40;variables&#41;
-Lex&#40;variables...&#41;</code></pre>
-<p>Lexicographical monomial ordering, defined as follows:</p>
-\[
-x_1^a_1...x_n^a_n < x_1^b_1...x_n^b_n
-\]
-<p>if there exists \(k ∈ 1..n\) such that \(a_j = b_j\) for \(j\) in \(1..k-1\) and \(a_k < b_k\).</p>
+      <div class="doc-content"><pre><code class="julia hljs">Lex()
+Lex(variables)
+Lex(variables...)</code></pre>
+<p>Lexicographical monomial ordering. <em>Dura Lex, sed Lex.</em></p>
+<p>We use the definition from Chapter 1, Computational Commutative Algebra 1, by Martin Kreuzer, Lorenzo Robbiano. </p>
+<p>DOI: https://doi.org/10.1007/978-3-540-70628-1.</p>
 <h2 id="possible_options__5"><a href="#possible_options__5" class="header-anchor">Possible Options</a></h2>
 <ul>
 <li><p><code>compile</code>: If <code>true</code>, compiles and uses a specialized monomial comparator function, which may speed up the runtime &#40;default is <code>false</code>&#41;. This option is experimental.</p>
 </li>
 </ul>
 <h2 id="example__5"><a href="#example__5" class="header-anchor">Example</a></h2>
-<pre><code class="language-julia">using Groebner, AbstractAlgebra
-R, &#40;x, y&#41; &#61; QQ&#91;&quot;x&quot;, &quot;y&quot;&#93;;
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>];
 
-# Lexicographical ordering with x &gt; y
-groebner&#40;&#91;x*y &#43; x, x &#43; y^2&#93;, ordering&#61;Lex&#40;&#41;&#41;
+<span class="hljs-comment"># Lexicographical ordering with x &gt; y</span>
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>], ordering=Lex())
 
-# Lexicographical ordering with y &gt; x
-groebner&#40;&#91;x*y &#43; x, x &#43; y^2&#93;, ordering&#61;Lex&#40;&#91;y, x&#93;&#41;&#41;</code></pre>
+<span class="hljs-comment"># Lexicographical ordering with y &gt; x</span>
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>], ordering=Lex([y, x]))
+
+<span class="hljs-comment"># Lexicographical ordering with x &gt; y</span>
+<span class="hljs-comment"># Note that both syntax -- Lex([...]) and Lex(...) -- are allowed</span>
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>], ordering=Lex(x, y))</code></pre>
 </div>
   </div>
 
@@ -326,28 +319,21 @@ groebner&#40;&#91;x*y &#43; x, x &#43; y^2&#93;, ordering&#61;Lex&#40;&#91;y, x&
       <h2 class="doc-header" id="DegLex">
         <a href="#DegLex">DegLex</a>
         <div class="doc-type"></div></h2>
-      <div class="doc-content"><pre><code class="language-julia">DegLex&#40;&#41;
-DegLex&#40;variables&#41;
-DegLex&#40;variables...&#41;</code></pre>
-<p>Degree lexicographical monomial ordering, defined as follows:</p>
-\[
-x_1^a_1...x_n^a_n < x_1^b_1...x_n^b_n
-\]
-<ul>
-<li><p>if \(a_1 +...+ a_n < b_1 +...+ b_n\), or,</p>
-</li>
-<li><p>if \(a_1 +...+ a_n = b_1 +...+ b_n\) and there exists \(k ∈ 1..n\) such that \(a_j = b_j\) for \(j\) in \(1..k-1\) and \(a_k < b_k\).</p>
-</li>
-</ul>
+      <div class="doc-content"><pre><code class="julia hljs">DegLex()
+DegLex(variables)
+DegLex(variables...)</code></pre>
+<p>Degree lexicographical monomial ordering.</p>
+<p>We use the definition from Chapter 1, Computational Commutative Algebra 1, by Martin Kreuzer, Lorenzo Robbiano. </p>
+<p>DOI: https://doi.org/10.1007/978-3-540-70628-1.</p>
 <h2 id="example__6"><a href="#example__6" class="header-anchor">Example</a></h2>
-<pre><code class="language-julia">using Groebner, AbstractAlgebra
-R, &#40;x, y&#41; &#61; QQ&#91;&quot;x&quot;, &quot;y&quot;&#93;;
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>];
 
-# Degree lexicographical ordering with x &gt; y
-groebner&#40;&#91;x*y &#43; x, x &#43; y^2&#93;, ordering&#61;DegLex&#40;&#41;&#41;
+<span class="hljs-comment"># Degree lexicographical ordering with x &gt; y</span>
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>], ordering=DegLex())
 
-# Degree lexicographical ordering with y &gt; x
-groebner&#40;&#91;x*y &#43; x, x &#43; y^2&#93;, ordering&#61;DegLex&#40;&#91;y, x&#93;&#41;&#41;</code></pre>
+<span class="hljs-comment"># Degree lexicographical ordering with y &gt; x</span>
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>], ordering=DegLex([y, x]))</code></pre>
 </div>
   </div>
 
@@ -355,28 +341,21 @@ groebner&#40;&#91;x*y &#43; x, x &#43; y^2&#93;, ordering&#61;DegLex&#40;&#91;y,
       <h2 class="doc-header" id="DegRevLex">
         <a href="#DegRevLex">DegRevLex</a>
         <div class="doc-type">st</div></h2>
-      <div class="doc-content"><pre><code class="language-julia">DegRevLex&#40;&#41;
-DegRevLex&#40;variables&#41;
-DegRevLex&#40;variables...&#41;</code></pre>
-<p>Degree reverse lexicographical monomial ordering, defined as follows:</p>
-\[
-x_1^a_1...x_n^a_n < x_1^b_1...x_n^b_n
-\]
-<ul>
-<li><p>if \(a_1 +...+ a_n < b_1 +...+ b_n\), or,</p>
-</li>
-<li><p>if \(a_1 +...+ a_n = b_1 +...+ b_n\) and there exists \(k ∈ 1..n\) such that \(a_j = b_j\) for \(j\) in \(k+1..n\) and \(a_k > b_k\).</p>
-</li>
-</ul>
+      <div class="doc-content"><pre><code class="julia hljs">DegRevLex()
+DegRevLex(variables)
+DegRevLex(variables...)</code></pre>
+<p>Degree reverse lexicographical monomial ordering.</p>
+<p>We use the definition from Chapter 1, Computational Commutative Algebra 1, by Martin Kreuzer, Lorenzo Robbiano. </p>
+<p>DOI: https://doi.org/10.1007/978-3-540-70628-1.</p>
 <h2 id="example__7"><a href="#example__7" class="header-anchor">Example</a></h2>
-<pre><code class="language-julia">using Groebner, AbstractAlgebra
-R, &#40;x, y&#41; &#61; QQ&#91;&quot;x&quot;, &quot;y&quot;&#93;;
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>];
 
-# Degree reverse lexicographical ordering with x &gt; y
-groebner&#40;&#91;x*y &#43; x, x &#43; y^2&#93;, ordering&#61;DegRevLex&#40;&#41;&#41;
+<span class="hljs-comment"># Degree reverse lexicographical ordering with x &gt; y</span>
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>], ordering=DegRevLex())
 
-# Degree reverse lexicographical ordering with y &gt; x
-groebner&#40;&#91;x*y &#43; x, x &#43; y^2&#93;, ordering&#61;DegRevLex&#40;y, x&#41;&#41;</code></pre>
+<span class="hljs-comment"># Degree reverse lexicographical ordering with y &gt; x</span>
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>], ordering=DegRevLex(y, x))</code></pre>
 </div>
   </div>
 
@@ -384,15 +363,16 @@ groebner&#40;&#91;x*y &#43; x, x &#43; y^2&#93;, ordering&#61;DegRevLex&#40;y, x
       <h2 class="doc-header" id="InputOrdering">
         <a href="#InputOrdering">InputOrdering</a>
         <div class="doc-type">st</div></h2>
-      <div class="doc-content"><pre><code class="language-julia">InputOrdering&#40;&#41;</code></pre>
-<p>Preserves the monomial ordering defined on the input polynomials. This is the default option.</p>
+      <div class="doc-content"><pre><code class="julia hljs">InputOrdering()</code></pre>
+<p>Preserves the monomial ordering defined on the input polynomials.</p>
+<p>This is the default value for the <code>ordering</code> keyword argument in the exported functions.</p>
 <h2 id="example__8"><a href="#example__8" class="header-anchor">Example</a></h2>
-<pre><code class="language-julia">using Groebner, AbstractAlgebra
-R, &#40;x, y&#41; &#61; QQ&#91;&quot;x&quot;, &quot;y&quot;&#93;
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
 
-# Uses the ordering &#96;InputOrdering&#96;, which, in this case, 
-# defaults to the lexicographical ordering with x &lt; y
-groebner&#40;&#91;x*y &#43; x, x &#43; y^2&#93;&#41;</code></pre>
+<span class="hljs-comment"># Uses the ordering `InputOrdering`, which, in this case, </span>
+<span class="hljs-comment"># defaults to the lexicographical ordering with x &lt; y</span>
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>])</code></pre>
 </div>
   </div>
 
@@ -400,16 +380,16 @@ groebner&#40;&#91;x*y &#43; x, x &#43; y^2&#93;&#41;</code></pre>
       <h2 class="doc-header" id="WeightedOrdering">
         <a href="#WeightedOrdering">WeightedOrdering</a>
         <div class="doc-type">st</div></h2>
-      <div class="doc-content"><pre><code class="language-julia">WeightedOrdering&#40;weights&#41;</code></pre>
+      <div class="doc-content"><pre><code class="julia hljs">WeightedOrdering(weights)</code></pre>
 <p>Weighted monomial ordering.</p>
-<p><em>Only positive weights are supported at the moment.</em></p>
+<p><em>Only positive weights are supported.</em></p>
 <h2 id="example__9"><a href="#example__9" class="header-anchor">Example</a></h2>
-<pre><code class="language-julia">using Groebner, AbstractAlgebra
-R, &#40;x, y&#41; &#61; QQ&#91;&quot;x&quot;, &quot;y&quot;&#93;;
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>];
 
-# x has weight 3, y has weight 1
-ord &#61; WeightedOrdering&#40;&#91;3, 1&#93;&#41;
-groebner&#40;&#91;x*y &#43; x, x &#43; y^2&#93;, ordering&#61;ord&#41;</code></pre>
+<span class="hljs-comment"># x has weight 3, y has weight 1</span>
+ord = WeightedOrdering([<span class="hljs-number">3</span>, <span class="hljs-number">1</span>])
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>], ordering=ord)</code></pre>
 </div>
   </div>
 
@@ -417,25 +397,25 @@ groebner&#40;&#91;x*y &#43; x, x &#43; y^2&#93;, ordering&#61;ord&#41;</code></p
       <h2 class="doc-header" id="ProductOrdering">
         <a href="#ProductOrdering">ProductOrdering</a>
         <div class="doc-type">str</div></h2>
-      <div class="doc-content"><pre><code class="language-julia">ProductOrdering&#40;ord1, ord2&#41;</code></pre>
+      <div class="doc-content"><pre><code class="julia hljs">ProductOrdering(ord1, ord2)</code></pre>
 <p>Product monomial ordering. Compares monomials by <code>ord1</code>, then breaks ties by <code>ord2</code>.</p>
-<p>Can be constructed with <code>*</code>.</p>
+<p>Can also be constructed with <code>*</code>.</p>
 <h2 id="example__10"><a href="#example__10" class="header-anchor">Example</a></h2>
-<pre><code class="language-julia">using Groebner, AbstractAlgebra
-R, &#40;x, y, z, w&#41; &#61; QQ&#91;&quot;x&quot;, &quot;y&quot;, &quot;z&quot;, &quot;w&quot;&#93;;
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y, z, w) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>, <span class="hljs-string">&quot;z&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>];
 
-# Ordering with x &gt; y &gt;&gt; w &gt; z
-ord &#61; ProductOrdering&#40;DegRevLex&#40;x, y&#41;, DegRevLex&#40;w, z&#41;&#41;
-groebner&#40;&#91;x*y &#43; w, y*z - w&#93;, ordering&#61;ord&#41;</code></pre>
+<span class="hljs-comment"># Ordering with x, y &gt; w, z</span>
+ord = ProductOrdering(DegRevLex(x, y), DegRevLex(w, z))
+groebner([x*y + w, y*z - w], ordering=ord)</code></pre>
 <p>You can also use the <code>*</code> operator:</p>
-<pre><code class="language-julia">using Groebner, AbstractAlgebra
-R, &#40;x, y, z, t&#41; &#61; QQ&#91;&quot;x&quot;, &quot;y&quot;, &quot;z&quot;, &quot;t&quot;&#93;;
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y, z, t) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>, <span class="hljs-string">&quot;z&quot;</span>, <span class="hljs-string">&quot;t&quot;</span>];
 
-ord1 &#61; Lex&#40;t&#41;
-ord2 &#61; DegRevLex&#40;x, y, z&#41;
-# t &gt;&gt; x, y, z
-ord &#61; ord1 * ord2
-groebner&#40;&#91;x*y*z &#43; z, t * z - 1&#93;, ordering&#61;ord&#41;</code></pre>
+ord1 = Lex(t)
+ord2 = DegRevLex(x, y, z)
+<span class="hljs-comment"># t &gt;&gt; x, y, z</span>
+ord = ord1 * ord2
+groebner([x*y*z + z, t * z - <span class="hljs-number">1</span>], ordering=ord)</code></pre>
 </div>
   </div>
 
@@ -443,26 +423,20 @@ groebner&#40;&#91;x*y*z &#43; z, t * z - 1&#93;, ordering&#61;ord&#41;</code></p
       <h2 class="doc-header" id="MatrixOrdering">
         <a href="#MatrixOrdering">MatrixOrdering</a>
         <div class="doc-type">st</div></h2>
-      <div class="doc-content"><pre><code class="language-julia">MatrixOrdering&#40;matrix&#41;
-MatrixOrdering&#40;Vector&#123;Vector&#125;&#41;</code></pre>
+      <div class="doc-content"><pre><code class="julia hljs">MatrixOrdering(matrix)
+MatrixOrdering(<span class="hljs-built_in">Vector</span>{<span class="hljs-built_in">Vector</span>})</code></pre>
 <p>Matrix monomial ordering. </p>
-<p><em>The number of matrix columns must be equal to the number of variables.</em></p>
-<p>Let \(M\) be an \(r x n\) matrix with rows \(m_1, ..., m_r\).  Then \(M\) defines the following ordering:</p>
-\[
-x^a < x^b
-\]
-<p>if \(m_i^T a < m_i^T b\) for some \(i\), and \(m_j^T a = m_j^T b\) for \(1 < j < i\).</p>
 <h2 id="example__11"><a href="#example__11" class="header-anchor">Example</a></h2>
-<pre><code class="language-julia">using Groebner, AbstractAlgebra
-R, &#40;x, y, z, w&#41; &#61; QQ&#91;&quot;x&quot;, &quot;y&quot;, &quot;z&quot;, &quot;w&quot;&#93;;
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y, z, w) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>, <span class="hljs-string">&quot;z&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>];
 
-# the number of columns equal to the number of variables
-ord &#61; MatrixOrdering&#40;&#91;
-    1 0  0  2;
-    0 0  1  2;
-    0 1  1  1;
-&#93;&#41;
-groebner&#40;&#91;x*y &#43; w, y*z - w&#93;, ordering&#61;ord&#41;</code></pre>
+<span class="hljs-comment"># the number of columns equal to the number of variables</span>
+ord = MatrixOrdering([
+    <span class="hljs-number">1</span> <span class="hljs-number">0</span>  <span class="hljs-number">0</span>  <span class="hljs-number">2</span>;
+    <span class="hljs-number">0</span> <span class="hljs-number">0</span>  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>;
+    <span class="hljs-number">0</span> <span class="hljs-number">1</span>  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>;
+])
+groebner([x*y + w, y*z - w], ordering=ord)</code></pre>
 </div>
   </div>
 
@@ -474,9 +448,9 @@ groebner&#40;&#91;x*y &#43; w, y*z - w&#93;, ordering&#61;ord&#41;</code></pre>
 </div><!-- CONTENT ENDS HERE -->
     </div>  <!-- div: content container -->
     
-        <script src="/Groebner.jl/libs/katex/katex.min.js"></script>
-<script src="/Groebner.jl/libs/katex/auto-render.min.js"></script>
-<script>renderMathInElement(document.body)</script>
+        
+
+
 
     
     <script>
@@ -490,8 +464,8 @@ groebner&#40;&#91;x*y &#43; w, y*z - w&#93;, ordering&#61;ord&#41;</code></pre>
         }
     </script>
     
-        <script src="/Groebner.jl/libs/highlight/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+        
+
 
     
   </body>
