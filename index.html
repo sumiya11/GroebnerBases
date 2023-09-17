@@ -96,8 +96,7 @@
 <p>Currently, polynomials from AbstractAlgebra.jl, DynamicPolynomials.jl, and Nemo.jl are supported as input.</p>
 <h3 id="with_abstractalgebrajl"><a href="#with_abstractalgebrajl" class="header-anchor">with AbstractAlgebra.jl</a></h3>
 <p>First, import AbstractAlgebra.jl.  Then, we can create an array of polynomials over a finite field</p>
-<pre><code class="plaintext hljs">UndefVarError: `Pkg` not defined
-</code></pre>
+
 <pre><code class="julia hljs"><span class="hljs-keyword">using</span> AbstractAlgebra
 
 R, (x, y, z) = PolynomialRing(GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span> - <span class="hljs-number">1</span>), [<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>, <span class="hljs-string">&quot;z&quot;</span>])
@@ -120,8 +119,7 @@ groebner(polys, ordering=ordering)</code></pre><pre><code class="plaintext hljs"
 <p>You can find more information on monomial orderings in Groebner.jl in <a href="interface/#monomial_orderings">Monomial Orderings</a>.</p>
 <h3 id="with_dynamicpolynomialsjl"><a href="#with_dynamicpolynomialsjl" class="header-anchor">with DynamicPolynomials.jl</a></h3>
 <p>We will compute the basis of the <code>noon-2</code> system<sup id="fnref:3"><a href="#fndef:3" class="fnref">[2]</a></sup></p>
-<pre><code class="plaintext hljs">UndefVarError: `Pkg` not defined
-</code></pre>
+
 <pre><code class="julia hljs"><span class="hljs-keyword">using</span> DynamicPolynomials
 
 <span class="hljs-meta">@polyvar</span> x1 x2
