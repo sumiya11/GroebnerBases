@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/Groebner.jl/libs/katex/katex.min.css">
+     
+   <link rel="stylesheet" href="/Groebner.jl/libs/highlight/github.min.css">
+   
+  <link rel="stylesheet" href="/Groebner.jl/css/franklin.css">
+<link rel="stylesheet" href="/Groebner.jl/css/poole_hyde.css">
+<link rel="stylesheet" href="/Groebner.jl/css/custom.css">
+<!-- style adjustments -->
+<style>
+  html {font-size: 17px;}
+  .franklin-content {position: relative; padding-left: 8%; padding-right: 5%;}
+  @media (min-width: 940px) {
+    .franklin-content {width: 100%; margin-left: auto; margin-right: auto;}
+  }
+  @media (max-width: 768px) {
+    .franklin-content {padding-left: 6%; padding-right: 6%;}
+  }
+</style>
+<link rel="icon" href="/Groebner.jl/assets/favicon.png">
+
+   <title>Groebner.jl — For developers</title>  
+</head>
+<body>
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1 class="sidebar-title"><a href="/Groebner.jl/">Groebner<span style="opacity:0.4">.jl</span></a></h1>
+      <br>
+    </div>
+    <style>
+      @media (min-width: 768px) {
+        .sidebar-nav {}
+      }
+
+      .sidebar .container.sidebar-sticky {
+        top: 4rem;
+      }
+
+      .sidebar-nav .sidebar-nav-item.active {
+        box-sizing: border-box;
+        border-bottom: 1px #f1f1f1 solid;
+        margin-right: -1em;
+        margin-left: -0.5em;
+        padding-left: 0.5em;
+        color: white;
+        font-weight: normal !important;
+      }
+
+      .sidebar-nav .sidebar-nav-item {
+        color: #cccccc;
+        margin: 0.25em 0;
+      }
+    </style>
+    <nav class="sidebar-nav" style="opacity: 0.9">
+      <a class="sidebar-nav-item " href="/Groebner.jl/">Home</a>
+      <!-- <a class="sidebar-nav-item {{ispage tutorial.html}}active{{end}}" href="/Groebner.jl/tutorial/">Tutorials</a> -->
+      <li class="sidebar-nav-item "><a href="/Groebner.jl/tutorial/">Tutorials</a>
+        <!-- <ul class="menu-list-child-list ">
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#introduction" class="menu-list-link">Introduction</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#gcd_rref" class="menu-list-link">Gcd & Rref</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#variable_elimination" class="menu-list-link">Variable Elimination</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#curve_implicitization" class="menu-list-link">Curve Implicitization</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#system_solving" class="menu-list-link">System Solving</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#integer_programming" class="menu-list-link">Integer Programming</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#graph_coloring" class="menu-list-link">Graph Coloring</a>
+				<li class="menu-list-item {{ispage index.html}}active{{end}}"><a href="/Groebner.jl/tutorial/" class="menu-list-link">Page structure</a>
+			  </ul> -->
+        <a class="sidebar-nav-item " href="/Groebner.jl/interface/">Interface</a>
+        <ul class="menu-list-child-list ">
+          <li class="menu-list-item "><a href="/Groebner.jl/interface/#exported_functions"
+              class="menu-list-link">Exported functions</a>
+          <li class="menu-list-item "><a href="/Groebner.jl/interface/#monomial_orderings"
+              class="menu-list-link">Monomial orderings</a>
+        </ul>
+      <li class="sidebar-nav-item active"><a href="/Groebner.jl/developer/">For developers</a>
+    </nav>
+
+  </div>
+  <div style="font-size: 0.85em; bottom: 3em; position: fixed">
+    <a href="https://github.com/sumiya11/Groebner.jl">Go to GitHub repository &rarr;</a> <br> <br>
+
+    <a href="https://julialang.org/"><img
+        src="https://raw.githubusercontent.com/JuliaLang/julia-logo-graphics/master/images/julia-logo-dark.svg"
+        height="32" style="display: inline-block; margin-bottom: -8px; opacity: 0.7">
+      powered.</a>
+  </div>
+</div>
+<div class="content container">
+<!-- Content appended here -->
+<div class="franklin-content"><h2 id="for_developers"><a href="#for_developers" class="header-anchor">For developers</a></h2>
+
+<h3 id="getting_groebnerjl_for_development"><a href="#getting_groebnerjl_for_development" class="header-anchor">Getting Groebner.jl for development</a></h3>
+<p>git clone ...</p>
+<p>or Pkg.dev</p>
+<h3 id="structure_of_groebnerjl"><a href="#structure_of_groebnerjl" class="header-anchor">Structure of Groebner.jl</a></h3>
+<p>..Graph of function calls..</p>
+<h3 id="utilities"><a href="#utilities" class="header-anchor">Utilities</a></h3>
+<h4 id="assertions"><a href="#assertions" class="header-anchor">Assertions</a></h4>
+<p>To enable/disable all <code>@invariant</code> macro in Groebner.jl, change <code>Groebner.invariants_enabled&#40;&#41;</code> to <code>true</code>/<code>false</code>. </p>
+  <div class="docstring">
+      <h2 class="doc-header" id="Groebner.@invariant">
+        <a href="#Groebner.@invariant">Groebner.@invariant</a>
+        <div class="doc-type">macro</div></h2>
+      <div class="doc-content"><pre><code class="julia hljs"><span class="hljs-meta">@invariant</span> expr</code></pre>
+<p>Check that <code>expr</code> evaluates to <code>true</code> at runtime. If not, throw an <code>AssertionError</code>.</p>
+<h2 id="examples"><a href="#examples" class="header-anchor">Examples</a></h2>
+<pre><code class="julia hljs"><span class="hljs-meta">@invariant</span> <span class="hljs-number">2</span> &gt; <span class="hljs-number">1</span>
+<span class="hljs-meta">@invariant</span> <span class="hljs-number">1</span> &gt; <span class="hljs-number">2</span>  <span class="hljs-comment"># throws!</span></code></pre>
+</div>
+  </div>
+
+<h4 id="logging"><a href="#logging" class="header-anchor">Logging</a></h4>
+<p>To enable/disable all <code>@log</code> macro in Groebner.jl, change <code>Groebner.logging_enabled&#40;&#41;</code> to <code>true</code>/<code>false</code>. </p>
+<p>For example,</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+_, (x,y,z) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>)[<span class="hljs-string">&quot;x&quot;</span>,<span class="hljs-string">&quot;y&quot;</span>,<span class="hljs-string">&quot;z&quot;</span>]
+groebner([x*y + z, x*z + y], loglevel=-<span class="hljs-number">3</span>)</code></pre><pre><code class="plaintext hljs">3-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
+ y^2 + 2147483646*z^2
+ x*z + y
+ x*y + z</code></pre>
+  <div class="docstring">
+      <h2 class="doc-header" id="Groebner.@log">
+        <a href="#Groebner.@log">Groebner.@log</a>
+        <div class="doc-type">macro</div></h2>
+      <div class="doc-content"><pre><code class="julia hljs"><span class="hljs-meta">@log</span> expr
+<span class="hljs-meta">@log</span> level=N expr</code></pre>
+<p>Logs a record with <code>expr</code> as a message. Allows to specify the logging level with <code>level&#61;N</code>.</p>
+<h2 id="examples__2"><a href="#examples__2" class="header-anchor">Examples</a></h2>
+<pre><code class="julia hljs"><span class="hljs-meta">@log</span> <span class="hljs-string">&quot;Hello, world!&quot;</span>
+<span class="hljs-meta">@log</span> level=<span class="hljs-number">1</span> <span class="hljs-string">&quot;Hello, world!&quot;</span></code></pre>
+</div>
+  </div>
+
+<h4 id="collecting_statistics_and_measuring_performance"><a href="#collecting_statistics_and_measuring_performance" class="header-anchor">Collecting statistics and measuring performance</a></h4>
+<p>All functions in the interface of Groebner.jl have keyword argument <code>statistics</code>. This keyword argument can be set to either of: <code>:no</code>, <code>:timings</code>, and <code>:all</code>. </p>
+<p>To enable/disable all <code>@log</code> macro in Groebner.jl, change <code>Groebner.logging_enabled&#40;&#41;</code> to <code>true</code>/<code>false</code>. </p>
+<p>For example,</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+_, (x,y,z) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>)[<span class="hljs-string">&quot;x&quot;</span>,<span class="hljs-string">&quot;y&quot;</span>,<span class="hljs-string">&quot;z&quot;</span>]
+groebner([x*y + z, x*z + y], statistics=:timings)</code></pre><pre><code class="plaintext hljs">AssertionError: Not recognized keyword: statistics
+</code></pre>
+<p>Timings are recorded</p>
+  <div class="docstring">
+      <h2 class="doc-header" id="Groebner.@timeit">
+        <a href="#Groebner.@timeit">Groebner.@timeit</a>
+        <div class="doc-type">macro</div></h2>
+      <div class="doc-content"><p>No documentation found.</p>
+<p>Binding <code>Groebner.@timeit</code> does not exist.</p>
+</div>
+  </div>
+
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: October 19, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div>  <!-- div: content container -->
+    
+        
+
+
+
+    
+    <script>
+        var els =  document.querySelectorAll(".language-julia")
+        for (var i=0, l = els.length; i < l; i++) {
+            var el = els[i]
+            var out = el.parentNode.nextSibling
+            if (out.tagName === "PRE") {
+                out.className = out.className + " code-output"
+            }
+        }
+    </script>
+    
+        
+
+
+    
+  </body>
+</html>
