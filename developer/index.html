@@ -77,7 +77,7 @@
           <li class="menu-list-item "><a href="/Groebner.jl/interface/#monomial_orderings"
               class="menu-list-link">Monomial orderings</a>
         </ul>
-      <li class="sidebar-nav-item active"><a href="/Groebner.jl/developer/">For developers</a>
+      <li class="sidebar-nav-item active"><a href="/Groebner.jl/developer/">Development</a>
     </nav>
 
   </div>
@@ -92,71 +92,53 @@
 </div>
 <div class="content container">
 <!-- Content appended here -->
-<div class="franklin-content"><h2 id="for_developers"><a href="#for_developers" class="header-anchor">For developers</a></h2>
+<div class="franklin-content"><h2 id="development"><a href="#development" class="header-anchor">Development</a></h2>
 
-<h3 id="getting_groebnerjl_for_development"><a href="#getting_groebnerjl_for_development" class="header-anchor">Getting Groebner.jl for development</a></h3>
-<p>git clone ...</p>
-<p>or Pkg.dev</p>
-<h3 id="structure_of_groebnerjl"><a href="#structure_of_groebnerjl" class="header-anchor">Structure of Groebner.jl</a></h3>
-<p>..Graph of function calls..</p>
-<h3 id="utilities"><a href="#utilities" class="header-anchor">Utilities</a></h3>
-<h4 id="assertions"><a href="#assertions" class="header-anchor">Assertions</a></h4>
-<p>To enable/disable all <code>@invariant</code> macro in Groebner.jl, change <code>Groebner.invariants_enabled&#40;&#41;</code> to <code>true</code>/<code>false</code>. </p>
-  <div class="docstring">
-      <h2 class="doc-header" id="Groebner.@invariant">
-        <a href="#Groebner.@invariant">Groebner.@invariant</a>
-        <div class="doc-type">macro</div></h2>
-      <div class="doc-content"><pre><code class="julia hljs"><span class="hljs-meta">@invariant</span> expr</code></pre>
-<p>Check that <code>expr</code> evaluates to <code>true</code> at runtime. If not, throw an <code>AssertionError</code>.</p>
-<h2 id="examples"><a href="#examples" class="header-anchor">Examples</a></h2>
-<pre><code class="julia hljs"><span class="hljs-meta">@invariant</span> <span class="hljs-number">2</span> &gt; <span class="hljs-number">1</span>
-<span class="hljs-meta">@invariant</span> <span class="hljs-number">1</span> &gt; <span class="hljs-number">2</span>  <span class="hljs-comment"># throws!</span></code></pre>
-</div>
-  </div>
-
+<h3 id="project_source"><a href="#project_source" class="header-anchor">Project source</a></h3>
+<p>You can get a clone of the GitHub repository with:</p>
+<pre><code class="julia hljs">git clone https://github.com/sumiya11/Groebner.jl</code></pre>
+<p>If you want to browse the repository online, or fork it on GitHub, it can be accessed here:</p>
+<p><a href="https://github.com/sumiya11/Groebner.jl">https://github.com/sumiya11/Groebner.jl</a></p>
+<p>The up-to-date branch in the repository is &quot;master&quot;.</p>
+<h3 id="development_directions"><a href="#development_directions" class="header-anchor">Development directions</a></h3>
+<p>WIP&#33;</p>
+<h3 id="utilities_in_groebnerjl"><a href="#utilities_in_groebnerjl" class="header-anchor">Utilities in Groebner.jl</a></h3>
+<p>Internally, Groebner.jl provides utilities for convenient assertion checking, logging, and timings measurment. These are implemented via macros <code>@invariant</code>, <code>@log</code>, and <code>@timeit</code>.</p>
+<p>Each utility can be globally enabled/disabled by setting the appropriate switch to <code>true</code>/<code>false</code>. The switches and their default values are: </p>
+<table><tr><th align="right">Macro</th><th align="right">Switch</th><th align="right">Default value</th></tr><tr><td align="right"><code>@invariant</code></td><td align="right"><code>invariants_enabled</code></td><td align="right"><code>true</code></td></tr><tr><td align="right"><code>@log</code></td><td align="right"><code>logging_enabled</code></td><td align="right"><code>true</code></td></tr><tr><td align="right"><code>@timeit</code></td><td align="right"><code>performance_counters_enabled</code></td><td align="right"><code>false</code></td></tr></table>
+<p>If the switch value is <code>false</code>, then the corresponding macro gets <em>compiled-out</em>, and has no performance impact.</p>
+<p>Therefore, for example, if you would like to get the best performance out of Groebner.jl, and do not care about assertions and logging, you can do</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner
+Groebner.invariants_enabled() = <span class="hljs-literal">false</span>
+Groebner.logging_enabled() = <span class="hljs-literal">false</span></code></pre>
 <h4 id="logging"><a href="#logging" class="header-anchor">Logging</a></h4>
-<p>To enable/disable all <code>@log</code> macro in Groebner.jl, change <code>Groebner.logging_enabled&#40;&#41;</code> to <code>true</code>/<code>false</code>. </p>
-<p>For example,</p>
+<p>Assuming <code>Groebner.logging_enabled&#40;&#41;</code> is <code>true</code>, for printing some logs you can do, for example,</p>
 <pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
-_, (x,y,z) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>)[<span class="hljs-string">&quot;x&quot;</span>,<span class="hljs-string">&quot;y&quot;</span>,<span class="hljs-string">&quot;z&quot;</span>]
-groebner([x*y + z, x*z + y], loglevel=-<span class="hljs-number">3</span>)</code></pre><pre><code class="plaintext hljs">3-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
+
+R, (x,y,z) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>)[<span class="hljs-string">&quot;x&quot;</span>,<span class="hljs-string">&quot;y&quot;</span>,<span class="hljs-string">&quot;z&quot;</span>]
+
+<span class="hljs-comment"># Will print some debug info.</span>
+<span class="hljs-comment"># Use lower loglevel, e.g., loglevel=-5, to print A LOT of info</span>
+groebner([x*y + z, x*z + y], loglevel=-<span class="hljs-number">2</span>)</code></pre><pre><code class="plaintext hljs">3-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
  y^2 + 2147483646*z^2
  x*z + y
  x*y + z</code></pre>
-  <div class="docstring">
-      <h2 class="doc-header" id="Groebner.@log">
-        <a href="#Groebner.@log">Groebner.@log</a>
-        <div class="doc-type">macro</div></h2>
-      <div class="doc-content"><pre><code class="julia hljs"><span class="hljs-meta">@log</span> expr
-<span class="hljs-meta">@log</span> level=N expr</code></pre>
-<p>Logs a record with <code>expr</code> as a message. Allows to specify the logging level with <code>level&#61;N</code>.</p>
-<h2 id="examples__2"><a href="#examples__2" class="header-anchor">Examples</a></h2>
-<pre><code class="julia hljs"><span class="hljs-meta">@log</span> <span class="hljs-string">&quot;Hello, world!&quot;</span>
-<span class="hljs-meta">@log</span> level=<span class="hljs-number">1</span> <span class="hljs-string">&quot;Hello, world!&quot;</span></code></pre>
-</div>
-  </div>
-
-<h4 id="collecting_statistics_and_measuring_performance"><a href="#collecting_statistics_and_measuring_performance" class="header-anchor">Collecting statistics and measuring performance</a></h4>
-<p>All functions in the interface of Groebner.jl have keyword argument <code>statistics</code>. This keyword argument can be set to either of: <code>:no</code>, <code>:timings</code>, and <code>:all</code>. </p>
-<p>To enable/disable all <code>@log</code> macro in Groebner.jl, change <code>Groebner.logging_enabled&#40;&#41;</code> to <code>true</code>/<code>false</code>. </p>
-<p>For example,</p>
+<h4 id="measuring_performance"><a href="#measuring_performance" class="header-anchor">Measuring performance</a></h4>
+<p>All functions in the interface have keyword argument <code>statistics</code>. This argument can be set to either of: <code>:no</code>, <code>:timings</code>, and <code>:all</code>. </p>
+<p>Use <code>statistics&#61;:timings</code> to print the table with timings and allocations of internal functions of Groebner.jl.</p>
+<p>Since <code>Groebner.performance_counters_enabled&#40;&#41;</code> is <code>false</code> by default, you should set it to <code>true</code> to record runtime statistics. For example,</p>
 <pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
-_, (x,y,z) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>)[<span class="hljs-string">&quot;x&quot;</span>,<span class="hljs-string">&quot;y&quot;</span>,<span class="hljs-string">&quot;z&quot;</span>]
+
+<span class="hljs-comment"># Enable performance counters</span>
+Groebner.performance_counters_enabled() = <span class="hljs-literal">true</span>
+
+R, (x,y,z) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>)[<span class="hljs-string">&quot;x&quot;</span>,<span class="hljs-string">&quot;y&quot;</span>,<span class="hljs-string">&quot;z&quot;</span>]
+
 groebner([x*y + z, x*z + y], statistics=:timings)</code></pre><pre><code class="plaintext hljs">AssertionError: Not recognized keyword: statistics
 </code></pre>
-<p>Timings are recorded</p>
-  <div class="docstring">
-      <h2 class="doc-header" id="Groebner.@timeit">
-        <a href="#Groebner.@timeit">Groebner.@timeit</a>
-        <div class="doc-type">macro</div></h2>
-      <div class="doc-content"><p>No documentation found.</p>
-<p>Binding <code>Groebner.@timeit</code> does not exist.</p>
-</div>
-  </div>
-
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: October 19, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: October 27, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
