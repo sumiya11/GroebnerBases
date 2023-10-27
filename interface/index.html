@@ -101,6 +101,8 @@
         <div class="doc-type">fn</div></h2>
       <div class="doc-content"><pre><code class="julia hljs">groebner(polynomials; options...)</code></pre>
 <p>Computes a Groebner basis of <code>polynomials</code>.</p>
+<p>The <code>polynomials</code> must be an array of polynomials from <code>AbstractAlgebra.jl</code>, <code>Nemo.jl</code>, or <code>DynamicPolynomials.jl</code>. For <code>AbstractAlgebra.jl</code> and <code>Nemo.jl</code>, the coefficients of polynomials must be either in <code>GF&#40;p&#41;</code> or in <code>QQ</code>.</p>
+<p>This function is thread-safe.</p>
 <h2 id="possible_options"><a href="#possible_options" class="header-anchor">Possible Options</a></h2>
 <p>The <code>groebner</code> routine takes the following optional arguments:</p>
 <ul>
@@ -149,7 +151,7 @@
 </li>
 <li><p><code>seed</code>: The seed for randomization. Default value is <code>42</code>. Groebner uses <code>Random.Xoshiro</code> and <code>Random.MersenneTwister</code> for random number generation.</p>
 </li>
-<li><p><code>loglevel</code>: Logging level, an integer. Higher values mean less verbose.   Default value is <code>0</code>, which means that only info and warnings are printed.   Set <code>loglevel</code> to negative values, e.g., <code>-1</code>, for debugging.</p>
+<li><p><code>loglevel</code>: Logging level, an integer. Higher values mean less verbose.   Default value is <code>0</code>, which means that only warnings are printed. Set <code>loglevel</code> to negative values, e.g., to <code>-3</code>, for debugging.</p>
 </li>
 <li><p><code>maxpairs</code>: The maximum number of critical pairs used at once in matrix   construction in the F4 algorithm. By default, this is not specified. Tweak   this option to try to lower the amount of RAM consumed.</p>
 </li>
@@ -160,6 +162,14 @@
 <li><p><code>:no</code>, never homogenize the input ideal,</p>
 </li>
 <li><p><code>:auto</code>, for the automatic choice &#40;default&#41;.</p>
+</li>
+</ul>
+</li>
+<li><p><code>statistics</code>: After the function exits, print some runtime statistics. Possible options are:</p>
+<ul>
+<li><p><code>:no</code>, do not print anything &#40;default&#41;,</p>
+</li>
+<li><p><code>:timings</code>, print the table with timings and allocations. Note that <code>Groebner.performance_counters_enabled&#40;&#41;</code> must be set to <code>true</code> for this to have effect.</p>
 </li>
 </ul>
 </li>
@@ -212,6 +222,14 @@ groebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-numb
 </li>
 <li><p><code>loglevel</code>: Logging level, an integer. Higher values mean less verbose.   Default value is <code>0</code>, which means that only warnings are printed. Set <code>loglevel</code> to negative values, e.g., <code>-1</code>, for debugging.</p>
 </li>
+<li><p><code>statistics</code>: After the function exits, print some runtime statistics.   Possible options are:</p>
+<ul>
+<li><p><code>:no</code>, do not print anything &#40;default&#41;,</p>
+</li>
+<li><p><code>:timings</code>, print the table with timings and allocations. Note that <code>Groebner.performance_counters_enabled&#40;&#41;</code> must be set to <code>true</code> for this to have effect.</p>
+</li>
+</ul>
+</li>
 </ul>
 <h2 id="example__2"><a href="#example__2" class="header-anchor">Example</a></h2>
 <p>Using <code>DynamicPolynomials</code>:</p>
@@ -234,7 +252,7 @@ isgroebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-nu
 <h2 id="possible_options__3"><a href="#possible_options__3" class="header-anchor">Possible Options</a></h2>
 <p>The <code>normalform</code> routine takes the following optional arguments:</p>
 <ul>
-<li><p><code>check</code>: Check if the given array <code>basis</code> forms a Groebner basis &#40;default is <code>true</code>&#41;.</p>
+<li><p><code>check</code>: Check if the given array <code>basis</code> forms a Groebner basis &#40;default is <code>false</code>&#41;.</p>
 </li>
 <li><p><code>ordering</code>: Specifies the monomial ordering. Available monomial orderings are: </p>
 <ul>
@@ -257,6 +275,14 @@ isgroebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-nu
 </li>
 <li><p><code>loglevel</code>: Logging level, an integer. Higher values mean less verbose. Default value is <code>0</code>, which means that only warnings are printed. Set <code>loglevel</code> to negative values, e.g., <code>-1</code>, for debugging.</p>
 </li>
+<li><p><code>statistics</code>: After the function exits, print some runtime statistics. Possible options are:</p>
+<ul>
+<li><p><code>:no</code>, do not print anything &#40;default&#41;,</p>
+</li>
+<li><p><code>:timings</code>, print the table with timings and allocations. Note that <code>Groebner.performance_counters_enabled&#40;&#41;</code> must be set to <code>true</code> for this to have effect.</p>
+</li>
+</ul>
+</li>
 </ul>
 <h2 id="example__3"><a href="#example__3" class="header-anchor">Example</a></h2>
 <pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, DynamicPolynomials
@@ -274,9 +300,17 @@ normalform([y^<span class="hljs-number">2</span> + x, x^<span class="hljs-number
 <h2 id="possible_options__4"><a href="#possible_options__4" class="header-anchor">Possible Options</a></h2>
 <p>The <code>kbase</code> routine takes the following optional arguments:</p>
 <ul>
-<li><p><code>check</code>: Check if the given array <code>basis</code> forms a Groebner basis &#40;default is <code>true</code>&#41;.</p>
+<li><p><code>check</code>: Check if the given array <code>basis</code> forms a Groebner basis &#40;default is <code>false</code>&#41;.</p>
 </li>
 <li><p><code>loglevel</code>: Logging level, an integer. Higher values mean less verbose.   Default value is <code>0</code>, which means that only warnings are printed. Set <code>loglevel</code> to negative values, e.g., <code>-1</code>, for debugging.</p>
+</li>
+<li><p><code>statistics</code>: After the function exits, print some runtime statistics.   Possible options are:</p>
+<ul>
+<li><p><code>:no</code>, do not print anything &#40;default&#41;,</p>
+</li>
+<li><p><code>:timings</code>, print the table with timings and allocations. Note that <code>Groebner.performance_counters_enabled&#40;&#41;</code> must be set to <code>true</code> for this to have effect.</p>
+</li>
+</ul>
 </li>
 </ul>
 <h2 id="example__4"><a href="#example__4" class="header-anchor">Example</a></h2>

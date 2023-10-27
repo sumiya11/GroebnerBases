@@ -171,11 +171,11 @@ groebner(f_1, \ldots, f_m) = gcd(gcd(gcd(f_1, f_2), \ldots), f_m)
 <p>With <code>DynamicPolynomials.jl</code>:</p>
 <pre><code class="julia hljs">h = (x + <span class="hljs-number">3</span>)^<span class="hljs-number">5</span>
 
-<span class="hljs-meta">@btime</span> gcd(gcd($f, $g), $h)</code></pre><pre><code class="plaintext hljs">  125.101 μs (1576 allocations: 82.45 KiB)
+<span class="hljs-meta">@btime</span> gcd(gcd($f, $g), $h)</code></pre><pre><code class="plaintext hljs">  141.805 μs (1576 allocations: 82.45 KiB)
 3 + x</code></pre>
 <p>With Groebner.jl:</p>
 <pre><code class="julia hljs">F = [f, g, h]
-<span class="hljs-meta">@btime</span> groebner($F)</code></pre><pre><code class="plaintext hljs">  222.802 μs (2021 allocations: 225.55 KiB)
+<span class="hljs-meta">@btime</span> groebner($F)</code></pre><pre><code class="plaintext hljs">  303.809 μs (2136 allocations: 230.88 KiB)
 1-element Vector{DynamicPolynomials.Polynomial{DynamicPolynomials.Commutative{DynamicPolynomials.CreationOrder}, MultivariatePolynomials.Graded{MultivariatePolynomials.LexOrder}, Int64}}:
  3 + x</code></pre>
 <h2 id="variable_elimination"><a href="#variable_elimination" class="header-anchor">Variable Elimination</a></h2>

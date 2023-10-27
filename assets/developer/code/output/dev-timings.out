@@ -1,1 +1,42 @@
-AssertionError: Not recognized keyword: statistics
+ --------------------------------------------------------------------------------
+          Groebner.jl                   Time                    Allocations      
+                               -----------------------   ------------------------
+       Tot / % measured:           6.86ms /   5.0%            914KiB /  60.5%    
+
+ Section               ncalls     time    %tot     avg     alloc    %tot      avg
+ --------------------------------------------------------------------------------
+ _groebner                  1    228μs   66.8%   228μs    506KiB   91.6%   506KiB
+   f4!                      1    179μs   52.5%   179μs   49.6KiB    9.0%  49.6KiB
+     reduction!             3   32.0μs    9.4%  10.7μs   8.22KiB    1.5%  2.74KiB
+       interreduce_...      3   2.90μs    0.9%   967ns   1.02KiB    0.2%     347B
+     select_critica...      3   27.0μs    7.9%  9.00μs   5.30KiB    1.0%  1.77KiB
+       multiplied_p...     10   5.50μs    1.6%   550ns   1.72KiB    0.3%     176B
+     update!                4   22.8μs    6.7%  5.70μs   2.30KiB    0.4%     588B
+       update_pairset!      5   6.10μs    1.8%  1.22μs      800B    0.1%     160B
+       update_basis!        4    700ns    0.2%   175ns     0.00B    0.0%    0.00B
+     symbolic_prepr...      4   10.9μs    3.2%  2.73μs   4.00KiB    0.7%  1.00KiB
+       multiplied_p...      3   1.00μs    0.3%   333ns      272B    0.0%    90.7B
+     initialize_sec...      5   6.30μs    1.8%  1.26μs   10.8KiB    2.0%  2.16KiB
+     standardize_ba...      1   4.10μs    1.2%  4.10μs   1.17KiB    0.2%  1.17KiB
+       normalize_ba...      1   1.00μs    0.3%  1.00μs     96.0B    0.0%    96.0B
+     initialize_matrix      4   3.30μs    1.0%   825ns   2.56KiB    0.5%     656B
+     multiplied_pol...      4   2.20μs    0.6%   550ns      896B    0.2%     224B
+     interreduce_ma...      1   1.60μs    0.5%  1.60μs   1.25KiB    0.2%  1.25KiB
+     normalize_basis!       1    600ns    0.2%   600ns     96.0B    0.0%    96.0B
+   initialize_structs       1   36.9μs   10.8%  36.9μs    453KiB   82.0%   453KiB
+     normalize_basis!       1   2.60μs    0.8%  2.60μs     96.0B    0.0%    96.0B
+   export_basis_data        1   1.10μs    0.3%  1.10μs      416B    0.1%     416B
+ convert_to_internal        1   73.1μs   21.4%  73.1μs   4.73KiB    0.9%  4.73KiB
+ initialize_structs         1   21.7μs    6.4%  21.7μs   33.6KiB    6.1%  33.6KiB
+   normalize_basis!         1   1.00μs    0.3%  1.00μs     96.0B    0.0%    96.0B
+ convert_to_output          1   5.60μs    1.6%  5.60μs   1.50KiB    0.3%  1.50KiB
+ standardize_basis!         1   3.30μs    1.0%  3.30μs   1.16KiB    0.2%  1.16KiB
+   normalize_basis!         1    800ns    0.2%   800ns     96.0B    0.0%    96.0B
+ multiplied_poly_to...      3   2.20μs    0.6%   733ns      672B    0.1%     224B
+ symbolic_preproces...      1   2.20μs    0.6%  2.20μs      960B    0.2%     960B
+ interreduce_matrix...      1   1.60μs    0.5%  1.60μs      992B    0.2%     992B
+ export_basis_data          1   1.20μs    0.4%  1.20μs      352B    0.1%     352B
+ initialize_seconda...      1   1.10μs    0.3%  1.10μs   2.14KiB    0.4%  2.14KiB
+ initialize_matrix          1    801ns    0.2%   801ns      656B    0.1%     656B
+ update_basis!              1    400ns    0.1%   400ns     0.00B    0.0%    0.00B
+ --------------------------------------------------------------------------------
