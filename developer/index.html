@@ -136,43 +136,43 @@ R, (x,y,z) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31<
 groebner([x*y + z, x*z + y], statistics=:timings)</code></pre><pre><code class="plaintext hljs"> --------------------------------------------------------------------------------
           Groebner.jl                   Time                    Allocations      
                                -----------------------   ------------------------
-       Tot / % measured:           7.55ms /   4.9%            914KiB /  60.5%    
+       Tot / % measured:           7.84ms /   4.5%            914KiB /  60.5%    
 
  Section               ncalls     time    %tot     avg     alloc    %tot      avg
  --------------------------------------------------------------------------------
- _groebner                  1    253μs   68.2%   253μs    506KiB   91.6%   506KiB
-   f4!                      1    196μs   53.0%   196μs   49.6KiB    9.0%  49.6KiB
-     reduction!             3   31.6μs    8.5%  10.5μs   8.22KiB    1.5%  2.74KiB
-       interreduce_...      3   2.60μs    0.7%   867ns   1.02KiB    0.2%     347B
-     select_critica...      3   28.6μs    7.7%  9.53μs   5.30KiB    1.0%  1.77KiB
-       multiplied_p...     10   5.50μs    1.5%   550ns   1.72KiB    0.3%     176B
-     update!                4   12.3μs    3.3%  3.08μs   2.30KiB    0.4%     588B
-       update_pairset!      5   5.90μs    1.6%  1.18μs      800B    0.1%     160B
-       update_basis!        4    700ns    0.2%   175ns     0.00B    0.0%    0.00B
-     symbolic_prepr...      4   9.50μs    2.6%  2.38μs   4.00KiB    0.7%  1.00KiB
-       multiplied_p...      3    900ns    0.2%   300ns      272B    0.0%    90.7B
-     initialize_sec...      5   4.40μs    1.2%   880ns   10.8KiB    2.0%  2.16KiB
-     standardize_ba...      1   3.70μs    1.0%  3.70μs   1.17KiB    0.2%  1.17KiB
+ _groebner                  1    225μs   63.5%   225μs    506KiB   91.6%   506KiB
+   f4!                      1    169μs   47.7%   169μs   49.6KiB    9.0%  49.6KiB
+     reduction!             3   30.0μs    8.5%  10.0μs   8.22KiB    1.5%  2.74KiB
+       interreduce_...      3   2.30μs    0.6%   767ns   1.02KiB    0.2%     347B
+     select_critica...      3   28.4μs    8.0%  9.47μs   5.30KiB    1.0%  1.77KiB
+       multiplied_p...     10   6.20μs    1.8%   620ns   1.72KiB    0.3%     176B
+     update!                4   22.1μs    6.2%  5.53μs   2.30KiB    0.4%     588B
+       update_pairset!      5   5.90μs    1.7%  1.18μs      800B    0.1%     160B
+       update_basis!        4    600ns    0.2%   150ns     0.00B    0.0%    0.00B
+     symbolic_prepr...      4   9.50μs    2.7%  2.38μs   4.00KiB    0.7%  1.00KiB
+       multiplied_p...      3    900ns    0.3%   300ns      272B    0.0%    90.7B
+     initialize_sec...      5   4.90μs    1.4%   980ns   10.8KiB    2.0%  2.16KiB
+     initialize_matrix      4   3.80μs    1.1%   950ns   2.56KiB    0.5%     656B
+     standardize_ba...      1   3.50μs    1.0%  3.50μs   1.17KiB    0.2%  1.17KiB
        normalize_ba...      1    800ns    0.2%   800ns     96.0B    0.0%    96.0B
-     initialize_matrix      4   2.90μs    0.8%   725ns   2.56KiB    0.5%     656B
-     multiplied_pol...      4   2.10μs    0.6%   525ns      896B    0.2%     224B
+     multiplied_pol...      4   2.30μs    0.6%   575ns      896B    0.2%     224B
      interreduce_ma...      1   1.70μs    0.5%  1.70μs   1.25KiB    0.2%  1.25KiB
      normalize_basis!       1    600ns    0.2%   600ns     96.0B    0.0%    96.0B
-   initialize_structs       1   46.1μs   12.4%  46.1μs    453KiB   82.0%   453KiB
-     normalize_basis!       1   2.10μs    0.6%  2.10μs     96.0B    0.0%    96.0B
-   export_basis_data        1   1.10μs    0.3%  1.10μs      416B    0.1%     416B
- convert_to_internal        1   80.2μs   21.7%  80.2μs   4.73KiB    0.9%  4.73KiB
- initialize_structs         1   20.1μs    5.4%  20.1μs   33.6KiB    6.1%  33.6KiB
-   normalize_basis!         1   1.00μs    0.3%  1.00μs     96.0B    0.0%    96.0B
- convert_to_output          1   6.00μs    1.6%  6.00μs   1.50KiB    0.3%  1.50KiB
- standardize_basis!         1   2.60μs    0.7%  2.60μs   1.16KiB    0.2%  1.16KiB
-   normalize_basis!         1    800ns    0.2%   800ns     96.0B    0.0%    96.0B
- multiplied_poly_to...      3   2.00μs    0.5%   667ns      672B    0.1%     224B
- symbolic_preproces...      1   1.70μs    0.5%  1.70μs      960B    0.2%     960B
- interreduce_matrix...      1   1.70μs    0.5%  1.70μs      992B    0.2%     992B
- initialize_seconda...      1   1.60μs    0.4%  1.60μs   2.14KiB    0.4%  2.14KiB
- initialize_matrix          1    900ns    0.2%   900ns      656B    0.1%     656B
+   initialize_structs       1   44.6μs   12.6%  44.6μs    453KiB   82.0%   453KiB
+     normalize_basis!       1   2.70μs    0.8%  2.70μs     96.0B    0.0%    96.0B
+   export_basis_data        1   1.00μs    0.3%  1.00μs      416B    0.1%     416B
+ convert_to_internal        1   85.3μs   24.1%  85.3μs   4.73KiB    0.9%  4.73KiB
+ initialize_structs         1   24.6μs    6.9%  24.6μs   33.6KiB    6.1%  33.6KiB
+   normalize_basis!         1    900ns    0.3%   900ns     96.0B    0.0%    96.0B
+ convert_to_output          1   7.80μs    2.2%  7.80μs   1.50KiB    0.3%  1.50KiB
+ standardize_basis!         1   3.40μs    1.0%  3.40μs   1.16KiB    0.2%  1.16KiB
+   normalize_basis!         1    600ns    0.2%   600ns     96.0B    0.0%    96.0B
+ multiplied_poly_to...      3   2.30μs    0.6%   767ns      672B    0.1%     224B
+ symbolic_preproces...      1   1.60μs    0.5%  1.60μs      960B    0.2%     960B
+ interreduce_matrix...      1   1.30μs    0.4%  1.30μs      992B    0.2%     992B
+ initialize_matrix          1   1.10μs    0.3%  1.10μs      656B    0.1%     656B
  export_basis_data          1    800ns    0.2%   800ns      352B    0.1%     352B
+ initialize_seconda...      1    800ns    0.2%   800ns   2.14KiB    0.4%  2.14KiB
  update_basis!              1    200ns    0.1%   200ns     0.00B    0.0%    0.00B
  --------------------------------------------------------------------------------
 3-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
