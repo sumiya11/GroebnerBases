@@ -59,7 +59,7 @@
     <nav class="sidebar-nav" style="opacity: 0.9">
       <a class="sidebar-nav-item " href="/Groebner.jl/">Home</a>
       <!-- <a class="sidebar-nav-item {{ispage tutorial.html}}active{{end}}" href="/Groebner.jl/tutorial/">Tutorials</a> -->
-      <li class="sidebar-nav-item "><a href="/Groebner.jl/tutorial/">Tutorials</a>
+      <li class="sidebar-nav-item "><a href="/Groebner.jl/tutorial/">Introductory tutorial</a>
         <!-- <ul class="menu-list-child-list ">
 				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#introduction" class="menu-list-link">Introduction</a>
 				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#gcd_rref" class="menu-list-link">Gcd & Rref</a>
@@ -76,6 +76,8 @@
               class="menu-list-link">Exported functions</a>
           <li class="menu-list-item active"><a href="/Groebner.jl/interface/#monomial_orderings"
               class="menu-list-link">Monomial orderings</a>
+          <li class="menu-list-item active"><a href="/Groebner.jl/interface/#learn_and_apply"
+              class="menu-list-link">Learn and Apply</a>
         </ul>
       <li class="sidebar-nav-item "><a href="/Groebner.jl/developer/">Development</a>
     </nav>
@@ -480,9 +482,90 @@ groebner([x*y + w, y*z - w], ordering=ord)</code></pre>
 </div>
   </div>
 
+<h2 id="learn_and_apply"><a href="#learn_and_apply" class="header-anchor">Learn and Apply</a></h2>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="groebner_learn">
+        <a href="#groebner_learn">groebner_learn</a>
+        <div class="doc-type">fn</div></h2>
+      <div class="doc-content"><pre><code class="julia hljs">groebner_learn(polynomials; options...)</code></pre>
+<p>Computes a Groebner basis of <code>polynomials</code> and emits the computation graph.</p>
+<p>The graph can be used to speed up the computation of subsequent Groebner bases, which should be the specializations of the same basis as the one <code>groebner_learn</code> had been applied to.</p>
+<p><em>At the moment, only input over integers modulo a prime is supported.</em></p>
+<p>This function is thread-safe.</p>
+<p>See also <code>groebner_apply&#33;</code>.</p>
+<h2 id="example__12"><a href="#example__12" class="header-anchor">Example</a></h2>
+<p>Using <code>groebner_learn</code> and <code>groebner_apply&#33;</code> over the same ground field:</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>)[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
+
+<span class="hljs-comment"># Learn</span>
+graph, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])
+
+<span class="hljs-comment"># Apply (same ground field, different coefficients)</span>
+success, gb_2 = groebner_apply!(graph, [<span class="hljs-number">2</span>x*y^<span class="hljs-number">2</span> + <span class="hljs-number">3</span>x, <span class="hljs-number">4</span>y*x^<span class="hljs-number">2</span> + <span class="hljs-number">5</span>y])
+
+<span class="hljs-meta">@assert</span> success</code></pre>
+<p>Using <code>groebner_learn</code> and <code>groebner_apply&#33;</code> over different ground fields:</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>)[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
+
+<span class="hljs-comment"># Learn</span>
+graph, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])
+
+<span class="hljs-comment"># Create a ring with a different modulo</span>
+_R, (_x, _y) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span>+<span class="hljs-number">3</span>)[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
+
+<span class="hljs-comment"># Apply (with a different modulo)</span>
+success, gb_2 = groebner_apply!(graph, [<span class="hljs-number">2_</span>x*_y^<span class="hljs-number">2</span> + <span class="hljs-number">3_</span>x, <span class="hljs-number">4_</span>y*_x^<span class="hljs-number">2</span> + <span class="hljs-number">5_</span>y])
+
+<span class="hljs-meta">@assert</span> success
+<span class="hljs-meta">@assert</span> gb_2 == groebner([<span class="hljs-number">2_</span>x*_y^<span class="hljs-number">2</span> + <span class="hljs-number">3_</span>x, <span class="hljs-number">4_</span>y*_x^<span class="hljs-number">2</span> + <span class="hljs-number">5_</span>y])</code></pre>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="groebner_apply!">
+        <a href="#groebner_apply!">groebner_apply!</a>
+        <div class="doc-type">fn</div></h2>
+      <div class="doc-content"><pre><code class="julia hljs">groebner_apply!(graph, polynomials; options...)</code></pre>
+<p>Computes a Groebner basis of <code>polynomials</code> using the given computation <code>graph</code>.</p>
+<p><em>At the moment, only input over integers modulo a prime is supported.</em></p>
+<p>This function is <em>not</em> thread-safe.</p>
+<p>See also <code>groebner_learn</code>.</p>
+<h2 id="example__13"><a href="#example__13" class="header-anchor">Example</a></h2>
+<p>Using <code>groebner_learn</code> and <code>groebner_apply&#33;</code> over the same ground field:</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>)[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
+
+<span class="hljs-comment"># Learn</span>
+graph, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])
+
+<span class="hljs-comment"># Apply (same ground field, different coefficients)</span>
+success, gb_2 = groebner_apply!(graph, [<span class="hljs-number">2</span>x*y^<span class="hljs-number">2</span> + <span class="hljs-number">3</span>x, <span class="hljs-number">4</span>y*x^<span class="hljs-number">2</span> + <span class="hljs-number">5</span>y])
+
+<span class="hljs-meta">@assert</span> success</code></pre>
+<p>Using <code>groebner_learn</code> and <code>groebner_apply&#33;</code> over different ground fields:</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>)[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
+
+<span class="hljs-comment"># Learn</span>
+graph, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])
+
+<span class="hljs-comment"># Create a ring with a different modulo</span>
+_R, (_x, _y) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span>+<span class="hljs-number">3</span>)[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
+
+<span class="hljs-comment"># Apply (with a different modulo)</span>
+success, gb_2 = groebner_apply!(graph, [<span class="hljs-number">2_</span>x*_y^<span class="hljs-number">2</span> + <span class="hljs-number">3_</span>x, <span class="hljs-number">4_</span>y*_x^<span class="hljs-number">2</span> + <span class="hljs-number">5_</span>y])
+
+<span class="hljs-meta">@assert</span> success
+<span class="hljs-meta">@assert</span> gb_2 == groebner([<span class="hljs-number">2_</span>x*_y^<span class="hljs-number">2</span> + <span class="hljs-number">3_</span>x, <span class="hljs-number">4_</span>y*_x^<span class="hljs-number">2</span> + <span class="hljs-number">5_</span>y])</code></pre>
+</div>
+  </div>
+
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: November 02, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: November 12, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
