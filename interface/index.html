@@ -151,6 +151,16 @@
 </li>
 </ul>
 </li>
+<li><p><code>modular</code>: Modular computation algorithm. Only has effect when computing basis   over the rational numbers. Possible options are:</p>
+<ul>
+<li><p><code>:auto</code> for the automatic choice &#40;default&#41;,</p>
+</li>
+<li><p><code>:classic_modular</code> for the classic multi-modular algorithm TODO: reference,</p>
+</li>
+<li><p><code>:learn_and_apply</code> for the learn &amp; apply algorithm from TODO: reference.</p>
+</li>
+</ul>
+</li>
 <li><p><code>seed</code>: The seed for randomization. Default value is <code>42</code>. Groebner uses <code>Random.Xoshiro</code> and <code>Random.MersenneTwister</code> for random number generation.</p>
 </li>
 <li><p><code>loglevel</code>: Logging level, an integer. Higher values mean less verbose.   Default value is <code>0</code>, which means that only warnings are printed. Set <code>loglevel</code> to negative values, e.g., to <code>-3</code>, for debugging.</p>
@@ -565,7 +575,7 @@ success, gb_2 = groebner_apply!(graph, [<span class="hljs-number">2_</span>x*_y^
 
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: November 12, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: December 10, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
