@@ -133,9 +133,11 @@
 </li>
 <li><p><code>linalg</code>: Linear algebra backend. Available options are: </p>
 <ul>
+<li><p><code>:auto</code>: for the automatic choice &#40;default&#41;,</p>
+</li>
 <li><p><code>:deterministic</code> for deterministic sparse linear algebra,</p>
 </li>
-<li><p><code>:randomized</code> for probabilistic sparse linear algebra &#40;default is <code>:randomized</code>&#41;.</p>
+<li><p><code>:randomized</code> for probabilistic sparse linear algebra.</p>
 </li>
 </ul>
 </li>
@@ -155,9 +157,9 @@
 <ul>
 <li><p><code>:auto</code> for the automatic choice &#40;default&#41;,</p>
 </li>
-<li><p><code>:classic_modular</code> for the classic multi-modular algorithm TODO: reference,</p>
+<li><p><code>:classic_modular</code> for the classic multi-modular algorithm,</p>
 </li>
-<li><p><code>:learn_and_apply</code> for the learn &amp; apply algorithm from TODO: reference.</p>
+<li><p><code>:learn_and_apply</code> for the learn &amp; apply algorithm.</p>
 </li>
 </ul>
 </li>
@@ -499,9 +501,9 @@ groebner([x*y + w, y*z - w], ordering=ord)</code></pre>
         <a href="#groebner_learn">groebner_learn</a>
         <div class="doc-type">fn</div></h2>
       <div class="doc-content"><pre><code class="julia hljs">groebner_learn(polynomials; options...)</code></pre>
-<p>Computes a Groebner basis of <code>polynomials</code> and emits the computation graph.</p>
-<p>The graph can be used to speed up the computation of subsequent Groebner bases, which should be the specializations of the same basis as the one <code>groebner_learn</code> had been applied to.</p>
-<p><em>At the moment, only input over integers modulo a prime is supported.</em></p>
+<p>Computes a Groebner basis of <code>polynomials</code> and emits the computation trace.</p>
+<p>The trace can be then used to speed up the computation of subsequent Groebner bases, which should be the specializations of the same ideal as the one <code>groebner_learn</code> has been applied to.</p>
+<p>The input <code>polynomials</code> must be an array of polynomials over a finite field.</p>
 <p>This function is thread-safe.</p>
 <p>See also <code>groebner_apply&#33;</code>.</p>
 <h2 id="example__12"><a href="#example__12" class="header-anchor">Example</a></h2>
@@ -510,10 +512,10 @@ groebner([x*y + w, y*z - w], ordering=ord)</code></pre>
 R, (x, y) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>)[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
 
 <span class="hljs-comment"># Learn</span>
-graph, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])
+trace, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])
 
 <span class="hljs-comment"># Apply (same ground field, different coefficients)</span>
-success, gb_2 = groebner_apply!(graph, [<span class="hljs-number">2</span>x*y^<span class="hljs-number">2</span> + <span class="hljs-number">3</span>x, <span class="hljs-number">4</span>y*x^<span class="hljs-number">2</span> + <span class="hljs-number">5</span>y])
+success, gb_2 = groebner_apply!(trace, [<span class="hljs-number">2</span>x*y^<span class="hljs-number">2</span> + <span class="hljs-number">3</span>x, <span class="hljs-number">4</span>y*x^<span class="hljs-number">2</span> + <span class="hljs-number">5</span>y])
 
 <span class="hljs-meta">@assert</span> success</code></pre>
 <p>Using <code>groebner_learn</code> and <code>groebner_apply&#33;</code> over different ground fields:</p>
@@ -521,13 +523,13 @@ success, gb_2 = groebner_apply!(graph, [<span class="hljs-number">2</span>x*y^<s
 R, (x, y) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>)[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
 
 <span class="hljs-comment"># Learn</span>
-graph, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])
+trace, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])
 
 <span class="hljs-comment"># Create a ring with a different modulo</span>
 _R, (_x, _y) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span>+<span class="hljs-number">3</span>)[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
 
 <span class="hljs-comment"># Apply (with a different modulo)</span>
-success, gb_2 = groebner_apply!(graph, [<span class="hljs-number">2_</span>x*_y^<span class="hljs-number">2</span> + <span class="hljs-number">3_</span>x, <span class="hljs-number">4_</span>y*_x^<span class="hljs-number">2</span> + <span class="hljs-number">5_</span>y])
+success, gb_2 = groebner_apply!(trace, [<span class="hljs-number">2_</span>x*_y^<span class="hljs-number">2</span> + <span class="hljs-number">3_</span>x, <span class="hljs-number">4_</span>y*_x^<span class="hljs-number">2</span> + <span class="hljs-number">5_</span>y])
 
 <span class="hljs-meta">@assert</span> success
 <span class="hljs-meta">@assert</span> gb_2 == groebner([<span class="hljs-number">2_</span>x*_y^<span class="hljs-number">2</span> + <span class="hljs-number">3_</span>x, <span class="hljs-number">4_</span>y*_x^<span class="hljs-number">2</span> + <span class="hljs-number">5_</span>y])</code></pre>
@@ -538,9 +540,9 @@ success, gb_2 = groebner_apply!(graph, [<span class="hljs-number">2_</span>x*_y^
       <h2 class="doc-header" id="groebner_apply!">
         <a href="#groebner_apply!">groebner_apply!</a>
         <div class="doc-type">fn</div></h2>
-      <div class="doc-content"><pre><code class="julia hljs">groebner_apply!(graph, polynomials; options...)</code></pre>
-<p>Computes a Groebner basis of <code>polynomials</code> using the given computation <code>graph</code>.</p>
-<p><em>At the moment, only input over integers modulo a prime is supported.</em></p>
+      <div class="doc-content"><pre><code class="julia hljs">groebner_apply!(trace, polynomials; options...)</code></pre>
+<p>Computes a Groebner basis of <code>polynomials</code> using the given computation <code>trace</code>.</p>
+<p>The input <code>polynomials</code> must be an array of polynomials over a finite field.</p>
 <p>This function is <em>not</em> thread-safe.</p>
 <p>See also <code>groebner_learn</code>.</p>
 <h2 id="example__13"><a href="#example__13" class="header-anchor">Example</a></h2>
@@ -549,10 +551,10 @@ success, gb_2 = groebner_apply!(graph, [<span class="hljs-number">2_</span>x*_y^
 R, (x, y) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>)[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
 
 <span class="hljs-comment"># Learn</span>
-graph, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])
+trace, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])
 
 <span class="hljs-comment"># Apply (same ground field, different coefficients)</span>
-success, gb_2 = groebner_apply!(graph, [<span class="hljs-number">2</span>x*y^<span class="hljs-number">2</span> + <span class="hljs-number">3</span>x, <span class="hljs-number">4</span>y*x^<span class="hljs-number">2</span> + <span class="hljs-number">5</span>y])
+success, gb_2 = groebner_apply!(trace, [<span class="hljs-number">2</span>x*y^<span class="hljs-number">2</span> + <span class="hljs-number">3</span>x, <span class="hljs-number">4</span>y*x^<span class="hljs-number">2</span> + <span class="hljs-number">5</span>y])
 
 <span class="hljs-meta">@assert</span> success</code></pre>
 <p>Using <code>groebner_learn</code> and <code>groebner_apply&#33;</code> over different ground fields:</p>
@@ -560,13 +562,13 @@ success, gb_2 = groebner_apply!(graph, [<span class="hljs-number">2</span>x*y^<s
 R, (x, y) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>)[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
 
 <span class="hljs-comment"># Learn</span>
-graph, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])
+trace, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])
 
 <span class="hljs-comment"># Create a ring with a different modulo</span>
 _R, (_x, _y) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span>+<span class="hljs-number">3</span>)[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
 
 <span class="hljs-comment"># Apply (with a different modulo)</span>
-success, gb_2 = groebner_apply!(graph, [<span class="hljs-number">2_</span>x*_y^<span class="hljs-number">2</span> + <span class="hljs-number">3_</span>x, <span class="hljs-number">4_</span>y*_x^<span class="hljs-number">2</span> + <span class="hljs-number">5_</span>y])
+success, gb_2 = groebner_apply!(trace, [<span class="hljs-number">2_</span>x*_y^<span class="hljs-number">2</span> + <span class="hljs-number">3_</span>x, <span class="hljs-number">4_</span>y*_x^<span class="hljs-number">2</span> + <span class="hljs-number">5_</span>y])
 
 <span class="hljs-meta">@assert</span> success
 <span class="hljs-meta">@assert</span> gb_2 == groebner([<span class="hljs-number">2_</span>x*_y^<span class="hljs-number">2</span> + <span class="hljs-number">3_</span>x, <span class="hljs-number">4_</span>y*_x^<span class="hljs-number">2</span> + <span class="hljs-number">5_</span>y])</code></pre>
