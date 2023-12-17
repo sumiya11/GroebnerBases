@@ -1,43 +1,43 @@
  --------------------------------------------------------------------------------
           Groebner.jl                   Time                    Allocations      
                                -----------------------   ------------------------
-       Tot / % measured:           5.51ms /   4.6%            923KiB /  58.7%    
+       Tot / % measured:           5.08ms /   4.4%            923KiB /  58.7%    
 
  Section               ncalls     time    %tot     avg     alloc    %tot      avg
  --------------------------------------------------------------------------------
- _groebner                  1    167μs   66.4%   167μs    495KiB   91.4%   495KiB
-   f4!                      1    133μs   53.0%   133μs   39.0KiB    7.2%  39.0KiB
-     reduction!             3   39.2μs   15.6%  13.1μs   8.30KiB    1.5%  2.77KiB
-       interreduce_...      3   14.9μs    5.9%  4.98μs   1.34KiB    0.2%     459B
-     select_critica...      3   20.7μs    8.2%  6.90μs   4.33KiB    0.8%  1.44KiB
-       transform_po...     10   3.86μs    1.5%   386ns   1.72KiB    0.3%     176B
-     update!                4   8.41μs    3.3%  2.10μs   2.30KiB    0.4%     588B
-       update_pairset!      5   4.50μs    1.8%   900ns      800B    0.1%     160B
-       update_basis!        4    361ns    0.1%  90.2ns     0.00B    0.0%    0.00B
-     symbolic_prepr...      4   7.48μs    3.0%  1.87μs   3.08KiB    0.6%     788B
-       symbolic_pre...      3   5.90μs    2.3%  1.97μs   2.23KiB    0.4%     763B
-         transform_...      3    492ns    0.2%   164ns      272B    0.0%    90.7B
-     interreduce_ma...      1   4.08μs    1.6%  4.08μs   1.36KiB    0.3%  1.36KiB
-     standardize_ba...      1   2.67μs    1.1%  2.67μs   1.17KiB    0.2%  1.17KiB
-       normalize_ba...      1    722ns    0.3%   722ns     96.0B    0.0%    96.0B
-     initialize_sec...      2   2.16μs    0.9%  1.08μs   4.31KiB    0.8%  2.16KiB
-     transform_poly...      4   1.88μs    0.7%   471ns      896B    0.2%     224B
-     initialize_matrix      1    971ns    0.4%   971ns   1.08KiB    0.2%  1.08KiB
-     normalize_basis!       1    321ns    0.1%   321ns     96.0B    0.0%    96.0B
-   initialize_structs       1   26.4μs   10.5%  26.4μs    453KiB   83.7%   453KiB
-     normalize_basis!       1   2.65μs    1.1%  2.65μs     96.0B    0.0%    96.0B
-   export_basis_data        1    821ns    0.3%   821ns      416B    0.1%     416B
- convert_to_internal        1   58.4μs   23.2%  58.4μs   4.25KiB    0.8%  4.25KiB
- initialize_structs         1   11.0μs    4.4%  11.0μs   33.4KiB    6.2%  33.4KiB
-   normalize_basis!         1    430ns    0.2%   430ns     96.0B    0.0%    96.0B
- convert_to_output          1   4.42μs    1.8%  4.42μs   1.50KiB    0.3%  1.50KiB
- interreduce_matrix...      1   3.26μs    1.3%  3.26μs   1.08KiB    0.2%  1.08KiB
- standardize_basis!         1   1.87μs    0.7%  1.87μs   1.16KiB    0.2%  1.16KiB
-   normalize_basis!         1    411ns    0.2%   411ns     96.0B    0.0%    96.0B
- transform_polynomi...      3   1.34μs    0.5%   448ns      672B    0.1%     224B
- initialize_matrix          1   1.31μs    0.5%  1.31μs   1.08KiB    0.2%  1.08KiB
- export_basis_data          1   1.04μs    0.4%  1.04μs      352B    0.1%     352B
- symbolic_preproces...      1    952ns    0.4%   952ns      960B    0.2%     960B
- initialize_seconda...      1    791ns    0.3%   791ns   2.14KiB    0.4%  2.14KiB
- update_basis!              1    120ns    0.0%   120ns     0.00B    0.0%    0.00B
+ _groebner                  1    148μs   65.9%   148μs    495KiB   91.4%   495KiB
+   f4!                      1    117μs   51.9%   117μs   39.0KiB    7.2%  39.0KiB
+     reduction!             3   32.0μs   14.2%  10.7μs   8.30KiB    1.5%  2.77KiB
+       interreduce_...      3   10.9μs    4.8%  3.62μs   1.34KiB    0.2%     459B
+     select_critica...      3   20.8μs    9.3%  6.93μs   4.33KiB    0.8%  1.44KiB
+       transform_po...     10   3.06μs    1.4%   306ns   1.72KiB    0.3%     176B
+     update!                4   7.62μs    3.4%  1.91μs   2.30KiB    0.4%     588B
+       update_pairset!      5   4.03μs    1.8%   805ns      800B    0.1%     160B
+       update_basis!        4    362ns    0.2%  90.5ns     0.00B    0.0%    0.00B
+     symbolic_prepr...      4   7.18μs    3.2%  1.80μs   3.08KiB    0.6%     788B
+       symbolic_pre...      3   5.55μs    2.5%  1.85μs   2.23KiB    0.4%     763B
+         transform_...      3    610ns    0.3%   203ns      272B    0.0%    90.7B
+     interreduce_ma...      1   3.57μs    1.6%  3.57μs   1.36KiB    0.3%  1.36KiB
+     standardize_ba...      1   2.37μs    1.1%  2.37μs   1.17KiB    0.2%  1.17KiB
+       normalize_ba...      1    602ns    0.3%   602ns     96.0B    0.0%    96.0B
+     initialize_sec...      2   1.62μs    0.7%   812ns   4.31KiB    0.8%  2.16KiB
+     transform_poly...      4   1.25μs    0.6%   313ns      896B    0.2%     224B
+     initialize_matrix      1   1.08μs    0.5%  1.08μs   1.08KiB    0.2%  1.08KiB
+     normalize_basis!       1    370ns    0.2%   370ns     96.0B    0.0%    96.0B
+   initialize_structs       1   23.5μs   10.5%  23.5μs    453KiB   83.7%   453KiB
+     normalize_basis!       1   1.67μs    0.7%  1.67μs     96.0B    0.0%    96.0B
+   export_basis_data        1    821ns    0.4%   821ns      416B    0.1%     416B
+ convert_to_internal        1   55.2μs   24.6%  55.2μs   4.25KiB    0.8%  4.25KiB
+ initialize_structs         1   8.40μs    3.7%  8.40μs   33.4KiB    6.2%  33.4KiB
+   normalize_basis!         1    390ns    0.2%   390ns     96.0B    0.0%    96.0B
+ convert_to_output          1   3.74μs    1.7%  3.74μs   1.50KiB    0.3%  1.50KiB
+ interreduce_matrix...      1   3.02μs    1.3%  3.02μs   1.08KiB    0.2%  1.08KiB
+ standardize_basis!         1   1.67μs    0.7%  1.67μs   1.16KiB    0.2%  1.16KiB
+   normalize_basis!         1    301ns    0.1%   301ns     96.0B    0.0%    96.0B
+ transform_polynomi...      3   1.13μs    0.5%   377ns      672B    0.1%     224B
+ symbolic_preproces...      1   1.11μs    0.5%  1.11μs      960B    0.2%     960B
+ initialize_matrix          1    842ns    0.4%   842ns   1.08KiB    0.2%  1.08KiB
+ initialize_seconda...      1    661ns    0.3%   661ns   2.14KiB    0.4%  2.14KiB
+ export_basis_data          1    561ns    0.2%   561ns      352B    0.1%     352B
+ update_basis!              1    120ns    0.1%   120ns     0.00B    0.0%    0.00B
  --------------------------------------------------------------------------------
