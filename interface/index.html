@@ -567,6 +567,32 @@ flag, (gb_2, gb_3) = groebner_apply!(trace, batch)
 
 <span class="hljs-meta">@assert</span> flag
 <span class="hljs-meta">@assert</span> (gb_2, gb_3) == map(groebner, batch)</code></pre>
+<p>Perhaps, in a more involved example, we will compute Groebner bases of the Katsura-9 system:</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra, BenchmarkTools
+
+<span class="hljs-comment"># Create the system</span>
+kat = Groebner.katsuran(<span class="hljs-number">9</span>, ground=ZZ, ordering=:degrevlex)
+
+<span class="hljs-comment"># Reduce the coefficients modulo 5 different primes</span>
+kat_0 = map(f -&gt; map_coefficients(c -&gt; GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span> + <span class="hljs-number">3</span>)(c), f), kat)
+kat_1 = map(f -&gt; map_coefficients(c -&gt; GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span> + <span class="hljs-number">7</span>)(c), f), kat)
+kat_2 = map(f -&gt; map_coefficients(c -&gt; GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span> + <span class="hljs-number">9</span>)(c), f), kat)
+kat_3 = map(f -&gt; map_coefficients(c -&gt; GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span> + <span class="hljs-number">15</span>)(c), f), kat)
+kat_4 = map(f -&gt; map_coefficients(c -&gt; GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span> + <span class="hljs-number">19</span>)(c), f), kat)
+
+<span class="hljs-comment"># Learn the trace</span>
+trace, gb_0 = groebner_learn(kat_0);
+
+<span class="hljs-comment"># Compare the performance of applying with 1 input and with 4 different inputs:</span>
+
+<span class="hljs-comment"># Apply for one system</span>
+<span class="hljs-meta">@btime</span> groebner_apply!($trace, $kat_1);
+<span class="hljs-comment">#  46.824 ms (19260 allocations: 24.48 MiB)</span>
+
+<span class="hljs-comment"># Apply for a batch of four systems</span>
+<span class="hljs-meta">@btime</span> groebner_apply!($trace, $(kat_1, kat_2, kat_3, kat_4));
+<span class="hljs-comment">#  72.813 ms (23722 allocations: 59.44 MiB)</span></code></pre>
+<p>Observe the better amortized performance of the batched <code>groebner_apply&#33;</code>.</p>
 </div>
   </div>
 
