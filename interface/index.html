@@ -512,7 +512,7 @@ groebner([x*y + w, y*z - w], ordering=ord)</code></pre>
         <a href="#groebner_learn">groebner_learn</a>
         <div class="doc-type">fn</div></h2>
       <div class="doc-content"><pre><code class="julia hljs">groebner_learn(polynomials; options...)</code></pre>
-<p>Computes a Groebner basis of <code>polynomials</code> and emits the trace.</p>
+<p>Computes a Groebner basis of <code>polynomials</code> and emits the computation trace.</p>
 <p>The trace can be used to speed up the computation of subsequent Groebner bases, which should be specializations of the same ideal <code>groebner_learn</code> has been applied to.</p>
 <p>The input <code>polynomials</code> must be an array of polynomials over a finite field.</p>
 <p>This function is thread-safe.</p>
@@ -525,7 +525,7 @@ R, (x, y) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</
 <span class="hljs-comment"># Learn</span>
 trace, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])
 
-<span class="hljs-comment"># Apply (same ground field, different coefficients)</span>
+<span class="hljs-comment"># Apply (same support, different coefficients)</span>
 flag, gb_2 = groebner_apply!(trace, [<span class="hljs-number">2</span>x*y^<span class="hljs-number">2</span> + <span class="hljs-number">3</span>x, <span class="hljs-number">4</span>y*x^<span class="hljs-number">2</span> + <span class="hljs-number">5</span>y])
 
 <span class="hljs-meta">@assert</span> flag</code></pre>
@@ -539,7 +539,7 @@ trace, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<s
 <span class="hljs-comment"># Create a ring with a different modulo</span>
 R2, (x2, y2) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span>+<span class="hljs-number">3</span>)[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
 
-<span class="hljs-comment"># Apply (with a different modulo)</span>
+<span class="hljs-comment"># Apply (different modulo)</span>
 flag, gb_2 = groebner_apply!(
     trace, 
     [<span class="hljs-number">2</span>x2*y2^<span class="hljs-number">2</span> + <span class="hljs-number">3</span>x2, <span class="hljs-number">4</span>y2*x2^<span class="hljs-number">2</span> + <span class="hljs-number">5</span>y2], 
@@ -615,7 +615,7 @@ groebner_apply!(trace, batch::<span class="hljs-built_in">NTuple</span>{N, <span
 
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: December 18, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: December 19, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
