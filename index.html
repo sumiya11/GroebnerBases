@@ -95,7 +95,7 @@
 <div class="content container">
 <!-- Content appended here -->
 <div class="franklin-content"><div class="im-50"><img src="/Groebner.jl/assets/logo-with-text.svg" alt="" /></div>
-<p>Groebner.jl is a package for fast and generic Gröbner bases computations based on Faugère&#39;s F4 algorithm<sup id="fnref:1"><a href="#fndef:1" class="fnref">[1]</a></sup> written in Julia.</p>
+<p>Groebner.jl is a package for fast and generic Gröbner bases computations based on Faugère&#39;s <a href="https://www-polsys.lip6.fr/~jcf/Papers/F99a.pdf">F4 algorithm</a> written in Julia.</p>
 <h2 id="installation"><a href="#installation" class="header-anchor">Installation</a></h2>
 <p>To install Groebner.jl, run the following in the Julia REPL:</p>
 
@@ -127,7 +127,7 @@ groebner(polys, ordering=ordering)</code></pre><pre><code class="plaintext hljs"
  x*y + z</code></pre>
 <p>You can find more information on monomial orderings in Groebner.jl in <a href="interface/#monomial_orderings">Monomial Orderings</a>.</p>
 <h3 id="with_dynamicpolynomialsjl"><a href="#with_dynamicpolynomialsjl" class="header-anchor">with DynamicPolynomials.jl</a></h3>
-<p>We will compute the basis of the <code>noon-2</code> system<sup id="fnref:3"><a href="#fndef:3" class="fnref">[2]</a></sup></p>
+<p>We will compute the basis of the <code>noon-2</code> system</p>
 
 <pre><code class="julia hljs"><span class="hljs-keyword">using</span> DynamicPolynomials
 
@@ -142,30 +142,12 @@ groebner(system)</code></pre><pre><code class="plaintext hljs">3-element Vector{
 <h2 id="contacts"><a href="#contacts" class="header-anchor">Contacts</a></h2>
 <p>This library is maintained by Alexander Demin &#40;<a href="mailto:asdemin_2@edu.hse.ru">asdemin_2@edu.hse.ru</a>&#41;.</p>
 <h2 id="acknowledgement"><a href="#acknowledgement" class="header-anchor">Acknowledgement</a></h2>
-<p>We would like to acknowledge Jérémy Berthomieu, Christian Eder, and Mohab Safey El Din as this library is inspired by their work &quot;msolve: A Library for Solving Polynomial Systems&quot;<sup id="fnref:2"><a href="#fndef:2" class="fnref">[3]</a></sup>. We are also grateful to The Max Planck Institute for Informatics and The MAX team at l&#39;X for providing computational resources.</p>
-<p>Special thanks goes to Vladimir Kuznetsov for providing the sources of his F4 implementation.</p>
-<p><table class="fndef" id="fndef:1">
-    <tr>
-        <td class="fndef-backref"><a href="#fnref:1">[1]</a></td>
-        <td class="fndef-content"><a href="https://www-polsys.lip6.fr/~jcf/Papers/F99a.pdf">https://www-polsys.lip6.fr/~jcf/Papers/F99a.pdf</a></td>
-    </tr>
-</table>
-<table class="fndef" id="fndef:3">
-    <tr>
-        <td class="fndef-backref"><a href="#fnref:3">[2]</a></td>
-        <td class="fndef-content"><a href="https://www.jstor.org/stable/2101937">https://www.jstor.org/stable/2101937</a></td>
-    </tr>
-</table>
-<table class="fndef" id="fndef:2">
-    <tr>
-        <td class="fndef-backref"><a href="#fnref:2">[3]</a></td>
-        <td class="fndef-content"><a href="https://msolve.lip6.fr/">https://msolve.lip6.fr/</a></td>
-    </tr>
-</table>
-</p>
+<p>We would like to acknowledge the developers of the msolve library &#40;<a href="https://msolve.lip6.fr/">https://msolve.lip6.fr/</a>&#41;, as several components of Groebner.jl were adapted from msolve. In our F4 implementation, we adapt and adjust the code of monomial hashtable, critical pair handling and symbolic preprocessing, and linear algebra from msolve. The source code of msolve is available at <a href="https://github.com/algebraic-solving/msolve">https://github.com/algebraic-solving/msolve</a>.</p>
+<p>We thank Vladimir Kuznetsov for helpful discussions and providing the sources of his F4 implementation.</p>
+<p>We are grateful to The Max Planck Institute for Informatics and The MAX team at l&#39;X for providing computational resources.</p>
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: January 01, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: January 02, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
