@@ -1,1 +1,1 @@
-nothing
+p^2*n*d*q^4

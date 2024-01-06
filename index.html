@@ -113,15 +113,18 @@ polys = [x^<span class="hljs-number">2</span> + y + z, x*y + z];</code></pre>
 <p>and compute the Groebner basis with the <code>groebner</code> command</p>
 <pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner
 
-basis = groebner(polys)</code></pre><pre><code class="plaintext hljs">Failed to precompile Groebner [0b43b601-686d-58a3-8a1c-6623616c7cd4] to &quot;/home/runner/.julia/compiled/v1.10/Groebner/jl_UXh1qm&quot;.
-</code></pre>
+basis = groebner(polys)</code></pre><pre><code class="plaintext hljs">4-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
+ y^3 + y^2*z + z^2
+ x*z + 2147483646*y^2 + 2147483646*y*z
+ x*y + z
+ x^2 + y + z</code></pre>
 <p>We can check if a set of polynomials forms a basis</p>
-<pre><code class="julia hljs">isgroebner(basis)</code></pre><pre><code class="plaintext hljs">UndefVarError: `isgroebner` not defined
-</code></pre>
+<pre><code class="julia hljs">isgroebner(basis)</code></pre><pre><code class="plaintext hljs">true</code></pre>
 <p>Groebner.jl also provides several monomial orderings.  For example, we can eliminate <code>z</code> from the above system:</p>
 <pre><code class="julia hljs">ordering = Lex(z) * DegRevLex(x, y)  <span class="hljs-comment"># z &gt; x, y</span>
-groebner(polys, ordering=ordering)</code></pre><pre><code class="plaintext hljs">UndefVarError: `Lex` not defined
-</code></pre>
+groebner(polys, ordering=ordering)</code></pre><pre><code class="plaintext hljs">2-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
+ x^2 + 2147483646*x*y + y
+ x*y + z</code></pre>
 <p>You can find more information on monomial orderings in Groebner.jl in <a href="interface/#monomial_orderings">Monomial Orderings</a>.</p>
 <h3 id="with_dynamicpolynomialsjl"><a href="#with_dynamicpolynomialsjl" class="header-anchor">with DynamicPolynomials.jl</a></h3>
 <p>We will compute the basis of the <code>noon-2</code> system</p>
@@ -132,8 +135,10 @@ groebner(polys, ordering=ordering)</code></pre><pre><code class="plaintext hljs"
 system = [<span class="hljs-number">10</span>*x1*x2^<span class="hljs-number">2</span> - <span class="hljs-number">11</span>*x1 + <span class="hljs-number">10</span>,
         <span class="hljs-number">10</span>*x1^<span class="hljs-number">2</span>*x2 - <span class="hljs-number">11</span>*x2 + <span class="hljs-number">10</span>]
 
-groebner(system)</code></pre><pre><code class="plaintext hljs">UndefVarError: `groebner` not defined
-</code></pre>
+groebner(system)</code></pre><pre><code class="plaintext hljs">3-element Vector{DynamicPolynomials.Polynomial{DynamicPolynomials.Commutative{DynamicPolynomials.CreationOrder}, MultivariatePolynomials.Graded{MultivariatePolynomials.LexOrder}, Int64}}:
+ 10x2 - 10x1 - 11x2² + 11x1²
+ 110 - 121x2 - 100x2² + 100x1x2 + 110x2³
+ 10 - 11x1 + 10x1x2²</code></pre>
 <h2 id="contacts"><a href="#contacts" class="header-anchor">Contacts</a></h2>
 <p>This library is maintained by Alexander Demin &#40;<a href="mailto:asdemin_2@edu.hse.ru">asdemin_2@edu.hse.ru</a>&#41;.</p>
 <h2 id="acknowledgement"><a href="#acknowledgement" class="header-anchor">Acknowledgement</a></h2>
