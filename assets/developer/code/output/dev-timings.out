@@ -1,42 +1,42 @@
  --------------------------------------------------------------------------------
           Groebner.jl                   Time                    Allocations      
                                -----------------------   ------------------------
-       Tot / % measured:           89.3ms /   0.2%           6.03MiB /   8.8%    
+       Tot / % measured:           92.7ms /   0.2%           6.03MiB /   8.8%    
 
  Section               ncalls     time    %tot     avg     alloc    %tot      avg
  --------------------------------------------------------------------------------
- _groebner                  1    124μs   61.1%   124μs    494KiB   91.4%   494KiB
-   f4!                      1   94.5μs   46.6%  94.5μs   38.0KiB    7.0%  38.0KiB
-     f4_reduction!          3   25.7μs   12.7%  8.57μs   8.02KiB    1.5%  2.67KiB
-       linalg_inter...      3   6.56μs    3.2%  2.19μs   1.34KiB    0.2%     459B
-     f4_select_crit...      3   17.4μs    8.6%  5.79μs   4.33KiB    0.8%  1.44KiB
-       matrix_trans...     10   2.96μs    1.5%   296ns   1.72KiB    0.3%     176B
-     f4_update!             4   6.89μs    3.4%  1.72μs   2.30KiB    0.4%     588B
-       pairset_update!      5   3.74μs    1.8%   748ns      800B    0.1%     160B
-       basis_update!        4    431ns    0.2%   108ns     0.00B    0.0%    0.00B
-     f4_symbolic_pr...      4   5.14μs    2.5%  1.28μs   2.34KiB    0.4%     600B
-       matrix_trans...      3    460ns    0.2%   153ns      272B    0.0%    90.7B
-     linalg_interre...      1   2.69μs    1.3%  2.69μs   1.36KiB    0.3%  1.36KiB
-     basis_standard...      1   1.96μs    1.0%  1.96μs   1.17KiB    0.2%  1.17KiB
-       basis_normal...      1    510ns    0.3%   510ns     96.0B    0.0%    96.0B
-     hashtable_init...      2   1.17μs    0.6%   586ns   4.34KiB    0.8%  2.17KiB
+ _groebner                  1    137μs   66.1%   137μs    494KiB   91.4%   494KiB
+   f4!                      1    104μs   50.6%   104μs   38.0KiB    7.0%  38.0KiB
+     f4_reduction!          3   28.0μs   13.6%  9.33μs   8.02KiB    1.5%  2.67KiB
+       linalg_inter...      3   8.21μs    4.0%  2.74μs   1.34KiB    0.2%     459B
+     f4_select_crit...      3   18.1μs    8.8%  6.04μs   4.33KiB    0.8%  1.44KiB
+       matrix_trans...     10   2.81μs    1.4%   281ns   1.72KiB    0.3%     176B
+     f4_update!             4   7.50μs    3.6%  1.88μs   2.30KiB    0.4%     588B
+       pairset_update!      5   3.56μs    1.7%   712ns      800B    0.1%     160B
+       basis_update!        4    403ns    0.2%   101ns     0.00B    0.0%    0.00B
+     f4_symbolic_pr...      4   5.17μs    2.5%  1.29μs   2.34KiB    0.4%     600B
+       matrix_trans...      3    480ns    0.2%   160ns      272B    0.0%    90.7B
+     linalg_interre...      1   4.64μs    2.2%  4.64μs   1.36KiB    0.3%  1.36KiB
+     basis_standard...      1   1.98μs    1.0%  1.98μs   1.17KiB    0.2%  1.17KiB
+       basis_normal...      1    431ns    0.2%   431ns     96.0B    0.0%    96.0B
+     matrix_initialize      1   1.50μs    0.7%  1.50μs   1.08KiB    0.2%  1.08KiB
+     hashtable_init...      2   1.21μs    0.6%   606ns   4.34KiB    0.8%  2.17KiB
      matrix_transfo...      4   1.15μs    0.6%   288ns      896B    0.2%     224B
-     matrix_initialize      1   1.14μs    0.6%  1.14μs   1.08KiB    0.2%  1.08KiB
-     basis_normalize!       1    381ns    0.2%   381ns     96.0B    0.0%    96.0B
-   f4_initialize_st...      1   24.0μs   11.9%  24.0μs    453KiB   83.8%   453KiB
-     basis_normalize!       1   1.20μs    0.6%  1.20μs     96.0B    0.0%    96.0B
-   basis_export_data        1    691ns    0.3%   691ns      416B    0.1%     416B
- io_convert_to_inte...      1   43.1μs   21.3%  43.1μs   4.25KiB    0.8%  4.25KiB
- io_convert_to_output       1   20.7μs   10.2%  20.7μs   1.50KiB    0.3%  1.50KiB
- f4_initialize_structs      1   7.67μs    3.8%  7.67μs   33.5KiB    6.2%  33.5KiB
-   basis_normalize!         1    460ns    0.2%   460ns     96.0B    0.0%    96.0B
- linalg_interreduce...      1   1.99μs    1.0%  1.99μs   1.08KiB    0.2%  1.08KiB
- basis_standardize!         1   1.60μs    0.8%  1.60μs   1.16KiB    0.2%  1.16KiB
-   basis_normalize!         1    271ns    0.1%   271ns     96.0B    0.0%    96.0B
- matrix_transform_p...      3    991ns    0.5%   330ns      672B    0.1%     224B
- f4_symbolic_prepro...      1    772ns    0.4%   772ns      960B    0.2%     960B
- matrix_initialize          1    771ns    0.4%   771ns   1.08KiB    0.2%  1.08KiB
- hashtable_initiali...      1    621ns    0.3%   621ns   2.16KiB    0.4%  2.16KiB
- basis_export_data          1    421ns    0.2%   421ns      352B    0.1%     352B
+     basis_normalize!       1    401ns    0.2%   401ns     96.0B    0.0%    96.0B
+   f4_initialize_st...      1   26.4μs   12.8%  26.4μs    453KiB   83.8%   453KiB
+     basis_normalize!       1   2.01μs    1.0%  2.01μs     96.0B    0.0%    96.0B
+   basis_export_data        1    772ns    0.4%   772ns      416B    0.1%     416B
+ io_convert_to_inte...      1   46.7μs   22.6%  46.7μs   4.25KiB    0.8%  4.25KiB
+ f4_initialize_structs      1   9.40μs    4.6%  9.40μs   33.5KiB    6.2%  33.5KiB
+   basis_normalize!         1    511ns    0.2%   511ns     96.0B    0.0%    96.0B
+ io_convert_to_output       1   4.59μs    2.2%  4.59μs   1.50KiB    0.3%  1.50KiB
+ linalg_interreduce...      1   2.48μs    1.2%  2.48μs   1.08KiB    0.2%  1.08KiB
+ basis_standardize!         1   2.12μs    1.0%  2.12μs   1.16KiB    0.2%  1.16KiB
+   basis_normalize!         1    480ns    0.2%   480ns     96.0B    0.0%    96.0B
+ f4_symbolic_prepro...      1   1.34μs    0.7%  1.34μs      960B    0.2%     960B
+ matrix_transform_p...      3   1.24μs    0.6%   414ns      672B    0.1%     224B
+ matrix_initialize          1    791ns    0.4%   791ns   1.08KiB    0.2%  1.08KiB
+ hashtable_initiali...      1    561ns    0.3%   561ns   2.16KiB    0.4%  2.16KiB
+ basis_export_data          1    561ns    0.3%   561ns      352B    0.1%     352B
  basis_update!              1    130ns    0.1%   130ns     0.00B    0.0%    0.00B
  --------------------------------------------------------------------------------
