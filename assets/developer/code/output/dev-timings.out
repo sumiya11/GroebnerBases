@@ -1,44 +1,44 @@
  --------------------------------------------------------------------------------
           Groebner.jl                   Time                    Allocations      
                                -----------------------   ------------------------
-       Tot / % measured:           98.0ms /   0.2%           5.97MiB /   8.8%    
+       Tot / % measured:           94.1ms /   0.2%           5.97MiB /   8.8%    
 
  Section               ncalls     time    %tot     avg     alloc    %tot      avg
  --------------------------------------------------------------------------------
- _groebner2                 1    131μs   65.1%   131μs    493KiB   91.5%   493KiB
-   f4!                      1   88.7μs   44.1%  88.7μs   37.0KiB    6.9%  37.0KiB
-     f4_reduction!          3   24.9μs   12.4%  8.31μs   8.73KiB    1.6%  2.91KiB
-       linalg_main!         3   20.2μs   10.1%  6.74μs   6.62KiB    1.2%  2.21KiB
-         linalg_int...      3   1.94μs    1.0%   648ns      976B    0.2%     325B
-       matrix_fill_...      3   1.58μs    0.8%   528ns      256B    0.0%    85.3B
-     f4_update!             4   7.61μs    3.8%  1.90μs   2.30KiB    0.4%     588B
-       pairset_update!      5   4.12μs    2.0%   824ns      800B    0.1%     160B
-       basis_update!        4    380ns    0.2%  95.0ns     0.00B    0.0%    0.00B
-     f4_symbolic_pr...      4   5.92μs    2.9%  1.48μs   2.34KiB    0.4%     600B
-       matrix_trans...      3    471ns    0.2%   157ns      272B    0.0%    90.7B
-     matrix_transfo...     14   4.45μs    2.2%   318ns   2.59KiB    0.5%     190B
-     hashtable_init...      2   1.97μs    1.0%   987ns   4.34KiB    0.8%  2.17KiB
-     basis_standard...      1   1.92μs    1.0%  1.92μs   1.17KiB    0.2%  1.17KiB
-       basis_normal...      1    421ns    0.2%   421ns     96.0B    0.0%    96.0B
-     linalg_interre...      1   1.61μs    0.8%  1.61μs   1.12KiB    0.2%  1.12KiB
-     matrix_initialize      1   1.25μs    0.6%  1.25μs   1.08KiB    0.2%  1.08KiB
-     matrix_fill_co...      1    611ns    0.3%   611ns     96.0B    0.0%    96.0B
-     basis_normalize!       1    381ns    0.2%   381ns     96.0B    0.0%    96.0B
-   f4_initialize_st...      1   36.6μs   18.2%  36.6μs    453KiB   84.1%   453KiB
-     basis_normalize!       1   2.23μs    1.1%  2.23μs     96.0B    0.0%    96.0B
-   basis_export_data        1    681ns    0.3%   681ns      416B    0.1%     416B
- io_convert_to_inte...      1   46.3μs   23.0%  46.3μs   3.78KiB    0.7%  3.78KiB
- f4_initialize_structs      1   9.86μs    4.9%  9.86μs   33.5KiB    6.2%  33.5KiB
-   basis_normalize!         1    340ns    0.2%   340ns     96.0B    0.0%    96.0B
- io_convert_to_output       1   6.01μs    3.0%  6.01μs   1.50KiB    0.3%  1.50KiB
- basis_standardize!         1   1.64μs    0.8%  1.64μs   1.16KiB    0.2%  1.16KiB
-   basis_normalize!         1    290ns    0.1%   290ns     96.0B    0.0%    96.0B
- matrix_transform_p...      3   1.40μs    0.7%   468ns      672B    0.1%     224B
- matrix_initialize          1    912ns    0.5%   912ns   1.08KiB    0.2%  1.08KiB
- basis_export_data          1    882ns    0.4%   882ns      352B    0.1%     352B
- matrix_fill_column...      1    851ns    0.4%   851ns     80.0B    0.0%    80.0B
- f4_symbolic_prepro...      1    771ns    0.4%   771ns      960B    0.2%     960B
- linalg_interreduce...      1    742ns    0.4%   742ns      896B    0.2%     896B
- hashtable_initiali...      1    741ns    0.4%   741ns   2.16KiB    0.4%  2.16KiB
- basis_update!              1    130ns    0.1%   130ns     0.00B    0.0%    0.00B
+ _groebner2                 1    141μs   66.5%   141μs    493KiB   91.5%   493KiB
+   f4!                      1   96.9μs   45.8%  96.9μs   37.0KiB    6.9%  37.0KiB
+     f4_reduction!          3   28.1μs   13.3%  9.37μs   8.73KiB    1.6%  2.91KiB
+       linalg_main!         3   22.6μs   10.7%  7.52μs   6.62KiB    1.2%  2.21KiB
+         linalg_int...      3   1.84μs    0.9%   615ns      976B    0.2%     325B
+       matrix_fill_...      3   1.77μs    0.8%   591ns      256B    0.0%    85.3B
+     f4_update!             4   7.80μs    3.7%  1.95μs   2.30KiB    0.4%     588B
+       pairset_update!      5   4.31μs    2.0%   862ns      800B    0.1%     160B
+       basis_update!        4    410ns    0.2%   102ns     0.00B    0.0%    0.00B
+     f4_symbolic_pr...      4   5.57μs    2.6%  1.39μs   2.34KiB    0.4%     600B
+       matrix_trans...      3    500ns    0.2%   167ns      272B    0.0%    90.7B
+     matrix_transfo...     14   4.91μs    2.3%   351ns   2.59KiB    0.5%     190B
+     basis_standard...      1   2.16μs    1.0%  2.16μs   1.17KiB    0.2%  1.17KiB
+       basis_normal...      1    411ns    0.2%   411ns     96.0B    0.0%    96.0B
+     matrix_initialize      1   1.81μs    0.9%  1.81μs   1.08KiB    0.2%  1.08KiB
+     hashtable_init...      2   1.81μs    0.9%   906ns   4.34KiB    0.8%  2.17KiB
+     linalg_interre...      1   1.41μs    0.7%  1.41μs   1.12KiB    0.2%  1.12KiB
+     matrix_fill_co...      1    652ns    0.3%   652ns     96.0B    0.0%    96.0B
+     basis_normalize!       1    300ns    0.1%   300ns     96.0B    0.0%    96.0B
+   f4_initialize_st...      1   36.9μs   17.4%  36.9μs    453KiB   84.1%   453KiB
+     basis_normalize!       1   2.03μs    1.0%  2.03μs     96.0B    0.0%    96.0B
+   basis_export_data        1    871ns    0.4%   871ns      416B    0.1%     416B
+ io_convert_to_inte...      1   47.3μs   22.4%  47.3μs   3.78KiB    0.7%  3.78KiB
+ f4_initialize_structs      1   10.3μs    4.9%  10.3μs   33.5KiB    6.2%  33.5KiB
+   basis_normalize!         1    351ns    0.2%   351ns     96.0B    0.0%    96.0B
+ io_convert_to_output       1   5.22μs    2.5%  5.22μs   1.50KiB    0.3%  1.50KiB
+ basis_standardize!         1   1.61μs    0.8%  1.61μs   1.16KiB    0.2%  1.16KiB
+   basis_normalize!         1    281ns    0.1%   281ns     96.0B    0.0%    96.0B
+ matrix_transform_p...      3   1.35μs    0.6%   451ns      672B    0.1%     224B
+ linalg_interreduce...      1   1.06μs    0.5%  1.06μs      896B    0.2%     896B
+ hashtable_initiali...      1    992ns    0.5%   992ns   2.16KiB    0.4%  2.16KiB
+ matrix_fill_column...      1    882ns    0.4%   882ns     80.0B    0.0%    80.0B
+ matrix_initialize          1    772ns    0.4%   772ns   1.08KiB    0.2%  1.08KiB
+ f4_symbolic_prepro...      1    772ns    0.4%   772ns      960B    0.2%     960B
+ basis_export_data          1    491ns    0.2%   491ns      352B    0.1%     352B
+ basis_update!              1    140ns    0.1%   140ns     0.00B    0.0%    0.00B
  --------------------------------------------------------------------------------
