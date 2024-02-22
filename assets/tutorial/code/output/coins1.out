@@ -1,8 +1,0 @@
-MethodError: no method matching polynomial_ring_only(::AbstractAlgebra.Rationals{BigInt}, ::Vector{Symbol}; ordering::Symbol)
-
-Closest candidates are:
-  polynomial_ring_only(::T, ::Vector{Symbol}; internal_ordering, cached) where T<:AbstractAlgebra.Ring got unsupported keyword argument "ordering"
-   @ AbstractAlgebra ~/.julia/packages/AbstractAlgebra/WN9Mu/src/MPoly.jl:1462
-  polynomial_ring_only(::T, !Matched::Symbol; cached) where T<:AbstractAlgebra.NCRing got unsupported keyword argument "ordering"
-   @ AbstractAlgebra ~/.julia/packages/AbstractAlgebra/WN9Mu/src/NCPoly.jl:750
-

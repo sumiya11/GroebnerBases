@@ -1,2 +1,1 @@
-LoadError: UndefVarError: `@btime` not defined
-in expression starting at none:1
+  66.825 μs (939 allocations: 58.41 KiB)

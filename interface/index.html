@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/Groebner.jl/libs/katex/katex.min.css">
+     
+   <link rel="stylesheet" href="/Groebner.jl/libs/highlight/github.min.css">
+   
+  <link rel="stylesheet" href="/Groebner.jl/css/franklin.css">
+<link rel="stylesheet" href="/Groebner.jl/css/poole_hyde.css">
+<link rel="stylesheet" href="/Groebner.jl/css/custom.css">
+<!-- style adjustments -->
+<style>
+  html {font-size: 17px;}
+  .franklin-content {position: relative; padding-left: 8%; padding-right: 5%;}
+  @media (min-width: 940px) {
+    .franklin-content {width: 100%; margin-left: auto; margin-right: auto;}
+  }
+  @media (max-width: 768px) {
+    .franklin-content {padding-left: 6%; padding-right: 6%;}
+  }
+</style>
+<link rel="icon" href="/Groebner.jl/assets/favicon.png">
+
+   <title>Groebner.jl — Interface</title>  
+</head>
+<body>
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1 class="sidebar-title"><a href="/Groebner.jl/">Groebner<span style="opacity:0.4">.jl</span></a></h1>
+      <br>
+    </div>
+    <style>
+      @media (min-width: 768px) {
+        .sidebar-nav {}
+      }
+
+      .sidebar .container.sidebar-sticky {
+        top: 4rem;
+      }
+
+      .sidebar-nav .sidebar-nav-item.active {
+        box-sizing: border-box;
+        border-bottom: 1px #f1f1f1 solid;
+        margin-right: -1em;
+        margin-left: -0.5em;
+        padding-left: 0.5em;
+        color: white;
+        font-weight: normal !important;
+      }
+
+      .sidebar-nav .sidebar-nav-item {
+        color: #cccccc;
+        margin: 0.25em 0;
+      }
+    </style>
+    <nav class="sidebar-nav" style="opacity: 0.9">
+      <a class="sidebar-nav-item " href="/Groebner.jl/">Home</a>
+      <!-- <a class="sidebar-nav-item {{ispage tutorial.html}}active{{end}}" href="/Groebner.jl/tutorial/">Tutorials</a> -->
+      <li class="sidebar-nav-item "><a href="/Groebner.jl/tutorial/">Introductory tutorial</a>
+        <!-- <ul class="menu-list-child-list ">
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#introduction" class="menu-list-link">Introduction</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#gcd_rref" class="menu-list-link">Gcd & Rref</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#variable_elimination" class="menu-list-link">Variable Elimination</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#curve_implicitization" class="menu-list-link">Curve Implicitization</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#system_solving" class="menu-list-link">System Solving</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#integer_programming" class="menu-list-link">Integer Programming</a>
+				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#graph_coloring" class="menu-list-link">Graph Coloring</a>
+				<li class="menu-list-item {{ispage index.html}}active{{end}}"><a href="/Groebner.jl/tutorial/" class="menu-list-link">Page structure</a>
+			  </ul> -->
+        <a class="sidebar-nav-item active" href="/Groebner.jl/interface/">Interface</a>
+        <ul class="menu-list-child-list ">
+          <li class="menu-list-item active"><a href="/Groebner.jl/interface/#exported_functions"
+              class="menu-list-link">Exported functions</a>
+          <li class="menu-list-item active"><a href="/Groebner.jl/interface/#monomial_orderings"
+              class="menu-list-link">Monomial orderings</a>
+          <li class="menu-list-item active"><a href="/Groebner.jl/interface/#learn_and_apply"
+              class="menu-list-link">Learn and Apply</a>
+        </ul>
+      <li class="sidebar-nav-item "><a href="/Groebner.jl/developer/">Development</a>
+    </nav>
+
+  </div>
+  <div style="font-size: 0.85em; bottom: 3em; position: fixed">
+    <a href="https://github.com/sumiya11/Groebner.jl">Go to GitHub repository &rarr;</a> <br> <br>
+
+    <a href="https://julialang.org/"><img
+        src="https://raw.githubusercontent.com/JuliaLang/julia-logo-graphics/master/images/julia-logo-dark.svg"
+        height="32" style="display: inline-block; margin-bottom: -8px; opacity: 0.7">
+      powered.</a>
+  </div>
+</div>
+<div class="content container">
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="interface"><a href="#interface" class="header-anchor">Interface</a></h1>
+<h2 id="exported_functions"><a href="#exported_functions" class="header-anchor">Exported functions</a></h2>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="groebner">
+        <a href="#groebner">groebner</a>
+        <div class="doc-type">fn</div></h2>
+      <div class="doc-content"><pre><code class="julia hljs">groebner(polynomials; options...)</code></pre>
+<p>Computes a Groebner basis of <code>polynomials</code>.</p>
+<p>The <code>polynomials</code> must be an array of polynomials from <code>AbstractAlgebra.jl</code>, <code>Nemo.jl</code>, or <code>DynamicPolynomials.jl</code>. For <code>AbstractAlgebra.jl</code> and <code>Nemo.jl</code>, the coefficients of polynomials must be either in <code>GF&#40;p&#41;</code> or in <code>QQ</code>.</p>
+<p>This function is thread-safe. Groebner.jl may also use multi-threading internally. See the option <code>threaded</code> below.</p>
+<h2 id="possible_options"><a href="#possible_options" class="header-anchor">Possible Options</a></h2>
+<p>The <code>groebner</code> routine takes the following optional arguments:</p>
+<ul>
+<li><p><code>reduced</code>: If the returned basis must be autoreduced and unique &#40;default is <code>true</code>&#41;.</p>
+</li>
+<li><p><code>ordering</code>: Specifies the monomial ordering. Available monomial orderings are: </p>
+<ul>
+<li><p><code>InputOrdering&#40;&#41;</code> for inferring the ordering from the given <code>polynomials</code> &#40;default&#41;,</p>
+</li>
+<li><p><code>Lex&#40;args...&#41;</code> for lexicographic,</p>
+</li>
+<li><p><code>DegLex&#40;args...&#41;</code> for degree lexicographic,</p>
+</li>
+<li><p><code>DegRevLex&#40;args...&#41;</code> for degree reverse lexicographic,</p>
+</li>
+<li><p><code>WeightedOrdering&#40;args...&#41;</code> for weighted ordering,</p>
+</li>
+<li><p><code>ProductOrdering&#40;args...&#41;</code> for block ordering,</p>
+</li>
+<li><p><code>MatrixOrdering&#40;args...&#41;</code> for matrix ordering. For details and examples</p>
+</li>
+</ul>
+<p>see the corresponding documentation page.</p>
+</li>
+<li><p><code>certify</code>: Certify the obtained basis. When this option is <code>false</code>, the   algorithm is randomized, and the result is correct with high probability.   When this option is <code>true</code>, the result is guaranteed to be correct in case   the ideal is homogeneous &#40;default is <code>false</code>&#41;.</p>
+</li>
+<li><p><code>linalg</code>: Linear algebra backend. Available options are: </p>
+<ul>
+<li><p><code>:auto</code> for the automatic choice &#40;default&#41;,</p>
+</li>
+<li><p><code>:deterministic</code> for deterministic sparse linear algebra,</p>
+</li>
+<li><p><code>:randomized</code> for probabilistic sparse linear algebra.</p>
+</li>
+</ul>
+</li>
+<li><p><code>threaded</code>: The use of multi-threading. Available options are: </p>
+<ul>
+<li><p><code>:auto</code> for the automatic choice &#40;default&#41;,</p>
+</li>
+<li><p><code>:no</code> never use multi-threading,</p>
+</li>
+<li><p><code>:yes</code> allow the use of multi-threading.</p>
+</li>
+</ul>
+<p>Additionally, you can set the environment variable <code>GROEBNER_NO_THREADED</code> to   <code>1</code> to disable all multi-threading in Groebner.jl. In this case, the   environment variable takes precedence over the <code>threaded</code> option.</p>
+</li>
+<li><p><code>monoms</code>: Monomial representation used in the computations. The algorithm   tries to automatically choose the most suitable monomial representation.   Otherwise, set <code>monoms</code> to one of the following: </p>
+<ul>
+<li><p><code>:auto</code> for the automatic choice &#40;default&#41;,</p>
+</li>
+<li><p><code>:dense</code> for classic dense exponent vectors,</p>
+</li>
+<li><p><code>:packed</code> for packed representation,</p>
+</li>
+<li><p><code>:sparse</code> for sparse representation.</p>
+</li>
+</ul>
+</li>
+<li><p><code>modular</code>: Modular computation algorithm. Only has effect when computing basis   over the rational numbers. Possible options are:</p>
+<ul>
+<li><p><code>:auto</code> for the automatic choice &#40;default&#41;,</p>
+</li>
+<li><p><code>:classic_modular</code> for the classic multi-modular algorithm,</p>
+</li>
+<li><p><code>:learn_and_apply</code> for the learn &amp; apply algorithm.</p>
+</li>
+</ul>
+</li>
+<li><p><code>seed</code>: The seed for randomization. Default value is <code>42</code>. Groebner uses <code>Random.Xoshiro</code> and <code>Random.MersenneTwister</code> for random number generation.</p>
+</li>
+<li><p><code>loglevel</code>: Logging level, an integer. Higher values mean less verbose.   Default value is <code>0</code>, which means that only warnings are printed. Set <code>loglevel</code> to negative values, e.g., to <code>-3</code>, for debugging.</p>
+</li>
+<li><p><code>maxpairs</code>: The maximum number of critical pairs used at once in matrix   construction in the F4 algorithm. By default, this is not specified. Tweak   this option to try to lower the amount of RAM consumed.</p>
+</li>
+<li><p><code>homogenize</code>: Controls the use of homogenization in the algorithm. Possible options are:</p>
+<ul>
+<li><p><code>:yes</code>, always homogenize the input ideal,</p>
+</li>
+<li><p><code>:no</code>, never homogenize the input ideal,</p>
+</li>
+<li><p><code>:auto</code>, for the automatic choice &#40;default&#41;.</p>
+</li>
+</ul>
+</li>
+<li><p><code>statistics</code>: After the function exits, print some runtime statistics. Possible options are:</p>
+<ul>
+<li><p><code>:no</code>, print nothing &#40;default&#41;,</p>
+</li>
+<li><p><code>:timings</code>, print the table with timings and allocations. Note that <code>Groebner.performance_counters_enabled&#40;&#41;</code> must be set to <code>true</code> for this to have effect.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="example"><a href="#example" class="header-anchor">Example</a></h2>
+<p>Using <code>DynamicPolynomials</code>:</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, DynamicPolynomials
+<span class="hljs-meta">@polyvar</span> x y
+groebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])</code></pre>
+<p>Using <code>AbstractAlgebra</code>:</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
+groebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])</code></pre>
+<p>Or, say, in another monomial ordering:</p>
+<pre><code class="julia hljs">groebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y], ordering=Lex(y, x))</code></pre>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="isgroebner">
+        <a href="#isgroebner">isgroebner</a>
+        <div class="doc-type">fn</div></h2>
+      <div class="doc-content"><pre><code class="julia hljs">isgroebner(polynomials; options...)</code></pre>
+<p>Checks if <code>polynomials</code> forms a Groebner basis.</p>
+<h2 id="possible_options__2"><a href="#possible_options__2" class="header-anchor">Possible Options</a></h2>
+<p>The <code>isgroebner</code> routine takes the following optional arguments:</p>
+<ul>
+<li><p><code>ordering</code>: Specifies the monomial ordering. Available monomial orderings are: </p>
+<ul>
+<li><p><code>InputOrdering&#40;&#41;</code> for inferring the ordering from the given <code>polynomials</code> &#40;default&#41;,</p>
+</li>
+<li><p><code>Lex&#40;&#41;</code> for lexicographic,</p>
+</li>
+<li><p><code>DegLex&#40;&#41;</code> for degree lexicographic,</p>
+</li>
+<li><p><code>DegRevLex&#40;&#41;</code> for degree reverse lexicographic,</p>
+</li>
+<li><p><code>WeightedOrdering&#40;weights&#41;</code> for weighted ordering,</p>
+</li>
+<li><p><code>ProductOrdering&#40;args...&#41;</code> for block ordering,</p>
+</li>
+<li><p><code>MatrixOrdering&#40;matrix&#41;</code> for matrix ordering.</p>
+</li>
+</ul>
+<p>For details and examples see the corresponding documentation page.</p>
+</li>
+<li><p><code>certify</code>: Use deterministic algorithm &#40;default is <code>false</code>&#41;.</p>
+</li>
+<li><p><code>seed</code>: The seed for randomization. Default value is <code>42</code>. Groebner uses <code>Random.Xoshiro</code> and <code>Random.MersenneTwister</code> for random number generation.</p>
+</li>
+<li><p><code>loglevel</code>: Logging level, an integer. Higher values mean less verbose.   Default value is <code>0</code>, which means that only warnings are printed. Set <code>loglevel</code> to negative values, e.g., <code>-1</code>, for debugging.</p>
+</li>
+<li><p><code>statistics</code>: After the function exits, print some runtime statistics.   Possible options are:</p>
+<ul>
+<li><p><code>:no</code>, do not print anything &#40;default&#41;,</p>
+</li>
+<li><p><code>:timings</code>, print the table with timings and allocations. Note that <code>Groebner.performance_counters_enabled&#40;&#41;</code> must be set to <code>true</code> for this to have effect.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="example__2"><a href="#example__2" class="header-anchor">Example</a></h2>
+<p>Using <code>DynamicPolynomials</code>:</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, DynamicPolynomials
+<span class="hljs-meta">@polyvar</span> x y;
+isgroebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])</code></pre>
+<p>Using <code>AbstractAlgebra</code>:</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
+isgroebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])</code></pre>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="normalform">
+        <a href="#normalform">normalform</a>
+        <div class="doc-type">fn</div></h2>
+      <div class="doc-content"><pre><code class="julia hljs">normalform(basis, tobereduced; options...)</code></pre>
+<p>Computes the normal form of polynomials <code>tobereduced</code> w.r.t <code>basis</code>. <code>tobereduced</code> can be either a single polynomial or an array of polynomials.</p>
+<h2 id="possible_options__3"><a href="#possible_options__3" class="header-anchor">Possible Options</a></h2>
+<p>The <code>normalform</code> routine takes the following optional arguments:</p>
+<ul>
+<li><p><code>check</code>: Check if the given array <code>basis</code> forms a Groebner basis &#40;default is <code>false</code>&#41;.</p>
+</li>
+<li><p><code>ordering</code>: Specifies the monomial ordering. Available monomial orderings are: </p>
+<ul>
+<li><p><code>InputOrdering&#40;&#41;</code> for inferring the ordering from the given <code>polynomials</code> &#40;default&#41;,</p>
+</li>
+<li><p><code>Lex&#40;&#41;</code> for lexicographic,</p>
+</li>
+<li><p><code>DegLex&#40;&#41;</code> for degree lexicographic,</p>
+</li>
+<li><p><code>DegRevLex&#40;&#41;</code> for degree reverse lexicographic,</p>
+</li>
+<li><p><code>WeightedOrdering&#40;weights&#41;</code> for weighted ordering,</p>
+</li>
+<li><p><code>ProductOrdering&#40;args...&#41;</code> for block ordering,</p>
+</li>
+<li><p><code>MatrixOrdering&#40;matrix&#41;</code> for matrix ordering.</p>
+</li>
+</ul>
+<p>For details and examples see the corresponding documentation page.</p>
+</li>
+<li><p><code>loglevel</code>: Logging level, an integer. Higher values mean less verbose. Default value is <code>0</code>, which means that only warnings are printed. Set <code>loglevel</code> to negative values, e.g., <code>-1</code>, for debugging.</p>
+</li>
+<li><p><code>statistics</code>: After the function exits, print some runtime statistics. Possible options are:</p>
+<ul>
+<li><p><code>:no</code>, do not print anything &#40;default&#41;,</p>
+</li>
+<li><p><code>:timings</code>, print the table with timings and allocations. Note that <code>Groebner.performance_counters_enabled&#40;&#41;</code> must be set to <code>true</code> for this to have effect.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="example__3"><a href="#example__3" class="header-anchor">Example</a></h2>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, DynamicPolynomials
+<span class="hljs-meta">@polyvar</span> x y;
+normalform([y^<span class="hljs-number">2</span> + x, x^<span class="hljs-number">2</span> + y], x^<span class="hljs-number">2</span> + y^<span class="hljs-number">2</span> + <span class="hljs-number">1</span>)</code></pre>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="kbase">
+        <a href="#kbase">kbase</a>
+        <div class="doc-type">fn</div></h2>
+      <div class="doc-content"><pre><code class="julia hljs">kbase(basis; options...)</code></pre>
+<p>Computes the basis of the quotient ideal of <code>basis</code> as a vector space.</p>
+<h2 id="possible_options__4"><a href="#possible_options__4" class="header-anchor">Possible Options</a></h2>
+<p>The <code>kbase</code> routine takes the following optional arguments:</p>
+<ul>
+<li><p><code>check</code>: Check if the given array <code>basis</code> forms a Groebner basis &#40;default is <code>false</code>&#41;.</p>
+</li>
+<li><p><code>loglevel</code>: Logging level, an integer. Higher values mean less verbose.   Default value is <code>0</code>, which means that only warnings are printed. Set <code>loglevel</code> to negative values, e.g., <code>-1</code>, for debugging.</p>
+</li>
+<li><p><code>statistics</code>: After the function exits, print some runtime statistics.   Possible options are:</p>
+<ul>
+<li><p><code>:no</code>, do not print anything &#40;default&#41;,</p>
+</li>
+<li><p><code>:timings</code>, print the table with timings and allocations. Note that <code>Groebner.performance_counters_enabled&#40;&#41;</code> must be set to <code>true</code> for this to have effect.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="example__4"><a href="#example__4" class="header-anchor">Example</a></h2>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, DynamicPolynomials
+<span class="hljs-meta">@polyvar</span> x y;
+kbase([y^<span class="hljs-number">2</span> + x, x^<span class="hljs-number">2</span> + y])</code></pre>
+</div>
+  </div>
+
+<h2 id="monomial_orderings"><a href="#monomial_orderings" class="header-anchor">Monomial orderings</a></h2>
+<p>A list of all monomial orderings supported by Groebner.jl. An ordering can be set by passing it with the keyword argument <code>ordering</code>. See below for some examples.</p>
+<div class="note"><div class="title">⚠ Note</div>
+<div class="content">Some frontends, for example, AbstractAlgebra.jl, may not support weighted/product/matrix orderings from Groebner.jl. In such cases, the basis is computed in the ordering requested by user, but the terms of polynomials in the output are ordered w.r.t. some other ordering that is supported by the frontend.</div></div>
+  <div class="docstring">
+      <h2 class="doc-header" id="Lex">
+        <a href="#Lex">Lex</a>
+        <div class="doc-type"></div></h2>
+      <div class="doc-content"><pre><code class="julia hljs">Lex()
+Lex(variables)
+Lex(variables...)</code></pre>
+<p>Lexicographical monomial ordering.</p>
+<p>We use the definition from Chapter 1, Computational Commutative Algebra 1, by Martin Kreuzer, Lorenzo Robbiano. </p>
+<p>DOI: https://doi.org/10.1007/978-3-540-70628-1.</p>
+<p><em>Dura Lex, sed Lex.</em></p>
+<h2 id="possible_options__5"><a href="#possible_options__5" class="header-anchor">Possible Options</a></h2>
+<ul>
+<li><p><code>compile</code>: If <code>true</code>, compiles and uses a specialized monomial comparator function, which may speed up the runtime &#40;default is <code>false</code>&#41;. This option is experimental.</p>
+</li>
+</ul>
+<h2 id="example__5"><a href="#example__5" class="header-anchor">Example</a></h2>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>];
+
+<span class="hljs-comment"># Lexicographical ordering with x &gt; y</span>
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>], ordering=Lex())
+
+<span class="hljs-comment"># Lexicographical ordering with y &gt; x</span>
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>], ordering=Lex([y, x]))
+
+<span class="hljs-comment"># Lexicographical ordering with x &gt; y</span>
+<span class="hljs-comment"># Note that both syntax -- Lex([...]) and Lex(...) -- are allowed</span>
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>], ordering=Lex(x, y))</code></pre>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="DegLex">
+        <a href="#DegLex">DegLex</a>
+        <div class="doc-type"></div></h2>
+      <div class="doc-content"><pre><code class="julia hljs">DegLex()
+DegLex(variables)
+DegLex(variables...)</code></pre>
+<p>Degree lexicographical monomial ordering.</p>
+<p>We use the definition from Chapter 1, Computational Commutative Algebra 1, by Martin Kreuzer, Lorenzo Robbiano. </p>
+<p>DOI: https://doi.org/10.1007/978-3-540-70628-1.</p>
+<h2 id="example__6"><a href="#example__6" class="header-anchor">Example</a></h2>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>];
+
+<span class="hljs-comment"># Degree lexicographical ordering with x &gt; y</span>
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>], ordering=DegLex())
+
+<span class="hljs-comment"># Degree lexicographical ordering with y &gt; x</span>
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>], ordering=DegLex([y, x]))</code></pre>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="DegRevLex">
+        <a href="#DegRevLex">DegRevLex</a>
+        <div class="doc-type">st</div></h2>
+      <div class="doc-content"><pre><code class="julia hljs">DegRevLex()
+DegRevLex(variables)
+DegRevLex(variables...)</code></pre>
+<p>Degree reverse lexicographical monomial ordering.</p>
+<p>We use the definition from Chapter 1, Computational Commutative Algebra 1, by Martin Kreuzer, Lorenzo Robbiano. </p>
+<p>DOI: https://doi.org/10.1007/978-3-540-70628-1.</p>
+<h2 id="example__7"><a href="#example__7" class="header-anchor">Example</a></h2>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>];
+
+<span class="hljs-comment"># Degree reverse lexicographical ordering with x &gt; y</span>
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>], ordering=DegRevLex())
+
+<span class="hljs-comment"># Degree reverse lexicographical ordering with y &gt; x</span>
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>], ordering=DegRevLex(y, x))</code></pre>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="InputOrdering">
+        <a href="#InputOrdering">InputOrdering</a>
+        <div class="doc-type">st</div></h2>
+      <div class="doc-content"><pre><code class="julia hljs">InputOrdering()</code></pre>
+<p>Preserves the monomial ordering defined on the input polynomials.</p>
+<p>This is the default value for the <code>ordering</code> keyword argument in the exported functions.</p>
+<h2 id="example__8"><a href="#example__8" class="header-anchor">Example</a></h2>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
+
+<span class="hljs-comment"># Uses the ordering `InputOrdering`, which, in this case, </span>
+<span class="hljs-comment"># defaults to the lexicographical ordering with x &gt; y</span>
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>])</code></pre>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="WeightedOrdering">
+        <a href="#WeightedOrdering">WeightedOrdering</a>
+        <div class="doc-type">st</div></h2>
+      <div class="doc-content"><pre><code class="julia hljs">WeightedOrdering(weights)</code></pre>
+<p>Weighted monomial ordering.</p>
+<p><em>Only positive weights are supported.</em></p>
+<h2 id="example__9"><a href="#example__9" class="header-anchor">Example</a></h2>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>];
+
+<span class="hljs-comment"># x has weight 3, y has weight 1</span>
+ord = WeightedOrdering([<span class="hljs-number">3</span>, <span class="hljs-number">1</span>])
+groebner([x*y + x, x + y^<span class="hljs-number">2</span>], ordering=ord)</code></pre>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="ProductOrdering">
+        <a href="#ProductOrdering">ProductOrdering</a>
+        <div class="doc-type">str</div></h2>
+      <div class="doc-content"><pre><code class="julia hljs">ProductOrdering(ord1, ord2)</code></pre>
+<p>Product monomial ordering. Compares monomials by <code>ord1</code>, then breaks ties by <code>ord2</code>.</p>
+<p>Can also be constructed with <code>*</code>.</p>
+<h2 id="example__10"><a href="#example__10" class="header-anchor">Example</a></h2>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y, z, w) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>, <span class="hljs-string">&quot;z&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>];
+
+<span class="hljs-comment"># Ordering with x, y &gt; w, z</span>
+ord = ProductOrdering(DegRevLex(x, y), DegRevLex(w, z))
+groebner([x*y + w, y*z - w], ordering=ord)</code></pre>
+<p>You can also use the <code>*</code> operator:</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y, z, t) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>, <span class="hljs-string">&quot;z&quot;</span>, <span class="hljs-string">&quot;t&quot;</span>];
+
+ord1 = Lex(t)
+ord2 = DegRevLex(x, y, z)
+<span class="hljs-comment"># t &gt;&gt; x, y, z</span>
+ord = ord1 * ord2
+groebner([x*y*z + z, t * z - <span class="hljs-number">1</span>], ordering=ord)</code></pre>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="MatrixOrdering">
+        <a href="#MatrixOrdering">MatrixOrdering</a>
+        <div class="doc-type">st</div></h2>
+      <div class="doc-content"><pre><code class="julia hljs">MatrixOrdering(matrix)
+MatrixOrdering(<span class="hljs-built_in">Vector</span>{<span class="hljs-built_in">Vector</span>})</code></pre>
+<p>Matrix monomial ordering. </p>
+<h2 id="example__11"><a href="#example__11" class="header-anchor">Example</a></h2>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y, z, w) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>, <span class="hljs-string">&quot;z&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>];
+
+<span class="hljs-comment"># the number of columns equal to the number of variables</span>
+ord = MatrixOrdering([
+    <span class="hljs-number">1</span> <span class="hljs-number">0</span>  <span class="hljs-number">0</span>  <span class="hljs-number">2</span>;
+    <span class="hljs-number">0</span> <span class="hljs-number">0</span>  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>;
+    <span class="hljs-number">0</span> <span class="hljs-number">1</span>  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>;
+])
+groebner([x*y + w, y*z - w], ordering=ord)</code></pre>
+</div>
+  </div>
+
+<h2 id="learn_and_apply"><a href="#learn_and_apply" class="header-anchor">Learn and Apply</a></h2>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="groebner_learn">
+        <a href="#groebner_learn">groebner_learn</a>
+        <div class="doc-type">fn</div></h2>
+      <div class="doc-content"><pre><code class="julia hljs">groebner_learn(polynomials; options...)</code></pre>
+<p>Computes a Groebner basis of <code>polynomials</code> and emits the computation trace.</p>
+<p>The trace can be used to speed up the computation of subsequent Groebner bases, which should be specializations of the same ideal <code>groebner_learn</code> has been applied to.</p>
+<p>The input <code>polynomials</code> must be an array of polynomials over a finite field.</p>
+<p>This function is thread-safe.</p>
+<p>See also <code>groebner_apply&#33;</code>.</p>
+<h2 id="example__12"><a href="#example__12" class="header-anchor">Example</a></h2>
+<p>Using <code>groebner_learn</code> and <code>groebner_apply&#33;</code> over the same ground field:</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>)[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
+
+<span class="hljs-comment"># Learn</span>
+trace, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])
+
+<span class="hljs-comment"># Apply (same support, different coefficients)</span>
+flag, gb_2 = groebner_apply!(trace, [<span class="hljs-number">2</span>x*y^<span class="hljs-number">2</span> + <span class="hljs-number">3</span>x, <span class="hljs-number">4</span>y*x^<span class="hljs-number">2</span> + <span class="hljs-number">5</span>y])
+
+<span class="hljs-meta">@assert</span> flag</code></pre>
+<p>Using <code>groebner_learn</code> and <code>groebner_apply&#33;</code> over different ground fields:</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>)[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
+
+<span class="hljs-comment"># Learn</span>
+trace, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y], ordering=DegRevLex())
+
+<span class="hljs-comment"># Create a ring with a different modulo</span>
+R2, (x2, y2) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span>+<span class="hljs-number">3</span>)[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
+
+<span class="hljs-comment"># Apply (different modulo)</span>
+flag, gb_2 = groebner_apply!(
+    trace, 
+    [<span class="hljs-number">2</span>x2*y2^<span class="hljs-number">2</span> + <span class="hljs-number">3</span>x2, <span class="hljs-number">4</span>y2*x2^<span class="hljs-number">2</span> + <span class="hljs-number">5</span>y2], 
+    ordering=DegRevLex()
+)
+
+<span class="hljs-meta">@assert</span> flag
+<span class="hljs-meta">@assert</span> gb_2 == groebner([<span class="hljs-number">2</span>x2*y2^<span class="hljs-number">2</span> + <span class="hljs-number">3</span>x2, <span class="hljs-number">4</span>y2*x2^<span class="hljs-number">2</span> + <span class="hljs-number">5</span>y2], ordering=DegRevLex())</code></pre>
+<p>Using <code>groebner_apply&#33;</code> in batches &#40;works only in <code>:degrevlex</code> at the moment&#41;:</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
+R, (x, y) = polynomial_ring(GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>), [<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>], internal_ordering=:degrevlex)
+
+<span class="hljs-comment"># Learn</span>
+trace, gb_1 = groebner_learn([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])
+
+<span class="hljs-comment"># Create rings with some other moduli</span>
+R2, (x2, y2) = polynomial_ring(GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span>+<span class="hljs-number">3</span>), [<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>], internal_ordering=:degrevlex)
+R3, (x3, y3) = polynomial_ring(GF(<span class="hljs-number">2</span>^<span class="hljs-number">27</span>+<span class="hljs-number">29</span>), [<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>], internal_ordering=:degrevlex)
+
+<span class="hljs-comment"># Two specializations of the same ideal</span>
+batch = ([<span class="hljs-number">2</span>x2*y2^<span class="hljs-number">2</span> + <span class="hljs-number">3</span>x2, <span class="hljs-number">4</span>y2*x2^<span class="hljs-number">2</span> + <span class="hljs-number">5</span>y2], [<span class="hljs-number">4</span>x3*y3^<span class="hljs-number">2</span> + <span class="hljs-number">4</span>x3, <span class="hljs-number">5</span>y3*x3^<span class="hljs-number">2</span> + <span class="hljs-number">7</span>y3])
+
+<span class="hljs-comment"># Apply for two sets of polynomials at once</span>
+flag, (gb_2, gb_3) = groebner_apply!(trace, batch)
+
+<span class="hljs-meta">@assert</span> flag
+<span class="hljs-meta">@assert</span> (gb_2, gb_3) == map(groebner, batch)</code></pre>
+<p>Perhaps, in a more involved example, we will compute Groebner bases of the Katsura-9 system:</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra, BenchmarkTools
+
+<span class="hljs-comment"># Create the system</span>
+kat = Groebner.katsuran(<span class="hljs-number">9</span>, k=ZZ, internal_ordering=:degrevlex)
+
+<span class="hljs-comment"># Reduce the coefficients modulo 5 different primes</span>
+kat_0 = map(f -&gt; map_coefficients(c -&gt; GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span> + <span class="hljs-number">3</span>)(c), f), kat)
+kat_1 = map(f -&gt; map_coefficients(c -&gt; GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span> + <span class="hljs-number">7</span>)(c), f), kat)
+kat_2 = map(f -&gt; map_coefficients(c -&gt; GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span> + <span class="hljs-number">9</span>)(c), f), kat)
+kat_3 = map(f -&gt; map_coefficients(c -&gt; GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span> + <span class="hljs-number">15</span>)(c), f), kat)
+kat_4 = map(f -&gt; map_coefficients(c -&gt; GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span> + <span class="hljs-number">19</span>)(c), f), kat)
+
+<span class="hljs-comment"># Learn the trace</span>
+trace, gb_0 = groebner_learn(kat_0);
+
+<span class="hljs-comment"># Compare the performance of applying with 1 input and with 4 different inputs:</span>
+
+<span class="hljs-comment"># Apply for one system</span>
+<span class="hljs-meta">@btime</span> groebner_apply!($trace, $kat_1);
+<span class="hljs-comment">#  46.824 ms (19260 allocations: 24.48 MiB)</span>
+
+<span class="hljs-comment"># Apply for a batch of four systems</span>
+<span class="hljs-meta">@btime</span> groebner_apply!($trace, $(kat_1, kat_2, kat_3, kat_4));
+<span class="hljs-comment">#  72.813 ms (23722 allocations: 59.44 MiB)</span></code></pre>
+<p>Observe the better amortized performance of the batched <code>groebner_apply&#33;</code>.</p>
+</div>
+  </div>
+
+  <div class="docstring">
+      <h2 class="doc-header" id="groebner_apply!">
+        <a href="#groebner_apply!">groebner_apply!</a>
+        <div class="doc-type">fn</div></h2>
+      <div class="doc-content"><pre><code class="julia hljs">groebner_apply!(trace, polynomials; options...)
+groebner_apply!(trace, batch::<span class="hljs-built_in">NTuple</span>{N, <span class="hljs-built_in">Vector</span>}; options...)</code></pre>
+<p>Computes a Groebner basis of <code>polynomials</code> using the given <code>trace</code>. The input <code>polynomials</code> must be an array of polynomials over a finite field.</p>
+<p>It is possible to input a tuple of <code>N</code> arrays to compute <code>N</code> Groebner bases simultaneously, which could be more efficient than computing them separately.</p>
+<p>This function is <strong>not</strong> thread-safe, since it mutates the <code>trace</code>.</p>
+<p>See also <code>groebner_learn</code>.</p>
+<h2 id="possible_options__6"><a href="#possible_options__6" class="header-anchor">Possible Options</a></h2>
+<p>The <code>groebner_apply&#33;</code> routine automatically inherits most of its parameters from the given <code>trace</code>.</p>
+<h2 id="example__13"><a href="#example__13" class="header-anchor">Example</a></h2>
+<p>For examples, see the documentation of <code>groebner_learn</code>.</p>
+</div>
+  </div>
+
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: February 22, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div>  <!-- div: content container -->
+    
+        
+
+
+
+    
+    <script>
+        var els =  document.querySelectorAll(".language-julia")
+        for (var i=0, l = els.length; i < l; i++) {
+            var el = els[i]
+            var out = el.parentNode.nextSibling
+            if (out.tagName === "PRE") {
+                out.className = out.className + " code-output"
+            }
+        }
+    </script>
+    
+        
+
+
+    
+  </body>
+</html>
