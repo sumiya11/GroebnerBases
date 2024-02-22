@@ -103,15 +103,14 @@
 <p><a href="https://github.com/sumiya11/Groebner.jl">https://github.com/sumiya11/Groebner.jl</a></p>
 <p>The up-to-date branch in the repository is &quot;master&quot;.</p>
 <h3 id="development_directions"><a href="#development_directions" class="header-anchor">Development directions</a></h3>
-<p>WIP&#33;</p>
+<p>TBD&#33;</p>
 <h3 id="utilities_in_groebnerjl"><a href="#utilities_in_groebnerjl" class="header-anchor">Utilities in Groebner.jl</a></h3>
 <p>Internally, Groebner.jl provides utilities for convenient assertion checking, logging, and timings measurment. These are implemented via macros <code>@invariant</code>, <code>@log</code>, and <code>@timeit</code>.</p>
 <p>Each utility can be globally enabled/disabled by setting the appropriate switch to <code>true</code>/<code>false</code>. The switches and their default values are: </p>
-<table><tr><th align="right">Macro</th><th align="right">Switch</th><th align="right">Default value</th></tr><tr><td align="right"><code>@invariant</code></td><td align="right"><code>invariants_enabled</code></td><td align="right"><code>true</code></td></tr><tr><td align="right"><code>@log</code></td><td align="right"><code>logging_enabled</code></td><td align="right"><code>true</code></td></tr><tr><td align="right"><code>@timeit</code></td><td align="right"><code>performance_counters_enabled</code></td><td align="right"><code>false</code></td></tr></table>
+<table><tr><th align="right">Macro</th><th align="right">Switch</th><th align="right">Default value</th></tr><tr><td align="right"><code>@invariant</code></td><td align="right"><code>invariants_enabled</code></td><td align="right"><code>false</code></td></tr><tr><td align="right"><code>@log</code></td><td align="right"><code>logging_enabled</code></td><td align="right"><code>true</code></td></tr><tr><td align="right"><code>@timeit</code></td><td align="right"><code>performance_counters_enabled</code></td><td align="right"><code>false</code></td></tr></table>
 <p>If the switch value is <code>false</code>, then the corresponding macro gets <em>compiled-out</em>, and has no performance impact.</p>
 <p>Therefore, for example, if you would like to get the best performance out of Groebner.jl, and do not care about assertions and logging, you can do</p>
 <pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner
-Groebner.invariants_enabled() = <span class="hljs-literal">false</span>
 Groebner.logging_enabled() = <span class="hljs-literal">false</span></code></pre>
 <h4 id="logging"><a href="#logging" class="header-anchor">Logging</a></h4>
 <p>Assuming <code>Groebner.logging_enabled&#40;&#41;</code> is <code>true</code>, for printing some logs you can do, for example,</p>
@@ -138,46 +137,46 @@ R, (x,y,z) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31<
 groebner([x*y + z, x*z + y], statistics=:timings)</code></pre><pre><code class="plaintext hljs"> --------------------------------------------------------------------------------
           Groebner.jl                   Time                    Allocations      
                                -----------------------   ------------------------
-       Tot / % measured:           90.4ms /   0.2%           5.97MiB /   8.8%    
+       Tot / % measured:           91.4ms /   0.2%           5.97MiB /   8.8%    
 
  Section               ncalls     time    %tot     avg     alloc    %tot      avg
  --------------------------------------------------------------------------------
- _groebner2                 1    132μs   67.8%   132μs    493KiB   91.5%   493KiB
-   f4!                      1   93.2μs   47.9%  93.2μs   37.0KiB    6.9%  37.0KiB
-     f4_reduction!          3   26.3μs   13.5%  8.77μs   8.73KiB    1.6%  2.91KiB
-       linalg_main!         3   20.6μs   10.6%  6.88μs   6.62KiB    1.2%  2.21KiB
-         linalg_int...      3   1.77μs    0.9%   591ns      976B    0.2%     325B
-       matrix_fill_...      3   1.75μs    0.9%   585ns      256B    0.0%    85.3B
-     f4_update!             4   8.02μs    4.1%  2.01μs   2.30KiB    0.4%     588B
-       pairset_update!      5   4.43μs    2.3%   886ns      800B    0.1%     160B
-       basis_update!        4    420ns    0.2%   105ns     0.00B    0.0%    0.00B
-     f4_symbolic_pr...      4   6.09μs    3.1%  1.52μs   2.34KiB    0.4%     600B
-       matrix_trans...      3    542ns    0.3%   181ns      272B    0.0%    90.7B
-     matrix_transfo...     14   4.49μs    2.3%   320ns   2.59KiB    0.5%     190B
-     basis_standard...      1   2.14μs    1.1%  2.14μs   1.17KiB    0.2%  1.17KiB
-       basis_normal...      1    451ns    0.2%   451ns     96.0B    0.0%    96.0B
-     linalg_interre...      1   1.63μs    0.8%  1.63μs   1.12KiB    0.2%  1.12KiB
-     matrix_initialize      1   1.46μs    0.8%  1.46μs   1.08KiB    0.2%  1.08KiB
-     hashtable_init...      2   1.24μs    0.6%   621ns   4.34KiB    0.8%  2.17KiB
-     matrix_fill_co...      1    651ns    0.3%   651ns     96.0B    0.0%    96.0B
-     basis_normalize!       1    421ns    0.2%   421ns     96.0B    0.0%    96.0B
-   f4_initialize_st...      1   33.2μs   17.0%  33.2μs    453KiB   84.1%   453KiB
-     basis_normalize!       1   1.87μs    1.0%  1.87μs     96.0B    0.0%    96.0B
-   basis_export_data        1    611ns    0.3%   611ns      416B    0.1%     416B
- io_convert_to_inte...      1   41.5μs   21.3%  41.5μs   3.78KiB    0.7%  3.78KiB
- f4_initialize_structs      1   10.0μs    5.1%  10.0μs   33.5KiB    6.2%  33.5KiB
-   basis_normalize!         1    431ns    0.2%   431ns     96.0B    0.0%    96.0B
- io_convert_to_output       1   3.43μs    1.8%  3.43μs   1.50KiB    0.3%  1.50KiB
- basis_standardize!         1   1.54μs    0.8%  1.54μs   1.16KiB    0.2%  1.16KiB
-   basis_normalize!         1    331ns    0.2%   331ns     96.0B    0.0%    96.0B
- matrix_transform_p...      3   1.37μs    0.7%   457ns      672B    0.1%     224B
- linalg_interreduce...      1    902ns    0.5%   902ns      896B    0.2%     896B
+ _groebner2                 1    128μs   64.8%   128μs    493KiB   91.5%   493KiB
+   f4!                      1   94.9μs   48.0%  94.9μs   37.0KiB    6.9%  37.0KiB
+     f4_reduction!          3   26.5μs   13.4%  8.83μs   8.73KiB    1.6%  2.91KiB
+       linalg_main!         3   21.4μs   10.8%  7.13μs   6.62KiB    1.2%  2.21KiB
+         linalg_int...      3   2.22μs    1.1%   741ns      976B    0.2%     325B
+       matrix_fill_...      3   1.68μs    0.9%   561ns      256B    0.0%    85.3B
+     f4_update!             4   8.18μs    4.1%  2.04μs   2.30KiB    0.4%     588B
+       pairset_update!      5   4.11μs    2.1%   822ns      800B    0.1%     160B
+       basis_update!        4    412ns    0.2%   103ns     0.00B    0.0%    0.00B
+     f4_symbolic_pr...      4   6.12μs    3.1%  1.53μs   2.34KiB    0.4%     600B
+       matrix_trans...      3    762ns    0.4%   254ns      272B    0.0%    90.7B
+     matrix_transfo...     14   5.33μs    2.7%   381ns   2.59KiB    0.5%     190B
+     basis_standard...      1   2.02μs    1.0%  2.02μs   1.17KiB    0.2%  1.17KiB
+       basis_normal...      1    441ns    0.2%   441ns     96.0B    0.0%    96.0B
+     hashtable_init...      2   1.91μs    1.0%   957ns   4.34KiB    0.8%  2.17KiB
+     matrix_initialize      1   1.31μs    0.7%  1.31μs   1.08KiB    0.2%  1.08KiB
+     linalg_interre...      1   1.22μs    0.6%  1.22μs   1.12KiB    0.2%  1.12KiB
+     matrix_fill_co...      1    681ns    0.3%   681ns     96.0B    0.0%    96.0B
+     basis_normalize!       1    451ns    0.2%   451ns     96.0B    0.0%    96.0B
+   f4_initialize_st...      1   27.9μs   14.1%  27.9μs    453KiB   84.1%   453KiB
+     basis_normalize!       1   1.46μs    0.7%  1.46μs     96.0B    0.0%    96.0B
+   basis_export_data        1    701ns    0.4%   701ns      416B    0.1%     416B
+ io_convert_to_inte...      1   47.3μs   23.9%  47.3μs   3.78KiB    0.7%  3.78KiB
+ f4_initialize_structs      1   10.1μs    5.1%  10.1μs   33.5KiB    6.2%  33.5KiB
+   basis_normalize!         1    341ns    0.2%   341ns     96.0B    0.0%    96.0B
+ io_convert_to_output       1   4.40μs    2.2%  4.40μs   1.50KiB    0.3%  1.50KiB
+ basis_standardize!         1   1.68μs    0.9%  1.68μs   1.16KiB    0.2%  1.16KiB
+   basis_normalize!         1    300ns    0.2%   300ns     96.0B    0.0%    96.0B
+ matrix_transform_p...      3   1.26μs    0.6%   421ns      672B    0.1%     224B
+ matrix_initialize          1    952ns    0.5%   952ns   1.08KiB    0.2%  1.08KiB
  matrix_fill_column...      1    852ns    0.4%   852ns     80.0B    0.0%    80.0B
- f4_symbolic_prepro...      1    832ns    0.4%   832ns      960B    0.2%     960B
- matrix_initialize          1    772ns    0.4%   772ns   1.08KiB    0.2%  1.08KiB
- hashtable_initiali...      1    721ns    0.4%   721ns   2.16KiB    0.4%  2.16KiB
- basis_export_data          1    691ns    0.4%   691ns      352B    0.1%     352B
- basis_update!              1    140ns    0.1%   140ns     0.00B    0.0%    0.00B
+ f4_symbolic_prepro...      1    821ns    0.4%   821ns      960B    0.2%     960B
+ linalg_interreduce...      1    791ns    0.4%   791ns      896B    0.2%     896B
+ hashtable_initiali...      1    742ns    0.4%   742ns   2.16KiB    0.4%  2.16KiB
+ basis_export_data          1    621ns    0.3%   621ns      352B    0.1%     352B
+ basis_update!              1    130ns    0.1%   130ns     0.00B    0.0%    0.00B
  --------------------------------------------------------------------------------
 3-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
  y^2 + 2147483646*z^2
