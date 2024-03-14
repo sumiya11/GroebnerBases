@@ -137,39 +137,39 @@ R, (x,y,z) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31<
 groebner([x*y + z, x*z + y], statistics=:timings)</code></pre><pre><code class="plaintext hljs"> --------------------------------------------------------------------------------
           Groebner.jl                   Time                    Allocations      
                                -----------------------   ------------------------
-       Tot / % measured:           88.7ms /   0.2%           5.97MiB /   8.7%    
+       Tot / % measured:           90.3ms /   0.2%           5.97MiB /   8.7%    
 
  Section               ncalls     time    %tot     avg     alloc    %tot      avg
  --------------------------------------------------------------------------------
- _groebner2                 1    113μs   64.7%   113μs    490KiB   91.8%   490KiB
-   f4!                      1   84.3μs   48.3%  84.3μs   34.9KiB    6.5%  34.9KiB
-     f4_reduction!          3   24.5μs   14.0%  8.17μs   8.98KiB    1.7%  2.99KiB
-       linalg_main!         3   18.3μs   10.5%  6.11μs   6.62KiB    1.2%  2.21KiB
-         linalg_int...      3   1.57μs    0.9%   524ns      976B    0.2%     325B
-       matrix_fill_...      3   1.58μs    0.9%   527ns      256B    0.0%    85.3B
-     f4_update!             4   7.08μs    4.1%  1.77μs   2.30KiB    0.4%     588B
-       pairset_update!      5   3.86μs    2.2%   772ns      800B    0.1%     160B
-       basis_update!        4    391ns    0.2%  97.8ns     0.00B    0.0%    0.00B
-     f4_symbolic_pr...      4   6.18μs    3.5%  1.55μs   2.34KiB    0.4%     600B
-       matrix_trans...      3    490ns    0.3%   163ns      272B    0.0%    90.7B
-     matrix_transfo...     14   4.29μs    2.5%   306ns   2.59KiB    0.5%     190B
-     basis_standard...      1   1.68μs    1.0%  1.68μs      528B    0.1%     528B
-     linalg_interre...      1   1.28μs    0.7%  1.28μs   1.12KiB    0.2%  1.12KiB
-     hashtable_init...      2   1.01μs    0.6%   506ns   4.34KiB    0.8%  2.17KiB
-     matrix_fill_co...      1    621ns    0.4%   621ns     96.0B    0.0%    96.0B
-   f4_initialize_st...      1   22.8μs   13.1%  22.8μs    453KiB   84.8%   453KiB
-   basis_export_data        1    621ns    0.4%   621ns      416B    0.1%     416B
- io_convert_to_inte...      1   44.3μs   25.4%  44.3μs   3.78KiB    0.7%  3.78KiB
- f4_initialize_structs      1   7.74μs    4.4%  7.74μs   32.8KiB    6.1%  32.8KiB
- io_convert_to_output       1   3.40μs    1.9%  3.40μs   1.50KiB    0.3%  1.50KiB
- matrix_transform_p...      3   1.44μs    0.8%   481ns      672B    0.1%     224B
- basis_standardize!         1   1.19μs    0.7%  1.19μs      512B    0.1%     512B
- linalg_interreduce...      1    992ns    0.6%   992ns      896B    0.2%     896B
- f4_symbolic_prepro...      1    741ns    0.4%   741ns      960B    0.2%     960B
- hashtable_initiali...      1    652ns    0.4%   652ns   2.16KiB    0.4%  2.16KiB
- matrix_fill_column...      1    612ns    0.4%   612ns     80.0B    0.0%    80.0B
- basis_export_data          1    441ns    0.3%   441ns      352B    0.1%     352B
- basis_update!              1    130ns    0.1%   130ns     0.00B    0.0%    0.00B
+ _groebner2                 1    119μs   65.7%   119μs    490KiB   91.8%   490KiB
+   f4!                      1   85.6μs   47.3%  85.6μs   34.9KiB    6.5%  34.9KiB
+     f4_reduction!          3   25.6μs   14.1%  8.53μs   8.98KiB    1.7%  2.99KiB
+       linalg_main!         3   18.8μs   10.4%  6.26μs   6.62KiB    1.2%  2.21KiB
+         linalg_int...      3   1.92μs    1.1%   641ns      976B    0.2%     325B
+       matrix_fill_...      3   2.25μs    1.2%   751ns      256B    0.0%    85.3B
+     f4_update!             4   7.79μs    4.3%  1.95μs   2.30KiB    0.4%     588B
+       pairset_update!      5   4.03μs    2.2%   806ns      800B    0.1%     160B
+       basis_update!        4    540ns    0.3%   135ns     0.00B    0.0%    0.00B
+     matrix_transfo...     14   5.19μs    2.9%   371ns   2.59KiB    0.5%     190B
+     f4_symbolic_pr...      4   5.08μs    2.8%  1.27μs   2.34KiB    0.4%     600B
+       matrix_trans...      3    533ns    0.3%   178ns      272B    0.0%    90.7B
+     hashtable_init...      2   1.69μs    0.9%   847ns   4.34KiB    0.8%  2.17KiB
+     basis_standard...      1   1.64μs    0.9%  1.64μs      528B    0.1%     528B
+     linalg_interre...      1   1.29μs    0.7%  1.29μs   1.12KiB    0.2%  1.12KiB
+     matrix_fill_co...      1    742ns    0.4%   742ns     96.0B    0.0%    96.0B
+   f4_initialize_st...      1   27.9μs   15.4%  27.9μs    453KiB   84.8%   453KiB
+   basis_export_data        1    882ns    0.5%   882ns      416B    0.1%     416B
+ io_convert_to_inte...      1   44.9μs   24.8%  44.9μs   3.78KiB    0.7%  3.78KiB
+ f4_initialize_structs      1   7.48μs    4.1%  7.48μs   32.8KiB    6.1%  32.8KiB
+ io_convert_to_output       1   3.45μs    1.9%  3.45μs   1.50KiB    0.3%  1.50KiB
+ f4_symbolic_prepro...      1   1.18μs    0.7%  1.18μs      960B    0.2%     960B
+ basis_standardize!         1   1.17μs    0.6%  1.17μs      512B    0.1%     512B
+ matrix_transform_p...      3   1.15μs    0.6%   384ns      672B    0.1%     224B
+ linalg_interreduce...      1    821ns    0.5%   821ns      896B    0.2%     896B
+ hashtable_initiali...      1    741ns    0.4%   741ns   2.16KiB    0.4%  2.16KiB
+ matrix_fill_column...      1    611ns    0.3%   611ns     80.0B    0.0%    80.0B
+ basis_export_data          1    471ns    0.3%   471ns      352B    0.1%     352B
+ basis_update!              1    120ns    0.1%   120ns     0.00B    0.0%    0.00B
  --------------------------------------------------------------------------------
 3-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
  y^2 + 2147483646*z^2
