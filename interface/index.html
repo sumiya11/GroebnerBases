@@ -221,8 +221,8 @@ groebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-numb
 <span class="hljs-comment"># degree reverse lexicographic</span>
 groebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y], ordering=DegRevLex())</code></pre>
 <h2 id="notes"><a href="#notes" class="header-anchor">Notes</a></h2>
-<p>The function <code>groebner</code> is <strong>thread-safe</strong>.</p>
-<p>The default algorithm is <strong>probabilistic</strong> &#40;with <code>certify&#61;false</code>&#41;.  Results are correct with high probability,  however, no precise bound on the probability is known.</p>
+<p>The function <code>groebner</code> is thread-safe.</p>
+<p>The default algorithm is probabilistic &#40;with <code>certify&#61;false</code>&#41;. Results are correct with high probability, however, no precise bound on the probability is known.</p>
 </div>
   </div>
 
@@ -312,7 +312,7 @@ isgroebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-nu
 R, (x, y) = QQ[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
 isgroebner([x*y^<span class="hljs-number">2</span> + x, y*x^<span class="hljs-number">2</span> + y])</code></pre>
 <h2 id="notes__3"><a href="#notes__3" class="header-anchor">Notes</a></h2>
-<p>The function <code>isgroebner</code> is <strong>thread-safe</strong>.</p>
+<p>The function <code>isgroebner</code> is thread-safe.</p>
 </div>
   </div>
 
@@ -374,7 +374,7 @@ normalform([y^<span class="hljs-number">2</span> + x, x^<span class="hljs-number
 <span class="hljs-meta">@polyvar</span> x y;
 normalform([y^<span class="hljs-number">2</span> + x, x^<span class="hljs-number">2</span> + y], [x^<span class="hljs-number">2</span> + y^<span class="hljs-number">2</span> + <span class="hljs-number">1</span>, x^<span class="hljs-number">10</span>*y^<span class="hljs-number">10</span>])</code></pre>
 <h2 id="notes__4"><a href="#notes__4" class="header-anchor">Notes</a></h2>
-<p>The function <code>normalform</code> is <strong>thread-safe</strong>.</p>
+<p>The function <code>normalform</code> is thread-safe.</p>
 </div>
   </div>
 
@@ -410,7 +410,7 @@ normalform([y^<span class="hljs-number">2</span> + x, x^<span class="hljs-number
 <span class="hljs-meta">@polyvar</span> x y;
 kbase([y^<span class="hljs-number">2</span> + x, x^<span class="hljs-number">2</span> + y])</code></pre>
 <h2 id="notes__5"><a href="#notes__5" class="header-anchor">Notes</a></h2>
-<p>The function <code>kbase</code> is <strong>thread-safe</strong>.</p>
+<p>The function <code>kbase</code> is thread-safe.</p>
 </div>
   </div>
 
@@ -644,7 +644,7 @@ flag, (gb_2, gb_3) = groebner_apply!(trace, batch)
 <pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra, BenchmarkTools
 
 <span class="hljs-comment"># Create the system</span>
-kat = Groebner.katsuran(<span class="hljs-number">9</span>, k=ZZ, internal_ordering=:degrevlex)
+kat = Groebner.Examples.katsuran(<span class="hljs-number">9</span>, k=ZZ, internal_ordering=:degrevlex)
 
 <span class="hljs-comment"># Reduce the coefficients modulo 5 different primes</span>
 kat_0 = map(f -&gt; map_coefficients(c -&gt; GF(<span class="hljs-number">2</span>^<span class="hljs-number">30</span> + <span class="hljs-number">3</span>)(c), f), kat)
@@ -667,7 +667,7 @@ trace, gb_0 = groebner_learn(kat_0);
 <span class="hljs-comment">#  72.813 ms (23722 allocations: 59.44 MiB)</span></code></pre>
 <p>Observe the better amortized performance of the batched <code>groebner_apply&#33;</code>.</p>
 <h2 id="notes__6"><a href="#notes__6" class="header-anchor">Notes</a></h2>
-<p>The function <code>groebner_learn</code> is <strong>thread-safe</strong>.</p>
+<p>The function <code>groebner_learn</code> is thread-safe.</p>
 </div>
   </div>
 
@@ -697,7 +697,7 @@ groebner_apply!(trace, batch::<span class="hljs-built_in">NTuple</span>{N, <span
 
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: April 17, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: July 13, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
