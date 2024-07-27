@@ -137,39 +137,39 @@ R, (x,y,z) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31<
 groebner([x*y + z, x*z + y], statistics=:timings)</code></pre><pre><code class="plaintext hljs"> --------------------------------------------------------------------------------
           Groebner.jl                   Time                    Allocations      
                                -----------------------   ------------------------
-       Tot / % measured:           92.0ms /   0.2%           5.90MiB /   7.7%    
+       Tot / % measured:           97.7ms /   0.2%           5.90MiB /   7.7%    
 
  Section               ncalls     time    %tot     avg     alloc    %tot      avg
  --------------------------------------------------------------------------------
- _groebner2                 1    145μs   66.7%   145μs    427KiB   91.5%   427KiB
-   f4!                      1    103μs   47.3%   103μs   35.3KiB    7.6%  35.3KiB
-     f4_reduction!          3   32.1μs   14.8%  10.7μs   9.36KiB    2.0%  3.12KiB
-       linalg_main!         3   22.1μs   10.2%  7.37μs   6.62KiB    1.4%  2.21KiB
-         linalg_int...      3   2.26μs    1.0%   754ns      976B    0.2%     325B
-       matrix_fill_...      3   1.90μs    0.9%   635ns      256B    0.1%    85.3B
-     f4_update!             4   9.32μs    4.3%  2.33μs   2.53KiB    0.5%     648B
-       pairset_update!      5   5.91μs    2.7%  1.18μs   1.02KiB    0.2%     208B
-       basis_update!        4    391ns    0.2%  97.8ns     0.00B    0.0%    0.00B
-     matrix_polynom...     14   5.68μs    2.6%   406ns   2.59KiB    0.6%     190B
-     f4_symbolic_pr...      4   5.59μs    2.6%  1.40μs   2.28KiB    0.5%     584B
-       matrix_polyn...      3    551ns    0.3%   184ns      272B    0.1%    90.7B
-     hashtable_init...      2   2.04μs    0.9%  1.02μs   3.97KiB    0.9%  1.98KiB
-     basis_standard...      1   1.97μs    0.9%  1.97μs      528B    0.1%     528B
-     linalg_interre...      1   1.51μs    0.7%  1.51μs   1.12KiB    0.2%  1.12KiB
-     matrix_fill_co...      1    661ns    0.3%   661ns     96.0B    0.0%    96.0B
-   f4_initialize_st...      1   35.5μs   16.3%  35.5μs    389KiB   83.4%   389KiB
-   basis_export_data        1    942ns    0.4%   942ns      416B    0.1%     416B
- io_convert_to_inte...      1   48.7μs   22.4%  48.7μs   3.47KiB    0.7%  3.47KiB
- f4_initialize_structs      1   10.4μs    4.8%  10.4μs   29.1KiB    6.2%  29.1KiB
- io_convert_to_output       1   5.06μs    2.3%  5.06μs   1.50KiB    0.3%  1.50KiB
- matrix_polynomial_...      3   1.74μs    0.8%   581ns      672B    0.1%     224B
- linalg_interreduce...      1   1.27μs    0.6%  1.27μs      896B    0.2%     896B
- hashtable_initiali...      1   1.20μs    0.6%  1.20μs   1.97KiB    0.4%  1.97KiB
- basis_standardize!         1   1.20μs    0.6%  1.20μs      512B    0.1%     512B
- matrix_fill_column...      1   1.05μs    0.5%  1.05μs     80.0B    0.0%    80.0B
- f4_symbolic_prepro...      1    812ns    0.4%   812ns      944B    0.2%     944B
- basis_export_data          1    551ns    0.3%   551ns      352B    0.1%     352B
- basis_update!              1    311ns    0.1%   311ns     0.00B    0.0%    0.00B
+ _groebner2                 1    148μs   65.9%   148μs    427KiB   91.5%   427KiB
+   f4!                      1    106μs   46.9%   106μs   35.3KiB    7.6%  35.3KiB
+     f4_reduction!          3   33.0μs   14.7%  11.0μs   9.36KiB    2.0%  3.12KiB
+       linalg_main!         3   21.7μs    9.7%  7.25μs   6.62KiB    1.4%  2.21KiB
+         linalg_int...      3   2.48μs    1.1%   828ns      976B    0.2%     325B
+       matrix_fill_...      3   1.71μs    0.8%   571ns      256B    0.1%    85.3B
+     f4_update!             4   11.0μs    4.9%  2.75μs   2.53KiB    0.5%     648B
+       pairset_update!      5   7.05μs    3.1%  1.41μs   1.02KiB    0.2%     208B
+       basis_update!        4    381ns    0.2%  95.2ns     0.00B    0.0%    0.00B
+     f4_symbolic_pr...      4   6.03μs    2.7%  1.51μs   2.28KiB    0.5%     584B
+       matrix_polyn...      3    420ns    0.2%   140ns      272B    0.1%    90.7B
+     matrix_polynom...     14   5.63μs    2.5%   402ns   2.59KiB    0.6%     190B
+     basis_standard...      1   1.64μs    0.7%  1.64μs      528B    0.1%     528B
+     linalg_interre...      1   1.27μs    0.6%  1.27μs   1.12KiB    0.2%  1.12KiB
+     hashtable_init...      2   1.27μs    0.6%   636ns   3.97KiB    0.9%  1.98KiB
+     matrix_fill_co...      1    611ns    0.3%   611ns     96.0B    0.0%    96.0B
+   f4_initialize_st...      1   36.8μs   16.3%  36.8μs    389KiB   83.4%   389KiB
+   basis_export_data        1    742ns    0.3%   742ns      416B    0.1%     416B
+ io_convert_to_inte...      1   50.6μs   22.5%  50.6μs   3.47KiB    0.7%  3.47KiB
+ f4_initialize_structs      1   11.4μs    5.1%  11.4μs   29.1KiB    6.2%  29.1KiB
+ io_convert_to_output       1   6.89μs    3.1%  6.89μs   1.50KiB    0.3%  1.50KiB
+ matrix_polynomial_...      3   2.15μs    1.0%   718ns      672B    0.1%     224B
+ basis_standardize!         1   1.20μs    0.5%  1.20μs      512B    0.1%     512B
+ f4_symbolic_prepro...      1   1.05μs    0.5%  1.05μs      944B    0.2%     944B
+ matrix_fill_column...      1    931ns    0.4%   931ns     80.0B    0.0%    80.0B
+ hashtable_initiali...      1    862ns    0.4%   862ns   1.97KiB    0.4%  1.97KiB
+ linalg_interreduce...      1    781ns    0.3%   781ns      896B    0.2%     896B
+ basis_export_data          1    631ns    0.3%   631ns      352B    0.1%     352B
+ basis_update!              1    130ns    0.1%   130ns     0.00B    0.0%    0.00B
  --------------------------------------------------------------------------------
 3-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
  y^2 + 2147483646*z^2
@@ -177,7 +177,7 @@ groebner([x*y + z, x*z + y], statistics=:timings)</code></pre><pre><code class="
  x*y + z</code></pre>
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: July 15, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: July 27, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
