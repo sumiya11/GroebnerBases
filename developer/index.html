@@ -137,39 +137,39 @@ R, (x,y,z) = GF(<span class="hljs-number">2</span>^<span class="hljs-number">31<
 groebner([x*y + z, x*z + y], statistics=:timings)</code></pre><pre><code class="plaintext hljs"> --------------------------------------------------------------------------------
           Groebner.jl                   Time                    Allocations      
                                -----------------------   ------------------------
-       Tot / % measured:           91.7ms /   0.2%           5.90MiB /   7.7%    
+       Tot / % measured:           92.0ms /   0.2%           5.90MiB /   7.7%    
 
  Section               ncalls     time    %tot     avg     alloc    %tot      avg
  --------------------------------------------------------------------------------
- _groebner2                 1    128μs   66.3%   128μs    427KiB   91.5%   427KiB
-   f4!                      1   90.5μs   47.0%  90.5μs   35.3KiB    7.6%  35.3KiB
-     f4_reduction!          3   27.6μs   14.4%  9.21μs   9.36KiB    2.0%  3.12KiB
-       linalg_main!         3   19.1μs    9.9%  6.36μs   6.62KiB    1.4%  2.21KiB
-         linalg_int...      3   1.81μs    0.9%   604ns      976B    0.2%     325B
-       matrix_fill_...      3   1.77μs    0.9%   591ns      256B    0.1%    85.3B
-     f4_update!             4   8.99μs    4.7%  2.25μs   2.53KiB    0.5%     648B
-       pairset_update!      5   5.69μs    3.0%  1.14μs   1.02KiB    0.2%     208B
-       basis_update!        4    360ns    0.2%  90.0ns     0.00B    0.0%    0.00B
-     f4_symbolic_pr...      4   5.36μs    2.8%  1.34μs   2.28KiB    0.5%     584B
+ _groebner2                 1    127μs   66.9%   127μs    427KiB   91.5%   427KiB
+   f4!                      1   91.5μs   48.2%  91.5μs   35.3KiB    7.6%  35.3KiB
+     f4_reduction!          3   28.4μs   14.9%  9.45μs   9.36KiB    2.0%  3.12KiB
+       linalg_main!         3   20.2μs   10.7%  6.75μs   6.62KiB    1.4%  2.21KiB
+         linalg_int...      3   1.70μs    0.9%   568ns      976B    0.2%     325B
+       matrix_fill_...      3   1.76μs    0.9%   588ns      256B    0.1%    85.3B
+     f4_update!             4   9.21μs    4.9%  2.30μs   2.53KiB    0.5%     648B
+       pairset_update!      5   5.91μs    3.1%  1.18μs   1.02KiB    0.2%     208B
+       basis_update!        4    411ns    0.2%   103ns     0.00B    0.0%    0.00B
+     matrix_polynom...     14   5.27μs    2.8%   376ns   2.59KiB    0.6%     190B
+     f4_symbolic_pr...      4   5.21μs    2.7%  1.30μs   2.28KiB    0.5%     584B
        matrix_polyn...      3    451ns    0.2%   150ns      272B    0.1%    90.7B
-     matrix_polynom...     14   4.90μs    2.5%   350ns   2.59KiB    0.6%     190B
+     hashtable_init...      2   1.88μs    1.0%   942ns   3.97KiB    0.9%  1.98KiB
      basis_standard...      1   1.65μs    0.9%  1.65μs      528B    0.1%     528B
-     linalg_interre...      1   1.38μs    0.7%  1.38μs   1.12KiB    0.2%  1.12KiB
-     hashtable_init...      2   1.36μs    0.7%   681ns   3.97KiB    0.9%  1.98KiB
-     matrix_fill_co...      1    721ns    0.4%   721ns     96.0B    0.0%    96.0B
-   f4_initialize_st...      1   32.7μs   17.0%  32.7μs    389KiB   83.4%   389KiB
-   basis_export_data        1    581ns    0.3%   581ns      416B    0.1%     416B
- io_convert_to_inte...      1   44.7μs   23.2%  44.7μs   3.47KiB    0.7%  3.47KiB
- f4_initialize_structs      1   9.41μs    4.9%  9.41μs   29.1KiB    6.2%  29.1KiB
- io_convert_to_output       1   4.15μs    2.2%  4.15μs   1.50KiB    0.3%  1.50KiB
- basis_standardize!         1   1.32μs    0.7%  1.32μs      512B    0.1%     512B
- matrix_polynomial_...      3   1.11μs    0.6%   371ns      672B    0.1%     224B
- linalg_interreduce...      1   1.08μs    0.6%  1.08μs      896B    0.2%     896B
- matrix_fill_column...      1    882ns    0.5%   882ns     80.0B    0.0%    80.0B
- f4_symbolic_prepro...      1    782ns    0.4%   782ns      944B    0.2%     944B
- hashtable_initiali...      1    721ns    0.4%   721ns   1.97KiB    0.4%  1.97KiB
- basis_export_data          1    581ns    0.3%   581ns      352B    0.1%     352B
- basis_update!              1    120ns    0.1%   120ns     0.00B    0.0%    0.00B
+     linalg_interre...      1   1.25μs    0.7%  1.25μs   1.12KiB    0.2%  1.12KiB
+     matrix_fill_co...      1    692ns    0.4%   692ns     96.0B    0.0%    96.0B
+   f4_initialize_st...      1   29.6μs   15.6%  29.6μs    389KiB   83.4%   389KiB
+   basis_export_data        1    642ns    0.3%   642ns      416B    0.1%     416B
+ io_convert_to_inte...      1   43.1μs   22.7%  43.1μs   3.47KiB    0.7%  3.47KiB
+ f4_initialize_structs      1   8.89μs    4.7%  8.89μs   29.1KiB    6.2%  29.1KiB
+ io_convert_to_output       1   4.32μs    2.3%  4.32μs   1.50KiB    0.3%  1.50KiB
+ basis_standardize!         1   1.24μs    0.7%  1.24μs      512B    0.1%     512B
+ matrix_polynomial_...      3   1.17μs    0.6%   391ns      672B    0.1%     224B
+ linalg_interreduce...      1   1.12μs    0.6%  1.12μs      896B    0.2%     896B
+ f4_symbolic_prepro...      1    942ns    0.5%   942ns      944B    0.2%     944B
+ matrix_fill_column...      1    731ns    0.4%   731ns     80.0B    0.0%    80.0B
+ hashtable_initiali...      1    601ns    0.3%   601ns   1.97KiB    0.4%  1.97KiB
+ basis_export_data          1    471ns    0.2%   471ns      352B    0.1%     352B
+ basis_update!              1    130ns    0.1%   130ns     0.00B    0.0%    0.00B
  --------------------------------------------------------------------------------
 3-element Vector{AbstractAlgebra.Generic.MPoly{AbstractAlgebra.GFElem{Int64}}}:
  y^2 + 2147483646*z^2
@@ -177,7 +177,7 @@ groebner([x*y + z, x*z + y], statistics=:timings)</code></pre><pre><code class="
  x*y + z</code></pre>
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: July 27, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: July 28, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
