@@ -135,10 +135,9 @@ groebner(polys, ordering=ordering)</code></pre><pre><code class="plaintext hljs"
 system = [<span class="hljs-number">10</span>*x1*x2^<span class="hljs-number">2</span> - <span class="hljs-number">11</span>*x1 + <span class="hljs-number">10</span>,
         <span class="hljs-number">10</span>*x1^<span class="hljs-number">2</span>*x2 - <span class="hljs-number">11</span>*x2 + <span class="hljs-number">10</span>]
 
-groebner(system)</code></pre><pre><code class="plaintext hljs">3-element Vector{DynamicPolynomials.Polynomial{DynamicPolynomials.Commutative{DynamicPolynomials.CreationOrder}, MultivariatePolynomials.Graded{MultivariatePolynomials.LexOrder}, Int64}}:
- 10x2 - 10x1 - 11x2² + 11x1²
- 110 - 121x2 - 100x2² + 100x1x2 + 110x2³
- 10 - 11x1 + 10x1x2²</code></pre>
+groebner(system)</code></pre><pre><code class="plaintext hljs">DomainError with Unknown type.:
+
+</code></pre>
 <h2 id="contacts"><a href="#contacts" class="header-anchor">Contacts</a></h2>
 <p>This library is maintained by Alexander Demin &#40;<a href="mailto:asdemin_2@edu.hse.ru">asdemin_2@edu.hse.ru</a>&#41;.</p>
 <h2 id="acknowledgement"><a href="#acknowledgement" class="header-anchor">Acknowledgement</a></h2>
@@ -147,7 +146,7 @@ groebner(system)</code></pre><pre><code class="plaintext hljs">3-element Vector{
 <p>We are grateful to The Max Planck Institute for Informatics and The MAX team at l&#39;X for providing computational resources.</p>
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: August 16, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: August 22, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
