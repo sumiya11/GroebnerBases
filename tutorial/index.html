@@ -145,9 +145,10 @@ system = [
   x + y + <span class="hljs-number">5</span>z + <span class="hljs-number">3</span>
 ]
 
-groebner(system)  <span class="hljs-comment"># rref</span></code></pre><pre><code class="plaintext hljs">DomainError with Unknown type.:
-
-</code></pre>
+groebner(system)  <span class="hljs-comment"># rref</span></code></pre><pre><code class="plaintext hljs">3-element Vector{DynamicPolynomials.Polynomial{DynamicPolynomials.Commutative{DynamicPolynomials.CreationOrder}, MultivariatePolynomials.Graded{MultivariatePolynomials.LexOrder}, Rational{BigInt}}}:
+ z
+ 1//1 + y
+ 2//1 + x</code></pre>
 <p>This implies <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>=</mo><mn>0</mn><mo separator="true">,</mo><mtext> </mtext><mi>y</mi><mo>=</mo><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mtext> </mtext><mi>x</mi><mo>=</mo><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">z = 0, ~y = -1, ~x = -2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace nobreak"> </span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">−</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace nobreak"> </span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord">2</span></span></span></span>.</p>
 <h3 id="groebner_basis_is_euclidean_algorithm"><a href="#groebner_basis_is_euclidean_algorithm" class="header-anchor">Groebner basis is Euclidean Algorithm</a></h3>
 <p>For univariate systems, Groebner basis is Greatest common divisor.</p>
@@ -160,9 +161,8 @@ groebner(system)  <span class="hljs-comment"># rref</span></code></pre><pre><cod
 f = (x^<span class="hljs-number">2</span> - <span class="hljs-number">1</span>)^<span class="hljs-number">7</span>*(x + <span class="hljs-number">3</span>)*(x - <span class="hljs-number">7</span>)^<span class="hljs-number">4</span>
 g = (x + <span class="hljs-number">3</span>)*(x + <span class="hljs-number">7</span>)
 
-groebner([f, g])   <span class="hljs-comment"># gcd by groebner</span></code></pre><pre><code class="plaintext hljs">DomainError with Unknown type.:
-
-</code></pre>
+groebner([f, g])   <span class="hljs-comment"># gcd by groebner</span></code></pre><pre><code class="plaintext hljs">1-element Vector{DynamicPolynomials.Polynomial{DynamicPolynomials.Commutative{DynamicPolynomials.CreationOrder}, MultivariatePolynomials.Graded{MultivariatePolynomials.LexOrder}, Rational{BigInt}}}:
+ 3//1 + x</code></pre>
 <pre><code class="julia hljs">gcd(f, g)          <span class="hljs-comment"># usual gcd</span></code></pre><pre><code class="plaintext hljs">3 + x</code></pre>
 <p>Naturally, the same holds for several input polynomials:</p>
 <span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mi>r</mi><mi>o</mi><mi>e</mi><mi>b</mi><mi>n</mi><mi>e</mi><mi>r</mi><mo stretchy="false">(</mo><msub><mi>f</mi><mn>1</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>f</mi><mi>m</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mi>g</mi><mi>c</mi><mi>d</mi><mo stretchy="false">(</mo><mi>g</mi><mi>c</mi><mi>d</mi><mo stretchy="false">(</mo><mi>g</mi><mi>c</mi><mi>d</mi><mo stretchy="false">(</mo><msub><mi>f</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mo>…</mo><mo stretchy="false">)</mo><mo separator="true">,</mo><msub><mi>f</mi><mi>m</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
@@ -173,13 +173,13 @@ groebner(f_1, \ldots, f_m) = gcd(gcd(gcd(f_1, f_2), \ldots), f_m)
 <p>With <code>DynamicPolynomials.jl</code>:</p>
 <pre><code class="julia hljs">h = (x + <span class="hljs-number">3</span>)^<span class="hljs-number">5</span>
 
-<span class="hljs-meta">@btime</span> gcd(gcd($f, $g), $h)</code></pre><pre><code class="plaintext hljs">  66.194 μs (939 allocations: 59.97 KiB)
+<span class="hljs-meta">@btime</span> gcd(gcd($f, $g), $h)</code></pre><pre><code class="plaintext hljs">  67.966 μs (939 allocations: 59.97 KiB)
 3 + x</code></pre>
 <p>With Groebner.jl:</p>
 <pre><code class="julia hljs">F = [f, g, h]
-<span class="hljs-meta">@btime</span> groebner($F)</code></pre><pre><code class="plaintext hljs">DomainError with Unknown type.:
-
-</code></pre>
+<span class="hljs-meta">@btime</span> groebner($F)</code></pre><pre><code class="plaintext hljs">  119.672 μs (1293 allocations: 120.28 KiB)
+1-element Vector{DynamicPolynomials.Polynomial{DynamicPolynomials.Commutative{DynamicPolynomials.CreationOrder}, MultivariatePolynomials.Graded{MultivariatePolynomials.LexOrder}, Rational{BigInt}}}:
+ 3//1 + x</code></pre>
 <h2 id="variable_elimination"><a href="#variable_elimination" class="header-anchor">Variable Elimination</a></h2>
 <p>One can also use Groebner bases to <em>eliminate indeterminates</em> from equations. A layer of theory lies behind this topic, however, the main simple observation here is that</p>
 <hr />
@@ -347,7 +347,7 @@ groebner(coloring_system)</code></pre><pre><code class="plaintext hljs">4-elemen
 
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: August 23, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: August 31, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
