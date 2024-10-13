@@ -59,7 +59,7 @@
     <nav class="sidebar-nav" style="opacity: 0.9">
       <a class="sidebar-nav-item " href="/Groebner.jl/">Home</a>
       <!-- <a class="sidebar-nav-item {{ispage tutorial.html}}active{{end}}" href="/Groebner.jl/tutorial/">Tutorials</a> -->
-      <li class="sidebar-nav-item "><a href="/Groebner.jl/tutorial/">Introductory tutorial</a>
+      <!-- <li class="sidebar-nav-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/">Introductory tutorial</a> -->
         <!-- <ul class="menu-list-child-list ">
 				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#introduction" class="menu-list-link">Introduction</a>
 				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#gcd_rref" class="menu-list-link">Gcd & Rref</a>
@@ -78,8 +78,10 @@
               class="menu-list-link">Monomial orderings</a>
           <li class="menu-list-item active"><a href="/Groebner.jl/interface/#learn_and_apply"
               class="menu-list-link">Learn and Apply</a>
+          <li class="menu-list-item active"><a href="/Groebner.jl/interface/#lowlevel"
+              class="menu-list-link">Low-level interface</a>
         </ul>
-      <li class="sidebar-nav-item "><a href="/Groebner.jl/developer/">Development</a>
+      <!-- <li class="sidebar-nav-item {{ispage developer.html}}active{{end}}"><a href="/Groebner.jl/developer/">Development</a> -->
     </nav>
 
   </div>
@@ -548,7 +550,7 @@ flag, gb_2 = groebner_apply!(
 
 <span class="hljs-meta">@assert</span> flag
 <span class="hljs-meta">@assert</span> gb_2 == groebner([<span class="hljs-number">2</span>x2*y2^<span class="hljs-number">2</span> + <span class="hljs-number">3</span>x2, <span class="hljs-number">4</span>y2*x2^<span class="hljs-number">2</span> + <span class="hljs-number">5</span>y2], ordering=DegRevLex())</code></pre>
-<p>Using <code>groebner_apply&#33;</code> in batches &#40;works only in <code>:degrevlex</code> at the moment&#41;:</p>
+<p>Using <code>groebner_apply&#33;</code> in batches:</p>
 <pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner, AbstractAlgebra
 R, (x, y) = polynomial_ring(GF(<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1</span>), [<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>], internal_ordering=:degrevlex)
 
@@ -622,6 +624,21 @@ groebner_apply!(trace, batch::<span class="hljs-built_in">NTuple</span>{N, <span
 </div>
   </div>
 
+<h2 id="low-level_interface"><a href="#low-level_interface" class="header-anchor">Low-level interface</a></h2>
+
+<p>Some functions in the interface have a low-level entry point. Low-level functions accept and output &#39;&#39;raw&#39;&#39; exponent vectors and coefficients. This could be convenient when one does not want to depend on a frontend.</p>
+<p>For example,</p>
+<pre><code class="julia hljs"><span class="hljs-keyword">using</span> Groebner
+
+<span class="hljs-comment"># define {x y - 1, x^3 + 7 y^2} modulo 65537 in DRL</span>
+ring = Groebner.PolyRing(<span class="hljs-number">2</span>, Groebner.DegRevLex(), <span class="hljs-number">65537</span>)
+monoms = [ [[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>]], [[<span class="hljs-number">3</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">2</span>]] ]
+coeffs = [ [<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">7</span>] ]
+
+<span class="hljs-comment"># compute a GB</span>
+gb_monoms, gb_coeffs = Groebner.groebner(ring, monoms, coeffs)</code></pre><pre><code class="plaintext hljs">(Vector{Vector{UInt32}}[[[0x00000001, 0x00000001], [0x00000000, 0x00000000]], [[0x00000000, 0x00000003], [0x00000002, 0x00000000]], [[0x00000003, 0x00000000], [0x00000000, 0x00000002]]], Vector{UInt32}[[0x00000001, 0x00010000], [0x00000001, 0x00004925], [0x00000001, 0x00000007]])</code></pre>
+<p>The list of functions that provide a low-level entry point: <code>groebner</code>, <code>normalform</code>, <code>isgroebner</code>, <code>groebner_learn</code>, <code>groebner_apply</code>.</p>
+<p>The low-level functions may be faster than their user-facing analogues since they bypass internal checks and conversions. Low-level functions do not make any specific assumptions, that is, all of these are correctly handled in the input: unsorted monomials, nonnormalized coefficients, duplicate terms, aliasing memory.</p>
 <div class="page-foot">
   <div class="copyright">
     &copy; Alexander Demin, Shashi Gowda, and others. Last modified: October 13, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.

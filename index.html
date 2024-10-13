@@ -59,7 +59,7 @@
     <nav class="sidebar-nav" style="opacity: 0.9">
       <a class="sidebar-nav-item active" href="/Groebner.jl/">Home</a>
       <!-- <a class="sidebar-nav-item {{ispage tutorial.html}}active{{end}}" href="/Groebner.jl/tutorial/">Tutorials</a> -->
-      <li class="sidebar-nav-item "><a href="/Groebner.jl/tutorial/">Introductory tutorial</a>
+      <!-- <li class="sidebar-nav-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/">Introductory tutorial</a> -->
         <!-- <ul class="menu-list-child-list ">
 				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#introduction" class="menu-list-link">Introduction</a>
 				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#gcd_rref" class="menu-list-link">Gcd & Rref</a>
@@ -78,8 +78,10 @@
               class="menu-list-link">Monomial orderings</a>
           <li class="menu-list-item "><a href="/Groebner.jl/interface/#learn_and_apply"
               class="menu-list-link">Learn and Apply</a>
+          <li class="menu-list-item "><a href="/Groebner.jl/interface/#lowlevel"
+              class="menu-list-link">Low-level interface</a>
         </ul>
-      <li class="sidebar-nav-item "><a href="/Groebner.jl/developer/">Development</a>
+      <!-- <li class="sidebar-nav-item {{ispage developer.html}}active{{end}}"><a href="/Groebner.jl/developer/">Development</a> -->
     </nav>
 
   </div>
@@ -95,14 +97,24 @@
 <div class="content container">
 <!-- Content appended here -->
 <div class="franklin-content"><div class="im-50"><img src="/Groebner.jl/assets/logo-with-text.svg" alt="" /></div>
-<p>Groebner.jl is a package for fast and generic Gröbner bases computations based on Faugère&#39;s <a href="https://www-polsys.lip6.fr/~jcf/Papers/F99a.pdf">F4 algorithm</a> written in Julia.</p>
+<p>Groebner.jl is a package for Gröbner bases computation based on the Faugère&#39;s F4 algorithm written in Julia.</p>
 <h2 id="installation"><a href="#installation" class="header-anchor">Installation</a></h2>
 <p>To install Groebner.jl, run the following in the Julia REPL:</p>
 
 <pre><code class="julia hljs"><span class="hljs-keyword">using</span> Pkg; Pkg.add(<span class="hljs-string">&quot;Groebner&quot;</span>)</code></pre>
-<p>See <a href="interface">Interface</a> for a description of all exported functions. For a quick introduction to Groebner bases we refer to <a href="tutorial">Tutorials</a>. Meanwhile, below are simple examples.</p>
+<h2 id="features"><a href="#features" class="header-anchor">Features</a></h2>
+<p>Groebner.jl features:</p>
+<ul>
+<li><p>Gröbner bases over integers modulo a prime and over the rationals</p>
+</li>
+<li><p>Gröbner trace algorithms</p>
+</li>
+<li><p>Multi-threading by default</p>
+</li>
+</ul>
+<p>See <a href="interface">Interface</a> page for a list of all exported functions.</p>
 <h2 id="examples"><a href="#examples" class="header-anchor">Examples</a></h2>
-<p>Currently, polynomials from AbstractAlgebra.jl, DynamicPolynomials.jl, and Nemo.jl are supported as input.</p>
+<p>As input, Groebner.jl supports polynomials from AbstractAlgebra.jl, DynamicPolynomials.jl, and Nemo.jl.</p>
 <h3 id="with_abstractalgebrajl"><a href="#with_abstractalgebrajl" class="header-anchor">with AbstractAlgebra.jl</a></h3>
 <p>First, import AbstractAlgebra.jl.  Then, we can create an array of polynomials over a finite field</p>
 
