@@ -58,7 +58,7 @@
     <nav class="sidebar-nav" style="opacity: 0.9">
       <a class="sidebar-nav-item " href="/Groebner.jl/">Home</a>
       <!-- <a class="sidebar-nav-item {{ispage tutorial.html}}active{{end}}" href="/Groebner.jl/tutorial/">Tutorials</a> -->
-      <li class="sidebar-nav-item "><a href="/Groebner.jl/tutorial/">Introductory tutorial</a>
+      <!-- <li class="sidebar-nav-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/">Introductory tutorial</a> -->
         <!-- <ul class="menu-list-child-list ">
 				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#introduction" class="menu-list-link">Introduction</a>
 				<li class="menu-list-item {{ispage tutorial.html}}active{{end}}"><a href="/Groebner.jl/tutorial/#gcd_rref" class="menu-list-link">Gcd & Rref</a>
@@ -77,8 +77,10 @@
               class="menu-list-link">Monomial orderings</a>
           <li class="menu-list-item "><a href="/Groebner.jl/interface/#learn_and_apply"
               class="menu-list-link">Learn and Apply</a>
+          <li class="menu-list-item "><a href="/Groebner.jl/interface/#low-level_interface"
+              class="menu-list-link">Low-level interface</a>
         </ul>
-      <li class="sidebar-nav-item "><a href="/Groebner.jl/developer/">Development</a>
+      <!-- <li class="sidebar-nav-item {{ispage developer.html}}active{{end}}"><a href="/Groebner.jl/developer/">Development</a> -->
     </nav>
 
   </div>
@@ -92,6 +94,7 @@
   </div>
 </div>
 <div class="content container">
+
 <!-- Content appended here -->
 <div class="franklin-content"><h1 id="benchmarks"><a href="#benchmarks" class="header-anchor">Benchmarks</a></h1>
 <p>Here we compare Groebner.jl vs Singular.jl groebner implementations over fields of <em>characteristic zero</em>. The table below lists runtimes for several standard benchmark systems in seconds</p>
