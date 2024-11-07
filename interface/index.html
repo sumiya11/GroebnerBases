@@ -622,6 +622,7 @@ groebner_apply!(trace, batch::<span class="hljs-built_in">NTuple</span>{N, <span
 <p>For examples, see the documentation of <code>groebner_learn</code>.</p>
 <h2 id="notes__6"><a href="#notes__6" class="header-anchor">Notes</a></h2>
 <p>This function is <strong>not</strong> thread-safe, since it mutates the <code>trace</code>.</p>
+<p>This function is <strong>not</strong> safe against program interruptions. For example, pressing <code>Ctrl &#43; C</code> while <code>groebner_apply&#33;&#40;trace, ...&#41;</code> is running may leave the <code>trace</code> corrupted.</p>
 </div>
   </div>
 
@@ -640,7 +641,7 @@ gb_monoms, gb_coeffs = Groebner.groebner(ring, monoms, coeffs)</code></pre><pre>
 <p>The low-level functions may be faster than their user-facing analogues since they bypass internal checks and conversions. Low-level functions do not make any specific assumptions, that is, all of these are correctly handled in the input: unsorted monomials, nonnormalized coefficients, duplicate terms, aliasing memory.</p>
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: October 25, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: November 07, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
