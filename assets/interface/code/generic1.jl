@@ -8,3 +8,4 @@ _, (x, y) = ff["x","y"]
 sys = [(t//t+1)*x*y - t^3, y^2 + t]
 
 gb = groebner(sys)
+gb
