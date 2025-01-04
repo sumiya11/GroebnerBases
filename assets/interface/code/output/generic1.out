@@ -1,0 +1,2 @@
+ArgumentError: Package Nemo not found in current path.
+- Run `import Pkg; Pkg.add("Nemo")` to install the Nemo package.

@@ -80,6 +80,8 @@
               class="menu-list-link">Learn and Apply</a>
           <li class="menu-list-item "><a href="/Groebner.jl/interface/#low-level_interface"
               class="menu-list-link">Low-level interface</a>
+          <li class="menu-list-item "><a href="/Groebner.jl/interface/#generic_coefficients"
+              class="menu-list-link">Generic coefficients</a>
         </ul>
       <!-- <li class="sidebar-nav-item {{ispage developer.html}}active{{end}}"><a href="/Groebner.jl/developer/">Development</a> -->
     </nav>
@@ -176,11 +178,11 @@ groebner(f_1, \ldots, f_m) = gcd(gcd(gcd(f_1, f_2), \ldots), f_m)
 <p>With <code>DynamicPolynomials.jl</code>:</p>
 <pre><code class="julia hljs">h = (x + <span class="hljs-number">3</span>)^<span class="hljs-number">5</span>
 
-<span class="hljs-meta">@btime</span> gcd(gcd($f, $g), $h)</code></pre><pre><code class="plaintext hljs">  81.693 μs (1669 allocations: 64.62 KiB)
+<span class="hljs-meta">@btime</span> gcd(gcd($f, $g), $h)</code></pre><pre><code class="plaintext hljs">  80.380 μs (1669 allocations: 64.62 KiB)
 3 + x</code></pre>
 <p>With Groebner.jl:</p>
 <pre><code class="julia hljs">F = [f, g, h]
-<span class="hljs-meta">@btime</span> groebner($F)</code></pre><pre><code class="plaintext hljs">  144.390 μs (2699 allocations: 159.97 KiB)
+<span class="hljs-meta">@btime</span> groebner($F)</code></pre><pre><code class="plaintext hljs">  147.455 μs (2699 allocations: 159.97 KiB)
 1-element Vector{DynamicPolynomials.Polynomial{DynamicPolynomials.Commutative{DynamicPolynomials.CreationOrder}, MultivariatePolynomials.Graded{MultivariatePolynomials.LexOrder}, Rational{BigInt}}}:
  3//1 + x</code></pre>
 <h2 id="variable_elimination"><a href="#variable_elimination" class="header-anchor">Variable Elimination</a></h2>
@@ -350,7 +352,7 @@ groebner(coloring_system)</code></pre><pre><code class="plaintext hljs">4-elemen
 
 <div class="page-foot">
   <div class="copyright">
-    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: January 03, 2025. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
+    &copy; Alexander Demin, Shashi Gowda, and others. Last modified: January 04, 2025. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
