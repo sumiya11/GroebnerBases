@@ -1,7 +1,7 @@
 # This file was generated, do not modify it. # hide
-using Groebner, Nemo
+using Groebner, AbstractAlgebra
 
-R, t = GF(101, 7)["t"]
+R, t = GF(101)["t"]
 ff = fraction_field(R)
 _, (x, y) = ff["x","y"]
 
