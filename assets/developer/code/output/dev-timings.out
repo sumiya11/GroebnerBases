@@ -1,2 +1,0 @@
-UndefVarError: `performance_counters_enabled` not defined in `Groebner`
-Suggestion: check for spelling errors or missing imports.

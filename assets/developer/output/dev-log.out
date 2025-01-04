@@ -1,3 +1,0 @@
-AssertionError: Keyword "loglevel" is not supported by Groebner.groebner.
-Supported keyword arguments for Groebner.groebner are:
-_composite, _generic, arithmetic, certify, changematrix, homogenize, linalg, modular, monoms, ordering, reduced, seed, selection, threaded
